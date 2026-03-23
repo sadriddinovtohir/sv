@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout'
-import Home from './Page/Home/Home'
 import SetTime from './components/SetTime/SetTime'
 import About from './Page/About/About'
 import Projects from './Page/Projects/Projects'
 import Skills from './Page/Skills/Skills'
 import Contact from './Page/Contact/Contact'
+import Home from './Page/Home/Home'
 
 function App() {
   const [showSetTime, setShowSetTime] = useState(true)
@@ -17,7 +17,7 @@ function App() {
   }, [])
 
   return (
-    <div className='container'>
+    <div>
       {showSetTime
         ? (
           <div style={{

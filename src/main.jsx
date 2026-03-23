@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
   <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={theme}>
-        <div style={{ color: COLOR.colors, height: "100vh", backgroundColor: COLOR.bgcolor }}>
+        <div style={{ color: COLOR.colors, height: "100vh", }}>
           <CssBaseline />
           <App />
         </div>

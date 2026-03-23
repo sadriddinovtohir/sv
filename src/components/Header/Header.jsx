@@ -24,9 +24,9 @@ export default function Header() {
   const currentLang = i18n.language;
   const isMobile = useMediaQuery("(max-width:724px)");
   return (
-    <Box>
-      <div >
-        {!isMobile ? <Stack padding={"10px"} flexDirection={"row"} maxWidth={"100%"} alignItems={"center"} justifyContent={"space-between"}>
+    <Box >
+      <div style={{padding:"5px"}} >
+        {!isMobile ? <Stack  padding={"10px"} flexDirection={"row"} maxWidth={"100%"} alignItems={"center"} justifyContent={"space-between"}>
           <Stack style={{ maxWidth: "700px" }}>
             <nav className="navbar">
               <NavLink to="/" className="nav-link"><BsPerson /> Home</NavLink>

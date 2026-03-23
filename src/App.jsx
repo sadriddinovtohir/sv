@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout'
 import SetTime from './components/SetTime/SetTime'
 import About from './page/about/About'

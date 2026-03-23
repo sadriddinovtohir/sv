@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout'
-import Home from './Page/Home/Home'
+import Home from './page/Home/Home'
 import SetTime from './components/SetTime/SetTime'
-import About from './Page/About/About'
-import Projects from './page/projects/Projects'
-import Skills from './Page/Skills/Skills'
-import Contact from './Page/Contact/Contact'
+import About from './page/About/About'
+import Projects from './page/Projects/Projects'
+import Skills from './page/Skills/Skills'
+import Contact from './page/Contact/Contact'
 
 function App() {
   const [showSetTime, setShowSetTime] = useState(true)

@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className='container'>
-      {showSetTime
+      {/* {showSetTime
         ? (
           <div style={{
             height: "100vh",
@@ -30,7 +30,7 @@ function App() {
             <SetTime />
           </div>
         )
-        : (
+        : ( */}
           <Routes>
             <Route path='/' element={<MainLayout />}>
               <Route index element={< Home/>} />
@@ -40,8 +40,8 @@ function App() {
               <Route path='/contact' element={<Contact />} />
             </Route>
           </Routes>
-        )
-      }
+        {/* )
+      } */}
     </div>
   )
 }

@@ -1,11 +1,6 @@
-import { useEffect, useState } from 'react';
 import { COLOR } from '../../config/ui/color'
 import { Roundedspan } from '../../config/ui/style'
 import { Stack, Typography } from '@mui/material';
-import CodeIcon from "@mui/icons-material/Code";
-import GlassButton from '../CustomButton/customGlassBtn';
-import { BsPerson } from 'react-icons/bs';
-import { FaGithub } from 'react-icons/fa';
 import imgProfile from "../../assets/img/about.jpg"
 
 const s = (dir, delay) => ({

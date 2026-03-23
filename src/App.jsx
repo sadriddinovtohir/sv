@@ -3,11 +3,10 @@ import { Route, Routes } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout'
 import Home from './Page/Home/Home'
 import SetTime from './components/SetTime/SetTime'
-// import SetTime from './components/SetTime/SetTime'
-// import About from './page/about/About'
-// import Projects from './page/projects/Projects'
-// import Skills from './page/skills/Skills'
-// import Contact from './page/contact/contact'
+import About from './Page/About/About'
+import Projects from './page/projects/Projects'
+import Skills from './Page/Skills/Skills'
+import Contact from './Page/Contact/Contact'
 
 function App() {
   const [showSetTime, setShowSetTime] = useState(true)
@@ -36,14 +35,14 @@ function App() {
           <Routes>
             <Route path='/' element={<MainLayout />}>
               <Route index element={<Home />} />
-              {/* <Route path='/about' element={<About />} />
+              <Route path='/about' element={<About />} />
               <Route path='/projects' element={<Projects />} />
               <Route path='/skills' element={<Skills />} />
-              <Route path='/contact' element={<Contact />} /> */}
+              <Route path='/contact' element={<Contact />} />
             </Route>
           </Routes>
-         )
-      } 
+        )
+      }
     </div>
   )
 }

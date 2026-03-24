@@ -99,22 +99,26 @@ function SkillCard({ skill }) {
 export default function Skills() {
     return (
         <Box
-            sx={{
-                padding: '50px 24px',
-                minHeight: '100vh',
-            }}
-        >
-            <Grid
-                container
-                spacing={3}
-                sx={{ maxWidth: 1200, margin: '0 auto' }}
-            >
-                {skills.map((skill) => (
-                    <Grid item xs={6} sm={4} md={2.4} key={skill.name}>
-                        <SkillCard skill={skill} />
-                    </Grid>
-                ))}
+    sx={{
+        padding: '50px 24px',
+        minHeight: '100vh',
+    }}
+>
+    <Grid
+        container
+        spacing={3}
+        sx={{
+            maxWidth: 1200,
+            margin: '0 auto',
+            justifyContent: 'center',  // o'rtaga joylash uchun
+        }}
+    >
+        {skills.map((skill) => (
+            <Grid item xs={6} sm={4} md={2.4} key={skill.name}>
+                <SkillCard skill={skill} />
             </Grid>
-        </Box>
+        ))}
+    </Grid>
+</Box>
     )
 }

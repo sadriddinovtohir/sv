@@ -29,7 +29,7 @@ export default function Home() {
           <Typography variant='h4' style={{ color: COLOR.secondText }} fontWeight={800} mb={'15px'}>
             Frontend Developer
           </Typography>
-
+          
           <Typography style={{ color: COLOR.colorsm, lineHeight: 1.7 }} mb={'25px'}>
             {t("I")}
           </Typography>

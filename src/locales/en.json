@@ -1,8 +1,17 @@
 {
-  "HI":"HI I'm Tohir",
-  "Loaction":"Toshkent",
-  "Now":"Available Now",
-  "I":"I create beautiful, functional, and user-centered digital experiences. With 1 years of experiences in web Development, I bring ideas to life through clean code and thoughtful design",
+  "HI": "HI I'm Tohir",
+  "Loaction": "Toshkent",
+  "Now": "Available Now",
+  "I": "I create beautiful, functional, and user-centered digital experiences. With 1 years of experiences in web Development, I bring ideas to life through clean code and thoughtful design",
   "Hire": "Hire Me",
-"CV": "Download CV"
+  "CV": "Download CV",
+  "job": "Frontend Developer",
+  "title": "My Journey",
+  "p1": "My name is Tohir. I was born in 2007. At the age of 15, I became interested in frontend development and started studying at IT PARK.",
+  "p2": "Later, I joined Najot Ta'lim to strengthen my knowledge.",
+  "p3": "After joining a company, my priority is to fully analyze the existing code.",
+  "p4": "If the code is well structured, I focus on SEO, optimization, and long-term stability.",
+  "p5": "If the project is new, I take full responsibility from architecture planning to implementation.",
+  "experience": "Experience",
+  "exp_text": "I have 1 year of experience as a frontend developer and have worked on real projects."
 }

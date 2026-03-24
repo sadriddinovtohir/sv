@@ -4,5 +4,15 @@
   "Now": "Hozir bo'shman",
   "I": "Men chiroyli, funksional va foydalanuvchiga yo‘naltirilgan raqamli tajribalar yarataman. Web dasturlash sohasida 1 yillik tajribaga ega bo‘lib, g‘oyalarni toza kod va puxta o‘ylangan dizayn orqali hayotga tatbiq etaman.",
   "Hire": "Yollash",
-  "CV": "CV yuklash"
+  "CV": "CV yuklash",
+   "job": "Frontend Developer",
+  "title": "Mening yo‘lim",
+  "p1": "Mening ismim Tohir. Men 2007 yilda tug‘ilganman. 15 yoshimda Frontend sohasiga qiziqib, IT PARKda dasturlash kurslariga borishni boshladim.",
+  "p2": "Keyinroq bilimlarimni mustahkamlash uchun Najot Ta'limga qo‘shildim.",
+  "p3": "Kompaniyaga qo‘shilgandan so‘ng, avvalo mavjud kodni to‘liq o‘rganib, uning sifati, tuzilishi va kengayuvchanligini baholash ustivor vazifam hisoblanadi.",
+  "p4": "Agar kod yaxshi tuzilgan bo‘lsa, SEO samaradorligini, optimallashtirishni va uzoq muddatli barqarorlikni yaxshilashga e’tibor qarataman.",
+  "p5": "Agar loyiha yangi bo‘lsa, arxitekturani rejalashtirish bosqichidan boshlab to amalga oshirishgacha to‘liq javobgarlikni o‘z zimmasiga olaman.",
+  "experience": "Tajriba",
+  "exp_text": "Men Frontend dasturchi sifatida 1 yillik tajribaga egaman va quyidagi real loyihalarda ishladim."
+
 }

@@ -21,7 +21,6 @@ export default function Footer() {
       }}
     >
       <div className='container'>
-        {/* Links row */}
         <Stack
           flexDirection="row"
           flexWrap="wrap"

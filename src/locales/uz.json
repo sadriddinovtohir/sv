@@ -5,7 +5,7 @@
   "I": "Men chiroyli, funksional va foydalanuvchiga yo‘naltirilgan raqamli tajribalar yarataman. Web dasturlash sohasida 1 yillik tajribaga ega bo‘lib, g‘oyalarni toza kod va puxta o‘ylangan dizayn orqali hayotga tatbiq etaman.",
   "Hire": "Yollash",
   "CV": "CV yuklash",
-   "job": "Frontend Developer",
+  "job": "Frontend Developer",
   "title": "Mening yo‘lim",
   "p1": "Mening ismim Tohir. Men 2007 yilda tug‘ilganman. 15 yoshimda Frontend sohasiga qiziqib, IT PARKda dasturlash kurslariga borishni boshladim.",
   "p2": "Keyinroq bilimlarimni mustahkamlash uchun Najot Ta'limga qo‘shildim.",
@@ -13,6 +13,9 @@
   "p4": "Agar kod yaxshi tuzilgan bo‘lsa, SEO samaradorligini, optimallashtirishni va uzoq muddatli barqarorlikni yaxshilashga e’tibor qarataman.",
   "p5": "Agar loyiha yangi bo‘lsa, arxitekturani rejalashtirish bosqichidan boshlab to amalga oshirishgacha to‘liq javobgarlikni o‘z zimmasiga olaman.",
   "experience": "Tajriba",
-  "exp_text": "Men Frontend dasturchi sifatida 1 yillik tajribaga egaman va quyidagi real loyihalarda ishladim."
-
+  "exp_text": "Men Frontend dasturchi sifatida 1 yillik tajribaga egaman va quyidagi real loyihalarda ishladim.",
+  "NOTFOUND_404": "404",
+  "NOTFOUND_TITLE": "Sahifa Topilmadi",
+  "NOTFOUND_DESC": "Siz qidirayotgan sahifa mavjud emas yoki boshqa joyga ko‘chirilgan.",
+  "NOTFOUND_BUTTON": "Bosh sahifaga"
 }

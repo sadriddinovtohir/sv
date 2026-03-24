@@ -13,5 +13,9 @@
   "p4": "If the code is well structured, I focus on SEO, optimization, and long-term stability.",
   "p5": "If the project is new, I take full responsibility from architecture planning to implementation.",
   "experience": "Experience",
-  "exp_text": "I have 1 year of experience as a frontend developer and have worked on real projects."
+  "exp_text": "I have 1 year of experience as a frontend developer and have worked on real projects.",
+   "NOTFOUND_404": "404",
+  "NOTFOUND_TITLE": "Page Not Found",
+  "NOTFOUND_DESC": "The page you are looking for does not exist or has been moved.",
+  "NOTFOUND_BUTTON": "Go Home"
 }

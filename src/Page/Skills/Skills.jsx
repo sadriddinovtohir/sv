@@ -24,7 +24,6 @@ const skills = [
     { name: 'SaaS Ishlab chiqish', icon: <MdRocketLaunch size={36} /> },
 ]
 
-// 🔴 CARD
 const CardWrapper = styled(Box)({
     background: '#0b0b0f',
     border: '1px solid #1f1f26',
@@ -45,7 +44,6 @@ const CardWrapper = styled(Box)({
     },
 })
 
-// 🔴 ICON BOX
 const IconBox = styled(Box)({
     width: 72,
     height: 72,
@@ -60,7 +58,6 @@ const IconBox = styled(Box)({
     boxShadow: '0 4px 20px rgba(255, 45, 85, 0.5)',
 })
 
-// 🔴 PROGRESS BAR
 const ProgressBar = styled(Box)({
     width: '100%',
     height: 4,
@@ -99,7 +96,6 @@ function SkillCard({ skill }) {
     )
 }
 
-// 🔴 MAIN PAGE
 export default function Skills() {
     return (
         <Box

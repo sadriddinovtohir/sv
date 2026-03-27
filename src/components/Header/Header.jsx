@@ -25,15 +25,15 @@ export default function Header() {
   const isMobile = useMediaQuery("(max-width:724px)");
   return (
     <Box >
-      <div style={{padding:"5px"}} >
-        {!isMobile ? <Stack  padding={"10px"} flexDirection={"row"} maxWidth={"100%"} alignItems={"center"} justifyContent={"space-between"}>
+      <div style={{ padding: "5px" }} >
+        {!isMobile ? <Stack padding={"10px"} flexDirection={"row"} maxWidth={"100%"} alignItems={"center"} justifyContent={"space-between"}>
           <Stack style={{ maxWidth: "700px" }}>
             <nav className="navbar">
               <NavLink to="/" className="nav-link"><BsPerson /> Home</NavLink>
               <NavLink to="/about" className="nav-link"><BsPerson /> About</NavLink>
               <NavLink to="/projects" className="nav-link"><BsFolder /> Projects</NavLink>
               <NavLink to="/skills" className="nav-link"><BiCode /> Skills  </NavLink>
-              <NavLink to="/contact" className="nav-link"><BsEnvelope /> Contact</NavLink>
+              {/* <NavLink to="/contact" className="nav-link"><BsEnvelope /> Contact</NavLink> */}
             </nav>
           </Stack>
           <Stack flexDirection={"row"} justifyContent={"end"} gap={"6px"}>
@@ -83,11 +83,11 @@ export default function Header() {
               <Stack justifyContent={"center"}>
                 <Stack style={{ maxWidth: "700px" }}>
                   <nav className="columNavbar">
-                    <NavLink onClick={toggleDrawer(false)}  to="/" className="nav-link"><BsPerson /> Home</NavLink>
-                    <NavLink onClick={toggleDrawer(false)}  to="/about" className="nav-link"><BsPerson /> About</NavLink>
-                    <NavLink onClick={toggleDrawer(false)}  to="/projects" className="nav-link"><BsFolder /> Projects</NavLink>
-                    <NavLink onClick={toggleDrawer(false)}  to="/skills" className="nav-link"><BiCode /> Skills  </NavLink>
-                    <NavLink onClick={toggleDrawer(false)}  to="/contact" className="nav-link"><BsEnvelope /> Contact</NavLink>
+                    <NavLink onClick={toggleDrawer(false)} to="/" className="nav-link"><BsPerson /> Home</NavLink>
+                    <NavLink onClick={toggleDrawer(false)} to="/about" className="nav-link"><BsPerson /> About</NavLink>
+                    <NavLink onClick={toggleDrawer(false)} to="/projects" className="nav-link"><BsFolder /> Projects</NavLink>
+                    <NavLink onClick={toggleDrawer(false)} to="/skills" className="nav-link"><BiCode /> Skills  </NavLink>
+                    {/* <NavLink onClick={toggleDrawer(false)} to="/contact" className="nav-link"><BsEnvelope /> Contact</NavLink> */}
                   </nav>
                 </Stack>
 

@@ -19,7 +19,7 @@ export default function Projects() {
         "Axios",
         "React Hook Form",],
       link: "https://giper-mart-tau.vercel.app/",
-      giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
+      giturl: "https://github.com/sadriddinovtohir/giperMart",
     },
     {
       img: "https://media.licdn.com/dms/image/v2/D4E22AQEPNtEfyCCqWg/feedshare-shrink_1280/B4EZzS_5oAGoAM-/0/1773066492673?e=1775692800&v=beta&t=3no1L3w7AMsTvyOk0qJuNdVvQjokYADQljBkYSJGx8s",
@@ -30,7 +30,7 @@ export default function Projects() {
         "Tailwind CSS",
         "Shadcn UI",
         "Axios", "Context api", "React Hook Form", "React Router Dom", "Rest Api"],
-      link: "https://quyosh-panellari-admin.netlify.app/",
+      link: "https://github.com/MaxmudAxmedov/admin-sun-energy",
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
@@ -65,7 +65,7 @@ export default function Projects() {
       title: "ZuhrStar IT Academy ",
       desc: "Teaching Frontend Development to students Creating comprehensive course materials Mentoring and guiding aspiring developers",
       tech: ["Teacher",],
-      link: "https://bilgi.uz/uz/educational-centers/it/zuhrstar/",
+      link: "https://yandex.uz/maps/org/19482222114/?ll=69.458631%2C41.388231&z=15",
     },
     {
       img: imragit,

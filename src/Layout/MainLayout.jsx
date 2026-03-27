@@ -16,7 +16,7 @@ export default function MainLayout() {
                         left: 0,
                         right: 0,
                         zIndex: 3,
-                        backgroundColor:"#22010bff"
+                        backgroundColor: "#22010bff"
                     }}
                 >
                     <Header />

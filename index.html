@@ -9,5 +9,24 @@
   <body style="background-color: #1a0008">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      const GA_ID = '%VITE_GA_ID%';
+      if (GA_ID && GA_ID !== 'G-XXXXXXX') {
+        const gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      } else {
+        console.warn('Google Analytics ID is not set. Add VITE_GA_ID to .env');
+      }
+    </script>
   </body>
 </html>

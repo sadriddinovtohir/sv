@@ -4,6 +4,8 @@ import CustomCard from "../../components/CustomCard/CustomCard";
 import imragit from "../../assets/img/image.png"
 import gipper from "../../assets/img/gipper.png"
 import bizCore from "../../assets/img/bizCore.png"
+import studense from "../../assets/img/studense.png"
+import sun_energy_img from "../../assets/img/sun_energy_img.jpg"
 
 export default function Projects() {
   const data = [
@@ -22,7 +24,7 @@ export default function Projects() {
       giturl: "https://github.com/sadriddinovtohir/giperMart",
     },
     {
-      img: "https://media.licdn.com/dms/image/v2/D4E22AQEPNtEfyCCqWg/feedshare-shrink_1280/B4EZzS_5oAGoAM-/0/1773066492673?e=1775692800&v=beta&t=3no1L3w7AMsTvyOk0qJuNdVvQjokYADQljBkYSJGx8s",
+      img: studense,
       title: "TTG",
       desc: "Developing a role-based learning platform for a Japanese company with four user roles: System Admin, Admin, Teacher, and Student",
       tech: ["React",
@@ -34,7 +36,7 @@ export default function Projects() {
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
-      img: "https://media.licdn.com/dms/image/v2/D4D22AQFHWu3c4AQhlA/feedshare-shrink_2048_1536/B4DZu9MKQDJ8A0-/0/1768405648541?e=1775692800&v=beta&t=QgVuGqEgiQeYQ7TduWPW7pDV_K6XzKKR8oxxpJNbJns",
+      img: sun_energy_img ,
       title: "Sun Energy",
       desc: "Improved performance and user experience Built reusable component architecture Frontend- backend collaboration",
       tech: ["React",

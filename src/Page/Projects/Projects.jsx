@@ -6,9 +6,18 @@ import gipper from "../../assets/img/gipper.png"
 import bizCore from "../../assets/img/bizCore.png"
 import studense from "../../assets/img/studense.png"
 import sun_energy_img from "../../assets/img/sun_energy_img.jpg"
+import ITPARKIMG from "../../assets/img/ITPARK.png"
 
 export default function Projects() {
   const data = [
+    {
+      img: ITPARKIMG,
+      title: "IT PARK",
+      desc: `I previously had experience working at IT Park, and now I have been officially accepted into a formal position. Here, I will further develop my frontend and IT skills while working on real-world projects as part of a team. My goal is to grow professionally and contribute to building high-quality and useful digital products using modern technologies.   🇷🇺 Русский (professional description)`,
+      tech: ["TEACHER"],
+      link: "https://giper-mart-tau.vercel.app/",
+      giturl: "https://github.com/sadriddinovtohir/giperMart",
+    },
     {
       img: gipper,
       title: "GiperMart",
@@ -36,7 +45,7 @@ export default function Projects() {
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
-      img: sun_energy_img ,
+      img: sun_energy_img,
       title: "Sun Energy",
       desc: "Improved performance and user experience Built reusable component architecture Frontend- backend collaboration",
       tech: ["React",
@@ -89,7 +98,7 @@ export default function Projects() {
         marginTop: "40px"
       }}
     >
-      <Stack direction="row" rowGap={"10px"} gap={"20px"} justifyContent={"center"} flexWrap="wrap" alignItems={"center"}>
+      <Stack direction="row" rowGap={"10px"} gap={"30px"} justifyContent={"center"} flexWrap="wrap" alignItems={"center"}>
         {data.map((item, index) => (
           <CustomCard
             key={index}

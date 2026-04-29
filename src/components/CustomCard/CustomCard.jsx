@@ -41,7 +41,7 @@ export default function CustomCard({ img, title, desc, tech, giturl, link }) {
                 </Typography>
 
                 {/* Desc */}
-                <Typography variant="body2" sx={{ color: "#bbb", mt: 1, mb: 2 }}>
+                <Typography variant="body2" sx={{ color: "#bbb", mt: 1, mb: 2, fontSize:"12px" }}>
                     {desc}
                 </Typography>
 

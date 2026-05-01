@@ -71,13 +71,13 @@ export default function Projects() {
       link: "https://github.com/PartHub-SNG/PartHub_Frontend",
       giturl: "https://github.com/PartHub-SNG/PartHub_Frontend",
     },
-    {
-      img: "https://frankfurt.apollo.olxcdn.com/v1/files/skza7cxrql3g-UZ/image",
-      title: "ZuhrStar IT Academy ",
-      desc: "Teaching Frontend Development to students Creating comprehensive course materials Mentoring and guiding aspiring developers",
-      tech: ["Teacher",],
-      link: "https://yandex.uz/maps/org/19482222114/?ll=69.458631%2C41.388231&z=15",
-    },
+    // {
+    //   img: "https://frankfurt.apollo.olxcdn.com/v1/files/skza7cxrql3g-UZ/image",
+    //   title: "ZuhrStar IT Academy ",
+    //   desc: "Teaching Frontend Development to students Creating comprehensive course materials Mentoring and guiding aspiring developers",
+    //   tech: ["Teacher",],
+    //   link: "https://yandex.uz/maps/org/19482222114/?ll=69.458631%2C41.388231&z=15",
+    // },
     {
       img: imragit,
       title: "IMRAAGT Uz  ",

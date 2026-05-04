@@ -15,8 +15,8 @@ export default function Projects() {
       title: "IT PARK",
       desc: `I previously had experience working at IT Park, and now I have been officially accepted into a formal position. Here, I will further develop my frontend and IT skills while working on real-world projects as part of a team. My goal is to grow professionally and contribute to building high-quality and useful digital products using modern technologies.   🇷🇺 Русский (professional description)`,
       tech: ["TEACHER"],
-      link: "https://giper-mart-tau.vercel.app/",
-      giturl: "https://github.com/sadriddinovtohir/giperMart",
+      link: "https://www.it-park.uz/",
+      // giturl: "https://github.com/sadriddinovtohir/giperMart",
     },
     {
       img: gipper,

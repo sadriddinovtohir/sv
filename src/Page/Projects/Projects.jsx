@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import CustomCard from "../../components/CustomCard/CustomCard";
 import imragit from "../../assets/img/image.png"
 import gipper from "../../assets/img/gipper.png"
@@ -9,80 +10,53 @@ import sun_energy_img from "../../assets/img/sun_energy_img.jpg"
 import ITPARKIMG from "../../assets/img/ITPARK.png"
 
 export default function Projects() {
+  const { t } = useTranslation();
+
   const data = [
     {
       img: ITPARKIMG,
-      title: "IT PARK",
-      desc: `I previously had experience working at IT Park, and now I have been officially accepted into a formal position. Here, I will further develop my frontend and IT skills while working on real-world projects as part of a team. My goal is to grow professionally and contribute to building high-quality and useful digital products using modern technologies.   🇷🇺 Русский (professional description)`,
-      tech: ["TEACHER"],
+      titleKey: "PROJECT_ITPARK_TITLE",
+      descKey: "PROJECT_ITPARK_DESC",
+      techKey: "PROJECT_ITPARK_TECH",
       link: "https://www.it-park.uz/",
-      // giturl: "https://github.com/sadriddinovtohir/giperMart",
     },
     {
       img: gipper,
-      title: "GiperMart",
-      desc: "Developed a modern online marketplace with React 19 and Vite Built scalable architecture with Redux Toolkit and TanStack Query Implemented product catalog, search system, and user profile dashboard",
-      tech: ["React",
-        "Vite",
-        "Material UI",
-        "Redux Toolkit",
-        "TanStack Query",
-        "Axios",
-        "React Hook Form",],
+      titleKey: "PROJECT_GIPERMART_TITLE",
+      descKey: "PROJECT_GIPERMART_DESC",
+      techKey: "PROJECT_GIPERMART_TECH",
       link: "https://giper-mart-tau.vercel.app/",
       giturl: "https://github.com/sadriddinovtohir/giperMart",
     },
     {
       img: studense,
-      title: "TTG",
-      desc: "Developing a role-based learning platform for a Japanese company with four user roles: System Admin, Admin, Teacher, and Student",
-      tech: ["React",
-        "TanStack Query",
-        "Tailwind CSS",
-        "Shadcn UI",
-        "Axios", "Context api", "React Hook Form", "React Router Dom", "Rest Api"],
+      titleKey: "PROJECT_TTG_TITLE",
+      descKey: "PROJECT_TTG_DESC",
+      techKey: "PROJECT_TTG_TECH",
       link: "https://github.com/MaxmudAxmedov/admin-sun-energy",
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
       img: sun_energy_img,
-      title: "Sun Energy",
-      desc: "Improved performance and user experience Built reusable component architecture Frontend- backend collaboration",
-      tech: ["React",
-        "Next.js",
-        "TanStack Query",
-        "Tailwind CSS",
-        "Shadcn UI",
-        "Axios", "Redux", "React Hook Form", "React Router Dom", "Rest Api"],
+      titleKey: "PROJECT_SUN_ENERGY_TITLE",
+      descKey: "PROJECT_SUN_ENERGY_DESC",
+      techKey: "PROJECT_SUN_ENERGY_TECH",
       link: "https://quyosh-panellari-admin.netlify.app/",
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
       img: bizCore,
-      title: "BizCore ",
-      desc: "A unified marketplace where business owners sell and manage their products online Frontend development of a modern and scalable e-commerce platform",
-      tech: ["Next.js",
-        "Ant Design",
-        "shadcn/ui",
-        "Redux",
-        "TanStack Query",
-        "React Hook Form",
-        "Next I18",],
+      titleKey: "PROJECT_BIZCORE_TITLE",
+      descKey: "PROJECT_BIZCORE_DESC",
+      techKey: "PROJECT_BIZCORE_TECH",
       link: "https://github.com/PartHub-SNG/PartHub_Frontend",
       giturl: "https://github.com/PartHub-SNG/PartHub_Frontend",
     },
-    // {
-    //   img: "https://frankfurt.apollo.olxcdn.com/v1/files/skza7cxrql3g-UZ/image",
-    //   title: "ZuhrStar IT Academy ",
-    //   desc: "Teaching Frontend Development to students Creating comprehensive course materials Mentoring and guiding aspiring developers",
-    //   tech: ["Teacher",],
-    //   link: "https://yandex.uz/maps/org/19482222114/?ll=69.458631%2C41.388231&z=15",
-    // },
     {
       img: imragit,
-      title: "IMRAAGT Uz  ",
-      desc: "Developing a modern and user-friendly interface",
-      tech: ["Html", "Cass"],
+      titleKey: "PROJECT_IMRAGIT_TITLE",
+      descKey: "PROJECT_IMRAGIT_DESC",
+      techKey: "PROJECT_IMRAGIT_TECH",
       link: "https://imraagt-uz.vercel.app/",
     },
 
@@ -98,14 +72,32 @@ export default function Projects() {
         marginTop: "40px"
       }}
     >
-      <Stack direction="row" rowGap={"10px"} gap={"30px"} justifyContent={"center"} flexWrap="wrap" alignItems={"center"}>
+      <Stack width="100%" px={{ xs: 2, md: 10 }} mb={4}>
+        <Typography
+          variant="h4"
+          fontWeight={800}
+          sx={{ color: "#ff4d6d", letterSpacing: "2px" }}
+        >
+          {t("PROJECTS_TITLE")}
+        </Typography>
+        <Typography color="#ccc">{t("PROJECTS_SUBTITLE")}</Typography>
+      </Stack>
+
+      <Stack
+        direction="row"
+        rowGap="10px"
+        gap="30px"
+        justifyContent="center"
+        flexWrap="wrap"
+        alignItems="center"
+      >
         {data.map((item, index) => (
           <CustomCard
             key={index}
             img={item.img}
-            title={item.title}
-            desc={item.desc}
-            tech={item.tech}
+            title={t(item.titleKey)}
+            desc={t(item.descKey)}
+            tech={t(item.techKey, { returnObjects: true })}
             link={item.link}
             giturl={item.giturl}
           />

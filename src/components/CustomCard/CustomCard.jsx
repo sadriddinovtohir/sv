@@ -47,21 +47,23 @@ export default function CustomCard({ img, title, desc, tech, giturl, link }) {
 
                 {/* Tech */}
                 <Stack direction="row" spacing={1} mb={2} flexWrap={"wrap"} rowGap={"5px"} >
-                    {tech.map((item, i) => (
-                        <Box
-                            key={i}
-                            sx={{
-                                px: 1.5,
-                                py: 0.5,
-                                borderRadius: "20px",
-                                background: "rgba(255,255,255,0.1)",
-                                color: "#ddd",
-                                fontSize: "12px",
-                            }}
-                        >
-                            {item}
-                        </Box>
-                    ))}
+                    {Array.isArray(tech)
+                        ? tech.map((item, i) => (
+                            <Box
+                                key={i}
+                                sx={{
+                                    px: 1.5,
+                                    py: 0.5,
+                                    borderRadius: "20px",
+                                    background: "rgba(255,255,255,0.1)",
+                                    color: "#ddd",
+                                    fontSize: "12px",
+                                }}
+                            >
+                                {item}
+                            </Box>
+                        ))
+                        : null}
                 </Stack>
             </div>
 

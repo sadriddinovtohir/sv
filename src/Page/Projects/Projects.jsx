@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import CustomCard from "../../components/CustomCard/CustomCard";
-import imragit from "../../assets/img/image.png"
+import RadioatorPro from "../../assets/img/RadioatorPro.png"
 import gipper from "../../assets/img/gipper.png"
 import bizCore from "../../assets/img/bizCore.png"
 import studense from "../../assets/img/studense.png"
@@ -53,11 +53,11 @@ export default function Projects() {
       giturl: "https://github.com/PartHub-SNG/PartHub_Frontend",
     },
     {
-      img: imragit,
-      titleKey: "PROJECT_IMRAGIT_TITLE",
-      descKey: "PROJECT_IMRAGIT_DESC",
-      techKey: "PROJECT_IMRAGIT_TECH",
-      link: "https://imraagt-uz.vercel.app/",
+      img: RadioatorPro,
+      titleKey: "RADIATORPRO_TITLE",
+      descKey: "RADIATORPRO_DESC",
+      techKey: "RADIATORPRO_TECH",
+      link: "https://radiator-pro.vercel.app/",
     },
 
   ];

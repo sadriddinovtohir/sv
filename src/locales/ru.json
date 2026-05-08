@@ -75,6 +75,9 @@
     "React Hook Form",
     "Next I18n"
   ],
+  "RADIATORPRO_TITLE": "Radiator Pro",
+  "RADIATORPRO_DESC": "Рекламный сайт, созданный с помощью HTML, CSS и JavaScript. На странице представлена информация об мастере, его услугах, контактные данные и области работы.",
+  "RADIATORPRO_TECH": ["HTML", "CSS", "JavaScript", "Landing page", "Рекламный сайт"],
   "PROJECT_IMRAGIT_TITLE": "IMRAAGT Uz",
   "PROJECT_IMRAGIT_DESC": "Разработал современный и удобный интерфейс для корпоративного сайта с чистым макетом и сильной визуальной подачей.",
   "PROJECT_IMRAGIT_TECH": ["HTML", "CSS"],

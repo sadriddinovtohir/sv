@@ -20,14 +20,14 @@ export default function Projects() {
       techKey: "PROJECT_ITPARK_TECH",
       link: "https://www.it-park.uz/",
     },
-    {
-      img: gipper,
-      titleKey: "PROJECT_GIPERMART_TITLE",
-      descKey: "PROJECT_GIPERMART_DESC",
-      techKey: "PROJECT_GIPERMART_TECH",
-      link: "https://giper-mart-tau.vercel.app/",
-      giturl: "https://github.com/sadriddinovtohir/giperMart",
-    },
+    // {
+    //   img: gipper,
+    //   titleKey: "PROJECT_GIPERMART_TITLE",
+    //   descKey: "PROJECT_GIPERMART_DESC",
+    //   techKey: "PROJECT_GIPERMART_TECH",
+    //   link: "https://giper-mart-tau.vercel.app/",
+    //   giturl: "https://github.com/sadriddinovtohir/giperMart",
+    // },
     {
       img: studense,
       titleKey: "PROJECT_TTG_TITLE",
@@ -46,11 +46,11 @@ export default function Projects() {
     },
     {
       img: bizCore,
-      titleKey: "PROJECT_BIZCORE_TITLE",
+      titleKey: "PARTHUB",
       descKey: "PROJECT_BIZCORE_DESC",
       techKey: "PROJECT_BIZCORE_TECH",
-      link: "https://github.com/PartHub-SNG/PartHub_Frontend",
-      giturl: "https://github.com/PartHub-SNG/PartHub_Frontend",
+      link: "https://github.com/sadriddinovtohir/PARTHUB_FRONTEND",
+      giturl: "https://github.com/sadriddinovtohir/PARTHUB_FRONTEND",
     },
     {
       img: RadioatorPro,

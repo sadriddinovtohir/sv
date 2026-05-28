@@ -49,7 +49,7 @@ export default function Projects() {
       titleKey: "PARTHUB",
       descKey: "PROJECT_BIZCORE_DESC",
       techKey: "PROJECT_BIZCORE_TECH",
-      link: "https://github.com/sadriddinovtohir/PARTHUB_FRONTEND",
+      link: "https://parthub-gamma.vercel.app/",
       giturl: "https://github.com/sadriddinovtohir/PARTHUB_FRONTEND",
     },
     {

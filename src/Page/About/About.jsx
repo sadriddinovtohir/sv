@@ -51,6 +51,21 @@ export default function About() {
           <Typography color="#bbb">{t("p3")}</Typography>
           <Typography color="#bbb">{t("p4")}</Typography>
           <Typography color="#bbb">{t("p5")}</Typography>
+          <Typography
+            sx={{
+              color: '#e4e4e7',
+              background: 'rgba(34,197,94,0.06)',
+              border: '1px solid rgba(34,197,94,0.2)',
+              borderRadius: '12px',
+              px: 2,
+              py: 1.5,
+              fontSize: '14px',
+              lineHeight: 1.7,
+              mt: 1,
+            }}
+          >
+            ✨ {t("p6")}
+          </Typography>
 
           <Typography
             variant="h5"

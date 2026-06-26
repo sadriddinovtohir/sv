@@ -5,14 +5,25 @@ import CustomCard from "../../components/CustomCard/CustomCard";
 import RadioatorPro from "../../assets/img/RadioatorPro.png"
 import gipper from "../../assets/img/gipper.png"
 import bizCore from "../../assets/img/bizCore.png"
+import parthubLogo from "../../assets/img/parthub.png"
 import studense from "../../assets/img/studense.png"
 import sun_energy_img from "../../assets/img/sun_energy_img.jpg"
 import ITPARKIMG from "../../assets/img/ITPARK.png"
+import clubMraa from "../../assets/img/image.png"
 
 export default function Projects() {
   const { t } = useTranslation();
 
   const data = [
+    {
+      img: bizCore,
+      titleKey: "PROJECT_BACKEND_TITLE",
+      descKey: "PROJECT_BACKEND_DESC",
+      techKey: "PROJECT_BACKEND_TECH",
+      link: "https://github.com/sadriddinovtohir",
+      giturl: "https://github.com/sadriddinovtohir",
+      badge: "AI Built",
+    },
     {
       img: ITPARKIMG,
       titleKey: "PROJECT_ITPARK_TITLE",
@@ -20,14 +31,6 @@ export default function Projects() {
       techKey: "PROJECT_ITPARK_TECH",
       link: "https://www.it-park.uz/",
     },
-    // {
-    //   img: gipper,
-    //   titleKey: "PROJECT_GIPERMART_TITLE",
-    //   descKey: "PROJECT_GIPERMART_DESC",
-    //   techKey: "PROJECT_GIPERMART_TECH",
-    //   link: "https://giper-mart-tau.vercel.app/",
-    //   giturl: "https://github.com/sadriddinovtohir/giperMart",
-    // },
     {
       img: studense,
       titleKey: "PROJECT_TTG_TITLE",
@@ -45,12 +48,20 @@ export default function Projects() {
       giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
     },
     {
-      img: bizCore,
+      img: parthubLogo,
       titleKey: "PARTHUB",
       descKey: "PROJECT_BIZCORE_DESC",
       techKey: "PROJECT_BIZCORE_TECH",
       link: "https://parthub-gamma.vercel.app/",
       giturl: "https://github.com/sadriddinovtohir/PARTHUB_FRONTEND",
+    },
+    {
+      img: clubMraa,
+      titleKey: "PROJECT_REACTNATIVE_TITLE",
+      descKey: "PROJECT_REACTNATIVE_DESC",
+      techKey: "PROJECT_REACTNATIVE_TECH",
+      link: "https://github.com/sadriddinovtohir",
+      giturl: "https://github.com/sadriddinovtohir",
     },
     {
       img: RadioatorPro,
@@ -59,7 +70,6 @@ export default function Projects() {
       techKey: "RADIATORPRO_TECH",
       link: "https://radiator-pro.vercel.app/",
     },
-
   ];
 
   return (
@@ -100,6 +110,7 @@ export default function Projects() {
             tech={t(item.techKey, { returnObjects: true })}
             link={item.link}
             giturl={item.giturl}
+            badge={item.badge}
           />
         ))}
       </Stack>

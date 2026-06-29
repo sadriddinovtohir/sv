@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
+import { skillCategoryData } from '../../data/skillsData'
 
 import { FaHtml5, FaJs, FaReact, FaGithub } from 'react-icons/fa'
 import {
@@ -12,77 +13,46 @@ import {
     MdDeveloperMode, MdRocketLaunch, MdAutoAwesome,
     MdHub, MdAccountTree, MdSmartToy, MdSecurity, MdVerifiedUser,
 } from 'react-icons/md'
-import { SiPostgresql, SiPrisma, SiRedis, SiJsonwebtokens, SiSwagger, SiDocker, SiExpress } from 'react-icons/si'
+import { SiPostgresql, SiPrisma, SiRedis, SiSwagger, SiDocker, SiExpress } from 'react-icons/si'
 import { TbBrandNodejs, TbShieldLock } from 'react-icons/tb'
 
-const skillCategoryKeys = [
-    {
-        labelKey: 'SKILL_CAT_FRONTEND_CORE',
-        accent: '#ff2d55',
-        skills: [
-            { name: 'HTML5',        icon: <FaHtml5 size={28} />,       level: 95 },
-            { name: 'CSS / Tailwind', icon: <SiTailwindcss size={28} />, level: 90 },
-            { name: 'JavaScript',   icon: <FaJs size={28} />,           level: 87 },
-            { name: 'TypeScript',   icon: <SiTypescript size={28} />,   level: 78 },
-        ],
-    },
-    {
-        labelKey: 'SKILL_CAT_FRAMEWORKS',
-        accent: '#38bdf8',
-        skills: [
-            { name: 'React',          icon: <FaReact size={28} />,       level: 92 },
-            { name: 'Next.js',        icon: <SiNextdotjs size={28} />,   level: 82 },
-            { name: 'Redux / Zustand', icon: <SiRedux size={28} />,      level: 80 },
-            { name: 'TanStack Query', icon: <SiReactquery size={28} />,  level: 84 },
-        ],
-    },
-    {
-        labelKey: 'SKILL_CAT_UI_LIBRARIES',
-        accent: '#a855f7',
-        skills: [
-            { name: 'Shadcn UI',    icon: <SiShadcnui size={28} />,    level: 86 },
-            { name: 'Ant Design',   icon: <SiAntdesign size={28} />,   level: 80 },
-            { name: 'Material UI',  icon: <SiMui size={28} />,         level: 85 },
-        ],
-    },
-    {
-        labelKey: 'SKILL_CAT_AI_TOOLS',
-        accent: '#22c55e',
-        skills: [
-            { name: 'Claude AI',       icon: <MdAutoAwesome size={28} />, level: 86 },
-            { name: 'Codex AI',        icon: <SiOpenai size={28} />,      level: 80 },
-            { name: 'GitHub Copilot',  icon: <MdSmartToy size={28} />,    level: 82 },
-        ],
-    },
-    {
-        labelKey: 'SKILL_CAT_AI_BACKEND',
-        accent: '#06b6d4',
-        skills: [
-            { name: 'Node.js',      icon: <TbBrandNodejs size={28} />,   level: 82 },
-            { name: 'Express.js',   icon: <SiExpress size={28} />,       level: 80 },
-            { name: 'PostgreSQL',   icon: <SiPostgresql size={28} />,    level: 76 },
-            { name: 'Prisma ORM',   icon: <SiPrisma size={28} />,        level: 78 },
-            { name: 'Redis',        icon: <SiRedis size={28} />,         level: 74 },
-            { name: 'JWT / Argon2', icon: <TbShieldLock size={28} />,    level: 80 },
-            { name: 'Zod',          icon: <MdVerifiedUser size={28} />,  level: 82 },
-            { name: 'Swagger',      icon: <SiSwagger size={28} />,       level: 78 },
-            { name: 'Docker',       icon: <SiDocker size={28} />,        level: 74 },
-            { name: 'Rate Limiting / Helmet', icon: <MdSecurity size={28} />, level: 76 },
-        ],
-    },
-    {
-        labelKey: 'SKILL_CAT_ARCHITECTURE',
-        accent: '#f59e0b',
-        skills: [
-            { name: 'File Structure',    icon: <MdAccountTree size={28} />,  level: 88 },
-            { name: 'Networking / REST', icon: <MdHub size={28} />,          level: 82 },
-            { name: 'DOM Manipulation',  icon: <MdDeveloperMode size={28} />, level: 88 },
-            { name: 'SaaS Development',  icon: <MdRocketLaunch size={28} />,  level: 76 },
-            { name: 'Git / GitHub',      icon: <FaGithub size={28} />,        level: 88 },
-            { name: 'Vercel / Netlify',  icon: <SiVercel size={28} />,        level: 85 },
-        ],
-    },
-]
+const skillIcons = {
+    'HTML5':                   <FaHtml5 size={28} />,
+    'CSS / Tailwind':          <SiTailwindcss size={28} />,
+    'JavaScript':              <FaJs size={28} />,
+    'TypeScript':              <SiTypescript size={28} />,
+    'React':                   <FaReact size={28} />,
+    'Next.js':                 <SiNextdotjs size={28} />,
+    'Redux / Zustand':         <SiRedux size={28} />,
+    'TanStack Query':          <SiReactquery size={28} />,
+    'Shadcn UI':               <SiShadcnui size={28} />,
+    'Ant Design':              <SiAntdesign size={28} />,
+    'Material UI':             <SiMui size={28} />,
+    'Claude AI':               <MdAutoAwesome size={28} />,
+    'Codex AI':                <SiOpenai size={28} />,
+    'GitHub Copilot':          <MdSmartToy size={28} />,
+    'Node.js':                 <TbBrandNodejs size={28} />,
+    'Express.js':              <SiExpress size={28} />,
+    'PostgreSQL':              <SiPostgresql size={28} />,
+    'Prisma ORM':              <SiPrisma size={28} />,
+    'Redis':                   <SiRedis size={28} />,
+    'JWT / Argon2':            <TbShieldLock size={28} />,
+    'Zod':                     <MdVerifiedUser size={28} />,
+    'Swagger':                 <SiSwagger size={28} />,
+    'Docker':                  <SiDocker size={28} />,
+    'Rate Limiting / Helmet':  <MdSecurity size={28} />,
+    'File Structure':          <MdAccountTree size={28} />,
+    'Networking / REST':       <MdHub size={28} />,
+    'DOM Manipulation':        <MdDeveloperMode size={28} />,
+    'SaaS Development':        <MdRocketLaunch size={28} />,
+    'Git / GitHub':            <FaGithub size={28} />,
+    'Vercel / Netlify':        <SiVercel size={28} />,
+}
+
+const skillCategoryKeys = skillCategoryData.map((cat) => ({
+    ...cat,
+    skills: cat.skills.map((s) => ({ ...s, icon: skillIcons[s.name] })),
+}))
 
 const CardWrapper = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'accentcolor',

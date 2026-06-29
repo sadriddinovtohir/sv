@@ -93,14 +93,15 @@ export default function Projects() {
         <Typography color="#ccc">{t("PROJECTS_SUBTITLE")}</Typography>
       </Stack>
 
-      <Stack
-        direction="row"
-        rowGap="10px"
-        gap="30px"
-        justifyContent="center"
-        flexWrap="wrap"
-        alignItems="center"
-      >
+      <Box sx={{
+        display: 'grid',
+        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
+        gap: '24px',
+        justifyItems: 'center',
+        width: '100%',
+        px: { xs: 2, md: 4 },
+        pb: 4,
+      }}>
         {data.map((item, index) => (
           <CustomCard
             key={index}
@@ -113,7 +114,7 @@ export default function Projects() {
             badge={item.badge}
           />
         ))}
-      </Stack>
+      </Box>
     </Box>
   );
 }

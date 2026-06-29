@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Grid, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import { useTranslation } from 'react-i18next'
 
 import { FaHtml5, FaJs, FaReact, FaGithub } from 'react-icons/fa'
 import {
@@ -14,9 +15,9 @@ import {
 import { SiPostgresql, SiPrisma, SiRedis, SiJsonwebtokens, SiSwagger, SiDocker, SiExpress } from 'react-icons/si'
 import { TbBrandNodejs, TbShieldLock } from 'react-icons/tb'
 
-const skillCategories = [
+const skillCategoryKeys = [
     {
-        label: 'Frontend Core',
+        labelKey: 'SKILL_CAT_FRONTEND_CORE',
         accent: '#ff2d55',
         skills: [
             { name: 'HTML5',        icon: <FaHtml5 size={28} />,       level: 95 },
@@ -26,7 +27,7 @@ const skillCategories = [
         ],
     },
     {
-        label: 'Frameworks & State',
+        labelKey: 'SKILL_CAT_FRAMEWORKS',
         accent: '#38bdf8',
         skills: [
             { name: 'React',          icon: <FaReact size={28} />,       level: 92 },
@@ -36,7 +37,7 @@ const skillCategories = [
         ],
     },
     {
-        label: 'UI Libraries',
+        labelKey: 'SKILL_CAT_UI_LIBRARIES',
         accent: '#a855f7',
         skills: [
             { name: 'Shadcn UI',    icon: <SiShadcnui size={28} />,    level: 86 },
@@ -45,7 +46,7 @@ const skillCategories = [
         ],
     },
     {
-        label: 'AI Tools',
+        labelKey: 'SKILL_CAT_AI_TOOLS',
         accent: '#22c55e',
         skills: [
             { name: 'Claude AI',       icon: <MdAutoAwesome size={28} />, level: 86 },
@@ -54,7 +55,7 @@ const skillCategories = [
         ],
     },
     {
-        label: 'AI Backend Skills',
+        labelKey: 'SKILL_CAT_AI_BACKEND',
         accent: '#06b6d4',
         skills: [
             { name: 'Node.js',      icon: <TbBrandNodejs size={28} />,   level: 82 },
@@ -70,7 +71,7 @@ const skillCategories = [
         ],
     },
     {
-        label: 'Architecture & DevOps',
+        labelKey: 'SKILL_CAT_ARCHITECTURE',
         accent: '#f59e0b',
         skills: [
             { name: 'File Structure',    icon: <MdAccountTree size={28} />,  level: 88 },
@@ -142,6 +143,7 @@ const ProgressFill = styled(Box, {
 }))
 
 function SkillCard({ skill, accent }) {
+    const { t } = useTranslation()
     return (
         <CardWrapper accentcolor={accent}>
             <IconBox accentcolor={accent}>{skill.icon}</IconBox>
@@ -159,7 +161,7 @@ function SkillCard({ skill, accent }) {
             <Box sx={{ width: '100%' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
                     <Typography sx={{ fontSize: '9px', color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>
-                        Proficiency
+                        {t('SKILL_PROFICIENCY')}
                     </Typography>
                     <Typography sx={{ fontSize: '9px', color: accent, fontWeight: 600 }}>
                         {skill.level}%
@@ -174,6 +176,13 @@ function SkillCard({ skill, accent }) {
 }
 
 export default function Skills() {
+    const { t } = useTranslation()
+
+    const skillCategories = skillCategoryKeys.map((cat) => ({
+        ...cat,
+        label: t(cat.labelKey),
+    }))
+
     return (
         <Box sx={{ px: { xs: '0', md: '0' }, py: { xs: '24px', md: '36px' }, maxWidth: 1160, mx: 'auto' }}>
 
@@ -190,20 +199,20 @@ export default function Skills() {
                     lineHeight: 1.15,
                     mb: 1,
                 }}>
-                    My Skills
+                    {t('SKILLS_TITLE')}
                 </Typography>
                 <Typography sx={{
                     color: 'rgba(255,255,255,0.4)',
                     fontSize: { xs: '13px', md: '15px' },
                     fontWeight: 400,
                 }}>
-                    Technologies &amp; tools I build with every day
+                    {t('SKILLS_SUBTITLE')}
                 </Typography>
             </Box>
 
             {/* Skill Categories */}
             {skillCategories.map((category) => (
-                <Box key={category.label} sx={{ mb: { xs: 4, md: 5 } }}>
+                <Box key={category.labelKey} sx={{ mb: { xs: 4, md: 5 } }}>
 
                     {/* Category Header */}
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: { xs: 2, md: 2.5 } }}>
@@ -231,7 +240,7 @@ export default function Skills() {
                             opacity: 0.75,
                             flexShrink: 0,
                         }}>
-                            {category.skills.length} skills
+                            {t('SKILL_COUNT', { count: category.skills.length })}
                         </Typography>
                     </Box>
 

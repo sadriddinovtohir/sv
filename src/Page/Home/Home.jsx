@@ -7,15 +7,15 @@ import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import profileImg from '../../assets/img/about.jpg'
 import { Link } from 'react-router-dom'
 
-const stats = [
-    { value: '1+',  label: 'Years Exp.',    accent: '#ff2d55' },
-    { value: '5+',  label: 'Projects',      accent: '#38bdf8' },
-    { value: '15+', label: 'Technologies',  accent: '#a855f7' },
-    { value: '∞',   label: 'Curiosity',     accent: '#22c55e' },
-]
-
 export default function Home() {
     const { t } = useTranslation()
+
+    const stats = [
+        { value: '1+',  label: t('STAT_YEARS_EXP'),    accent: '#ff2d55' },
+        { value: '5+',  label: t('STAT_PROJECTS'),      accent: '#38bdf8' },
+        { value: '15+', label: t('STAT_TECHNOLOGIES'),  accent: '#a855f7' },
+        { value: '∞',   label: t('STAT_CURIOSITY'),     accent: '#22c55e' },
+    ]
 
     return (
         <div className='container'>
@@ -51,7 +51,7 @@ export default function Home() {
                             fontSize: { xs: '18px', md: '24px' },
                         }}
                     >
-                        Frontend Developer
+                        {t("FRONTEND_DEVELOPER")}
                     </Typography>
 
                     <Typography
@@ -62,17 +62,31 @@ export default function Home() {
 
                     {/* Location & Available */}
                     <Stack flexDirection={'row'} gap={'16px'} alignItems={'center'} mb={'26px'} flexWrap={'wrap'}>
-                        <Box sx={{
-                            display: 'flex', alignItems: 'center', gap: '6px',
-                            color: 'rgba(255,255,255,0.55)', fontSize: '13px',
-                            background: 'rgba(255,255,255,0.05)',
-                            backdropFilter: 'blur(12px)',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            borderRadius: '20px', px: '12px', py: '6px',
-                        }}>
-                            <CiLocationOn size={15} />
-                            {t("Loaction")}
-                        </Box>
+                        <a
+                            href="https://www.google.com/maps/place/Najot+Ta'lim+Chilonzor+Filial/@41.2856679,69.199098,1047m/data=!3m1!1e3!4m6!3m5!1s0x38ae8ba578f4f58d:0xd7a2ecf23413b7a0!8m2!3d41.2857626!4d69.2036637!16s%2Fg%2F11nms27h2f?entry=ttu&g_ep=EgoyMDI2MDYyNC4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Box sx={{
+                                display: 'flex', alignItems: 'center', gap: '6px',
+                                color: 'rgba(255,255,255,0.55)', fontSize: '13px',
+                                background: 'rgba(255,255,255,0.05)',
+                                backdropFilter: 'blur(12px)',
+                                border: '1px solid rgba(255,255,255,0.08)',
+                                borderRadius: '20px', px: '12px', py: '6px',
+                                cursor: 'pointer',
+                                transition: 'all 0.25s ease',
+                                '&:hover': {
+                                    color: 'rgba(255,255,255,0.9)',
+                                    background: 'rgba(255,255,255,0.1)',
+                                    borderColor: 'rgba(255,255,255,0.25)',
+                                },
+                            }}>
+                                <CiLocationOn size={15} />
+                                {t("Loaction")}
+                            </Box>
+                        </a>
 
                         <Box sx={{
                             display: 'flex', alignItems: 'center', gap: '6px',
@@ -90,27 +104,7 @@ export default function Home() {
                     </Stack>
 
                     {/* Buttons */}
-                    <Stack flexDirection={'row'} gap={'12px'} mb={'30px'} flexWrap={'wrap'}>
-                        <Link to={"/contact"}>
-                            <Button
-                                variant='contained'
-                                endIcon={<FaArrowRight size={14} />}
-                                sx={{
-                                    background: 'linear-gradient(135deg, #c0103a, #ff2d55)',
-                                    color: 'white',
-                                    borderRadius: '25px',
-                                    padding: '10px 24px',
-                                    textTransform: 'none',
-                                    fontWeight: 600,
-                                    fontSize: '14px',
-                                    boxShadow: '0 6px 20px rgba(192,16,58,0.4)',
-                                    '&:hover': { boxShadow: '0 8px 28px rgba(192,16,58,0.6)' },
-                                }}
-                            >
-                                {t("Hire")}
-                            </Button>
-                        </Link>
-
+                    {/* <Stack flexDirection={'row'} gap={'12px'} mb={'30px'} flexWrap={'wrap'}>
                         <Link target='_blank' to={"https://drive.google.com/file/d/1RFFDrtltvwii3hLzHM4FH4YADf0htNI5/view"}>
                             <Button
                                 variant='outlined'
@@ -135,7 +129,7 @@ export default function Home() {
                                 {t("CV")}
                             </Button>
                         </Link>
-                    </Stack>
+                    </Stack> */}
 
                     {/* Divider */}
                     <Box sx={{ borderTop: '1px solid rgba(255,255,255,0.07)', mb: '18px' }} />
@@ -143,7 +137,7 @@ export default function Home() {
                     {/* Social Links */}
                     <Stack flexDirection={'row'} gap={'16px'} alignItems={'center'} flexWrap={'wrap'}>
                         <Typography sx={{ color: 'rgba(255,255,255,0.35)', fontSize: '12px', fontWeight: 500 }}>
-                            Follow me:
+                            {t("FOLLOW_ME")}
                         </Typography>
 
                         {[

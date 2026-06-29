@@ -1,16 +1,19 @@
 import { Stack, Box, Typography } from '@mui/material'
 import { FaEnvelope, FaFileAlt, FaLinkedin, FaPhone, FaTelegram, FaUser } from "react-icons/fa";
-
-const links = [
-  { icon: <FaEnvelope />, label: 'toxir4626@gmail.com', href: 'mailto:toxir4626@gmail.com' },
-  { icon: <FaPhone />, label: '+998-90-128-33-07', href: 'tel:+998901283307' },
-  { icon: <FaFileAlt />, label: 'Rezyume', href: 'https://rezumi.vercel.app/', target: '_blank' },
-  { icon: <FaUser />, label: 'Sertifikat', href: 'https://rezumi.vercel.app/sertificat.html', target: '_blank' },
-  { icon: <FaLinkedin />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/', target: '_blank' },
-  { icon: <FaTelegram />, label: 'Telegram', href: 'https://t.me/tohir_sadriddinov/', target: '_blank' },
-]
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
+  const { t } = useTranslation()
+
+  const links = [
+    { icon: <FaEnvelope />, label: 'toxir4626@gmail.com', href: 'mailto:toxir4626@gmail.com' },
+    { icon: <FaPhone />, label: '+998-90-128-33-07', href: 'tel:+998901283307' },
+    { icon: <FaFileAlt />, label: t('FOOTER_RESUME'), href: 'https://rezumi.vercel.app/', target: '_blank' },
+    { icon: <FaUser />, label: t('FOOTER_CERTIFICATE'), href: 'https://rezumi.vercel.app/sertificat.html', target: '_blank' },
+    { icon: <FaLinkedin />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/', target: '_blank' },
+    { icon: <FaTelegram />, label: 'Telegram', href: 'https://t.me/tohir_sadriddinov/', target: '_blank' },
+  ]
+
   return (
     <Box
       component="footer"
@@ -73,7 +76,7 @@ export default function Footer() {
             fontSize: "12px",
           }}
         >
-          © {new Date().getFullYear()} Tohirbek Sadriddinov. All rights reserved.
+          © {new Date().getFullYear()} Tohirbek Sadriddinov. {t('FOOTER_RIGHTS')}
         </Typography>
       </div>
     </Box>

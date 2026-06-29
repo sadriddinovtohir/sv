@@ -95,9 +95,10 @@ export default function Projects() {
 
       <Box sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
+        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
         gap: '24px',
         justifyItems: 'center',
+        justifyContent: 'start',
         width: '100%',
         px: { xs: 2, md: 4 },
         pb: 4,

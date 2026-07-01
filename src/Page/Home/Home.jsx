@@ -11,15 +11,9 @@ import {
 import { TbBrandNodejs } from 'react-icons/tb'
 import profileImg from '../../assets/img/homePage.jpg'
 import { Link } from 'react-router-dom'
-import CustomCard from '../../components/CustomCard/CustomCard'
-import RadioatorPro from '../../assets/img/RadioatorPro.png'
-import bizCore from '../../assets/img/bizCore.png'
-import parthubLogo from '../../assets/img/parthub.png'
-import studense from '../../assets/img/studense.png'
-import sun_energy_img from '../../assets/img/sun_energy_img.jpg'
-import ITPARKIMG from '../../assets/img/ITPARK.png'
-import clubMraa from '../../assets/img/image.png'
 import { totalSkillsCount } from '../../data/skillsData'
+
+const PROJECTS_COUNT = 7
 
 const techStack = [
     { icon: <FaHtml5 size={22} />,       name: 'HTML5',        color: '#e34f26' },
@@ -35,22 +29,12 @@ const techStack = [
     { icon: <SiDocker size={22} />,      name: 'Docker',       color: '#2496ed' },
 ]
 
-const projectsData = [
-    { img: bizCore,       titleKey: 'PROJECT_BACKEND_TITLE',    descKey: 'PROJECT_BACKEND_DESC',    techKey: 'PROJECT_BACKEND_TECH',    link: 'https://github.com/sadriddinovtohir',              giturl: 'https://github.com/sadriddinovtohir',                       badge: 'AI Built' },
-    { img: ITPARKIMG,     titleKey: 'PROJECT_ITPARK_TITLE',     descKey: 'PROJECT_ITPARK_DESC',     techKey: 'PROJECT_ITPARK_TECH',     link: 'https://www.it-park.uz/' },
-    { img: studense,      titleKey: 'PROJECT_TTG_TITLE',        descKey: 'PROJECT_TTG_DESC',        techKey: 'PROJECT_TTG_TECH',        link: 'https://github.com/MaxmudAxmedov/admin-sun-energy', giturl: 'https://github.com/MaxmudAxmedov/admin-sun-energy' },
-    { img: sun_energy_img,titleKey: 'PROJECT_SUN_ENERGY_TITLE', descKey: 'PROJECT_SUN_ENERGY_DESC', techKey: 'PROJECT_SUN_ENERGY_TECH', link: 'https://quyosh-panellari-admin.netlify.app/',      giturl: 'https://github.com/MaxmudAxmedov/admin-sun-energy' },
-    { img: parthubLogo,   titleKey: 'PARTHUB',                  descKey: 'PROJECT_BIZCORE_DESC',    techKey: 'PROJECT_BIZCORE_TECH',    link: 'https://parthub-gamma.vercel.app/',               giturl: 'https://github.com/sadriddinovtohir/PARTHUB_FRONTEND' },
-    { img: clubMraa,      titleKey: 'PROJECT_REACTNATIVE_TITLE',descKey: 'PROJECT_REACTNATIVE_DESC',techKey: 'PROJECT_REACTNATIVE_TECH',link: 'https://github.com/sadriddinovtohir',              giturl: 'https://github.com/sadriddinovtohir' },
-    { img: RadioatorPro,  titleKey: 'RADIATORPRO_TITLE',        descKey: 'RADIATORPRO_DESC',        techKey: 'RADIATORPRO_TECH',        link: 'https://radiator-pro.vercel.app/' },
-]
-
 export default function Home() {
     const { t } = useTranslation()
 
     const stats = [
         { value: '1+',                    label: t('STAT_YEARS_EXP'),    accent: '#ff2d55' },
-        { value: `${projectsData.length}`,label: t('STAT_PROJECTS'),     accent: '#38bdf8' },
+        { value: `${PROJECTS_COUNT}`,     label: t('STAT_PROJECTS'),     accent: '#38bdf8' },
         { value: `${totalSkillsCount}`,   label: t('STAT_TECHNOLOGIES'), accent: '#a855f7' },
         { value: '∞',                     label: t('STAT_CURIOSITY'),    accent: '#22c55e' },
     ]
@@ -346,58 +330,6 @@ export default function Home() {
                         </Box>
                     ))}
                 </Stack>
-            </Box>
-
-            {/* === Projects Section === */}
-            <Box sx={{ mb: '60px' }}>
-                <Stack flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} mb={'24px'} flexWrap={'wrap'} gap={'12px'}>
-                    <Box>
-                        <Typography sx={{
-                            fontWeight: 800,
-                            fontSize: { xs: '22px', md: '28px' },
-                            color: '#ff4d6d',
-                            letterSpacing: '1px',
-                            mb: '4px',
-                        }}>
-                            {t('PROJECTS_TITLE')}
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px' }}>
-                            {t('PROJECTS_SUBTITLE')}
-                        </Typography>
-                    </Box>
-                    <Link to="/projects" style={{ textDecoration: 'none' }}>
-                        <Box sx={{
-                            display: 'flex', alignItems: 'center', gap: '6px',
-                            color: '#ff4d6d', fontSize: '13px', fontWeight: 600,
-                            border: '1px solid rgba(255,77,109,0.3)',
-                            borderRadius: '20px', px: '14px', py: '6px',
-                            cursor: 'pointer', transition: 'all 0.25s ease',
-                            '&:hover': { background: 'rgba(255,77,109,0.08)', borderColor: '#ff4d6d' },
-                        }}>
-                            View all <FaArrowRight size={11} />
-                        </Box>
-                    </Link>
-                </Stack>
-
-                <Box sx={{
-                    display: 'grid',
-                    gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
-                    gap: '24px',
-                    justifyItems: 'center',
-                }}>
-                    {projectsData.map((item, index) => (
-                        <CustomCard
-                            key={index}
-                            img={item.img}
-                            title={t(item.titleKey)}
-                            desc={t(item.descKey)}
-                            tech={t(item.techKey, { returnObjects: true })}
-                            link={item.link}
-                            giturl={item.giturl}
-                            badge={item.badge}
-                        />
-                    ))}
-                </Box>
             </Box>
 
         </div>

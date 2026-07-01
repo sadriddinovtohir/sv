@@ -3,7 +3,6 @@ import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import CustomCard from "../../components/CustomCard/CustomCard";
 import RadioatorPro from "../../assets/img/RadioatorPro.png"
-import gipper from "../../assets/img/gipper.png"
 import bizCore from "../../assets/img/bizCore.png"
 import parthubLogo from "../../assets/img/parthub.png"
 import studense from "../../assets/img/studense.png"
@@ -95,7 +94,7 @@ export default function Projects() {
 
       <Box sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
+        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
         gap: '24px',
         justifyItems: 'center',
         justifyContent: 'start',

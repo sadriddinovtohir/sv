@@ -41,7 +41,11 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                         component="img"
                         src={img}
                         alt={title}
-                        sx={{ height: "150px", width: "100%", borderRadius: "14px", objectFit: "cover", display: "block" }}
+                        sx={{
+                            height: "150px", width: "100%", borderRadius: "14px",
+                            objectFit: "contain", display: "block",
+                            background: "rgba(0,0,0,0.25)",
+                        }}
                     />
                     {badge && (
                         <Box sx={{
@@ -139,7 +143,11 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                             component="img"
                             src={img}
                             alt={title}
-                            sx={{ width: "100%", height: "220px", objectFit: "cover", display: "block" }}
+                            sx={{
+                                width: "100%", height: "220px",
+                                objectFit: "contain", display: "block",
+                                background: "rgba(0,0,0,0.35)",
+                            }}
                         />
                         {/* Gradient overlay on image */}
                         <Box sx={{

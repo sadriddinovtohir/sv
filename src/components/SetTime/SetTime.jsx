@@ -31,7 +31,7 @@ export default function SetTime() {
         <div style={{ paddingX: "10px", marginX: "10px" }}>
             <style>{styles}</style>
             <Stack style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "16px" }}>
-                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, boxShadow: COLOR.shadow, borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>
+                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, gap: { xs: "28px", md: "32px" }, boxShadow: COLOR.shadow, borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>
                     <div>
                         <Stack>
                             <Stack flexDirection="row" style={s("top", 0.7)}>

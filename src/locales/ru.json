@@ -72,6 +72,7 @@
   "CONTACT_SUBTITLE": "Есть идея проекта? Расскажите мне, и я отвечу в течение дня.",
   "CONTACT_FORM_NAME": "Ваше имя",
   "CONTACT_FORM_PHONE": "Ваш номер телефона",
+  "CONTACT_FORM_PHONE_INVALID": "Введите полный номер телефона, например: +998-90-123-45-67",
   "CONTACT_FORM_MESSAGE": "Детали проекта",
   "CONTACT_FORM_MESSAGE_PLACEHOLDER": "Расскажите немного о своём проекте или идее...",
   "CONTACT_FORM_SUBMIT": "Отправить сообщение",

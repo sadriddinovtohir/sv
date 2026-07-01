@@ -8,6 +8,10 @@ export async function handleContactSubmission({ name, phone, message, company } 
     return { statusCode: 400, body: { error: 'Missing required fields' } }
   }
 
+  if (!/^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/.test(phone)) {
+    return { statusCode: 400, body: { error: 'Invalid phone number' } }
+  }
+
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
 

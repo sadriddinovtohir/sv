@@ -72,6 +72,7 @@
   "CONTACT_SUBTITLE": "Loyiha g'oyangiz bormi? Menga ayting, bir kun ichida javob beraman.",
   "CONTACT_FORM_NAME": "Ismingiz",
   "CONTACT_FORM_PHONE": "Telefon raqamingiz",
+  "CONTACT_FORM_PHONE_INVALID": "Telefon raqamini to'liq kiriting, masalan: +998-90-123-45-67",
   "CONTACT_FORM_MESSAGE": "Loyiha tafsilotlari",
   "CONTACT_FORM_MESSAGE_PLACEHOLDER": "Loyihangiz yoki g'oyangiz haqida qisqacha yozing...",
   "CONTACT_FORM_SUBMIT": "Xabar yuborish",

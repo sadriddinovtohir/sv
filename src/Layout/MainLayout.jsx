@@ -6,7 +6,7 @@ import { Stack, Box } from '@mui/material'
 
 export default function MainLayout() {
     return (
-        <Stack justifyContent={"space-between"} minHeight={"100vh"} sx={{ position: 'relative' }}>
+        <Stack justifyContent={"space-between"} minHeight={"100vh"} sx={{ position: 'relative', overflowX: 'hidden', width: '100%' }}>
 
             {/* Glassmorphism background orbs */}
             <div className="bg-orb bg-orb-1" />

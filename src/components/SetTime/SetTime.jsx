@@ -28,7 +28,7 @@ const styles = `
 
 export default function SetTime() {
     return (
-        <div style={{ paddingX: "10px", marginX: "10px" }}>
+        <div style={{ paddingInline: "10px", overflowX: "hidden" }}>
             <style>{styles}</style>
             <Stack style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "16px" }}>
                 <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, gap: { xs: "28px", md: "32px" }, boxShadow: COLOR.shadow, borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>

@@ -16,7 +16,8 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
             <Stack
                 onClick={() => setOpen(true)}
                 sx={{
-                    width: 310,
+                    width: "100%",
+                    maxWidth: { xs: "100%", sm: 310 },
                     borderRadius: "20px",
                     p: 2,
                     background: "rgba(255,255,255,0.04)",

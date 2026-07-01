@@ -75,6 +75,7 @@ function LangDropdown({ currentLang, changeLang }) {
           top: 'calc(100% + 8px)',
           right: 0,
           minWidth: '150px',
+          maxWidth: 'calc(100vw - 32px)',
           background: 'rgba(18,18,28,0.95)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255,255,255,0.1)',

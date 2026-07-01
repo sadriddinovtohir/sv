@@ -1,6 +1,6 @@
 import { COLOR } from '../../config/ui/color'
 import { Roundedspan } from '../../config/ui/style'
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Box } from '@mui/material';
 import imgProfile from "../../assets/img/about.jpg"
 
 const s = (dir, delay) => ({
@@ -30,17 +30,17 @@ export default function SetTime() {
     return (
         <div style={{ paddingX: "10px", marginX: "10px" }}>
             <style>{styles}</style>
-            <Stack style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} style={{ padding: "50px", boxShadow: COLOR.shadow, borderRadius: "30px", ...s("top", 0) }}>
+            <Stack style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "16px" }}>
+                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, boxShadow: COLOR.shadow, borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>
                     <div>
                         <Stack>
                             <Stack flexDirection="row" style={s("top", 0.7)}>
                                 <Roundedspan>UI LOADING...</Roundedspan>
                             </Stack>
-                            <Typography style={s("left", 1.75)} marginY="10px" variant="h3" maxWidth="300px" fontWeight={700}>
+                            <Typography style={s("left", 1.75)} marginY="10px" variant="h3" sx={{ maxWidth: { xs: "100%", sm: "300px" }, fontSize: { xs: "26px", sm: "32px", md: "40px" } }} fontWeight={700}>
                                 Welcome to my Portfolio Website
                             </Typography>
-                            <Typography style={s("left", 1.9)} marginBottom="20px" variant="p" maxWidth="500px" fontWeight={200} sx={{ opacity: 0.5 }}>
+                            <Typography style={s("left", 1.9)} marginBottom="20px" variant="p" sx={{ maxWidth: { xs: "100%", sm: "500px" }, opacity: 0.5 }} fontWeight={200}>
                                 Building modern, reliable, and fast digital experiences with a focus on clean UI and solid engineering.
                             </Typography>
                             <Typography className="hide-mobile" style={s("left", 2.05)} marginBottom="20px" variant="p" fontWeight={700} fontSize="15px" color="rgba(205,12,12,0.729)">
@@ -48,7 +48,7 @@ export default function SetTime() {
                             </Typography>
                         </Stack>
 
-                        <Stack style={{ maxWidth: "400px" }}>
+                        <Stack sx={{ maxWidth: { xs: "100%", sm: "400px" } }}>
 
                             <Typography
                                 style={s("bottom", 2.2)}
@@ -76,13 +76,15 @@ export default function SetTime() {
 
                         </Stack>
                     </div>
-                    <img
-                        className="hide-mobile"
-                        style={{
+                    <Box
+                        component="img"
+                        sx={{
                             cursor: "pointer",
-                            maxWidth: "500px",
+                            width: { xs: "160px", sm: "260px", md: "500px" },
+                            maxWidth: "100%",
                             borderRadius: "20px",
                             boxShadow: "0 4px 15px rgba(255, 0, 0, 0.7)",
+                            mx: "auto",
                             ...s("right", 1.8)
                         }}
                         src={imgProfile}

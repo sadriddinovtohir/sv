@@ -74,6 +74,12 @@ body {
   50% { transform: translate(-55px, -35px) scale(1.1); }
 }
 
+@media (max-width: 768px) {
+  .bg-orb-1 { width: 380px; height: 380px; top: -140px; left: -120px; }
+  .bg-orb-2 { width: 300px; height: 300px; right: -100px; }
+  .bg-orb-3 { width: 260px; height: 260px; left: 10%; }
+}
+
 /* === Animations === */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(22px); }
@@ -120,6 +126,14 @@ body {
   padding: 7px 16px;
   border-radius: 50px;
   transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .nav-link {
+    font-size: 12.5px;
+    padding: 6px 10px;
+  }
 }
 .nav-link:hover {
   color: white;
@@ -136,6 +150,13 @@ body {
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 }
 
 .btn {

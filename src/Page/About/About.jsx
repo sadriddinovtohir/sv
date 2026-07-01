@@ -1,6 +1,7 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import Profiler from "../../assets/img/about.jpg";
+import AboutProfile from "../../assets/img/About_Profile.jpg";
 
 export default function About() {
   const { t } = useTranslation();
@@ -86,11 +87,13 @@ export default function About() {
             boxShadow: "0 0 30px rgba(255,0,80,0.4)",
           }}
         >
-          <img
-            src={Profiler}
+          <Box
+            component="img"
+            src={AboutProfile}
             alt=""
-            style={{
-              width: "250px",
+            sx={{
+              width: { xs: "180px", sm: "220px", md: "250px" },
+              maxWidth: "100%",
               borderRadius: "15px",
             }}
           />

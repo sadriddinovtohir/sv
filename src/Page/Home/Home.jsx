@@ -9,7 +9,7 @@ import {
     SiReactquery, SiDocker, SiPostgresql,
 } from 'react-icons/si'
 import { TbBrandNodejs } from 'react-icons/tb'
-import profileImg from '../../assets/img/about.jpg'
+import profileImg from '../../assets/img/homePage.jpg'
 import { Link } from 'react-router-dom'
 import CustomCard from '../../components/CustomCard/CustomCard'
 import RadioatorPro from '../../assets/img/RadioatorPro.png'
@@ -151,20 +151,21 @@ export default function Home() {
                         </Typography>
 
                         {[
-                            { icon: <FaGithub size={20} />,    href: "https://github.com/sadriddinovtohir" },
-                            { icon: <FaTelegram size={20} />,  href: "https://t.me/tohir_sadriddinov" },
-                            { icon: <FaLinkedin size={20} />,  href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/' },
-                            { icon: <FaInstagram size={20} />, href: 'https://www.instagram.com/tohirbek_sadriddinov/' },
-                            { icon: <FaPlay size={20} />,      href: 'https://vercel.com/sadriddinovtohirs-projects' },
+                            { icon: <FaGithub size={18} />,    href: "https://github.com/sadriddinovtohir" },
+                            { icon: <FaTelegram size={18} />,  href: "https://t.me/tohir_sadriddinov" },
+                            { icon: <FaLinkedin size={18} />,  href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/' },
+                            { icon: <FaInstagram size={18} />, href: 'https://www.instagram.com/tohirbek_sadriddinov/' },
+                            { icon: <FaPlay size={18} />,      href: 'https://vercel.com/sadriddinovtohirs-projects' },
                         ].map((item, i) => (
-                            <a
+                            <Box
                                 key={i}
+                                component="a"
                                 href={item.href}
                                 target='_blank'
                                 rel='noreferrer'
-                                style={{
+                                sx={{
                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    width: 38, height: 38,
+                                    width: { xs: 34, md: 38 }, height: { xs: 34, md: 38 },
                                     background: 'rgba(255,255,255,0.05)',
                                     border: '1px solid rgba(255,255,255,0.08)',
                                     borderRadius: '50%',
@@ -187,7 +188,7 @@ export default function Home() {
                                 }}
                             >
                                 {item.icon}
-                            </a>
+                            </Box>
                         ))}
                     </Stack>
                 </Stack>
@@ -208,7 +209,8 @@ export default function Home() {
                     <Box sx={{
                         position: 'relative', zIndex: 1,
                         width: { xs: '220px', sm: '280px', md: '320px' },
-                        aspectRatio: '3/4',
+                        maxWidth: '100%',
+                        aspectRatio: '467/420',
                         borderRadius: '24px',
                         overflow: 'hidden',
                         border: '1px solid rgba(255,255,255,0.1)',
@@ -218,7 +220,7 @@ export default function Home() {
                         <img
                             src={profileImg}
                             alt='Tohirbek Sadriddinov'
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                         />
                     </Box>
                 </Box>

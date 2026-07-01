@@ -31,7 +31,7 @@ export default function MainLayout() {
                     <Header />
                 </Box>
 
-                <Box style={{ height: "60px" }} />
+                <Box sx={{ height: { xs: "54px", md: "64px" } }} />
 
                 <main>
                     <Outlet />

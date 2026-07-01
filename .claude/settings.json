@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Read(//d/idea/Parthub Bold Icon Mark/**)"
+      "Read(//d/idea/Parthub Bold Icon Mark/**)",
+      "Bash(node -e ' *)"
     ],
     "additionalDirectories": [
       "D:\\idea\\Parthub Bold Icon Mark"

@@ -121,13 +121,12 @@ export default function Contact() {
         </Stack>
       </Stack>
 
-      <Stack direction={{ xs: 'column', md: 'row' }} gap={4} alignItems="flex-start">
+      <Stack direction="column" gap={4} alignItems="stretch" sx={{ width: '100%' }}>
         {/* === Form === */}
         <Box
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            flex: { xs: '1 1 auto', md: '1 1 60%' },
             minWidth: 0,
             width: '100%',
             p: { xs: 2.5, md: 4 },
@@ -220,10 +219,8 @@ export default function Contact() {
         {/* === Contact Info === */}
         <Stack
           sx={{
-            flex: { xs: '1 1 auto', md: '0 1 340px' },
             minWidth: 0,
             width: '100%',
-            maxWidth: { xs: '100%', md: '340px' },
             p: { xs: 2.5, md: 3 },
             borderRadius: '20px',
             background: 'rgba(255,255,255,0.04)',

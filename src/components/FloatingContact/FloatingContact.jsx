@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Box, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { FaTelegram, FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa'
-import { FiMessageCircle, FiX } from 'react-icons/fi'
+import { FiMessageCircle } from 'react-icons/fi'
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
 
@@ -15,19 +16,23 @@ const CHANNELS = [
 
 export default function FloatingContact() {
     const { t } = useTranslation()
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
 
     return (
-        <Box sx={{
-            position: 'fixed',
-            bottom: { xs: 16, md: 28 },
-            right: { xs: 16, md: 28 },
-            zIndex: 1200,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            gap: '12px',
-        }}>
+        <Box
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+            sx={{
+                position: 'fixed',
+                bottom: { xs: 16, md: 28 },
+                right: { xs: 16, md: 28 },
+                zIndex: 1200,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                gap: '12px',
+            }}>
             {CHANNELS.map((ch, i) => (
                 <Tooltip key={ch.label} title={ch.label} placement="left">
                     <Box
@@ -59,7 +64,7 @@ export default function FloatingContact() {
 
             <Tooltip title={t('FLOATING_CTA_LABEL')} placement="left">
                 <Box
-                    onClick={() => setOpen(o => !o)}
+                    onClick={() => navigate('/contact')}
                     role="button"
                     aria-label={t('FLOATING_CTA_LABEL')}
                     sx={{
@@ -75,7 +80,7 @@ export default function FloatingContact() {
                         '&:hover': { transform: 'scale(1.08)' },
                     }}
                 >
-                    {open ? <FiX size={24} /> : <FiMessageCircle size={24} />}
+                    <FiMessageCircle size={24} />
                 </Box>
             </Tooltip>
         </Box>

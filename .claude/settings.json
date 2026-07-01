@@ -20,7 +20,8 @@
       "Bash(curl -s -i -X POST http://localhost:5173/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test\",\"phone\":\"+998900000000\",\"message\":\"tekshiruv 5173\"}')",
       "Bash(curl -s -i -X POST http://localhost:5173/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Final check\",\"phone\":\"+998900000000\",\"message\":\"5173 portda tuzatilgandan keyingi test\"}')",
       "Bash(curl -s -i -X POST https://rezumi2.vercel.app/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Diagnostic\",\"phone\":\"+998900000000\",\"message\":\"Deploy diagnostikasi\"}')",
-      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('vercel.json'\\)\\); console.log\\('vercel.json valid'\\)\")"
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('vercel.json'\\)\\); console.log\\('vercel.json valid'\\)\")",
+      "Bash(curl -s -i -X POST https://rezumi2.vercel.app/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Diagnostic\",\"phone\":\"+998-90-123-45-67\",\"message\":\"tekshiruv\"}')"
     ],
     "additionalDirectories": [
       "D:\\idea\\Parthub Bold Icon Mark"

@@ -80,8 +80,8 @@ export default function SetTime() {
                         component="img"
                         sx={{
                             cursor: "pointer",
-                            width: { xs: "160px", sm: "260px", md: "500px" },
-                            maxWidth: "100%",
+                            width: { xs: "160px", sm: "220px", md: "320px", lg: "440px" },
+                            maxWidth: "min(100%, 70vw)",
                             borderRadius: "20px",
                             boxShadow: "0 4px 15px rgba(255, 0, 0, 0.7)",
                             mx: "auto",

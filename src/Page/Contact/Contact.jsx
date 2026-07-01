@@ -5,6 +5,22 @@ import { FaEnvelope, FaPhone, FaTelegram, FaLinkedin } from 'react-icons/fa'
 import { FiSend, FiCheckCircle } from 'react-icons/fi'
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
+const PHONE_REGEX = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/
+
+function formatPhone(raw) {
+  let digits = raw.replace(/\D/g, '')
+  if (digits.startsWith('998')) {
+    digits = digits.slice(3)
+  }
+  digits = digits.slice(0, 9)
+
+  let out = '+998'
+  if (digits.length > 0) out += '-' + digits.slice(0, 2)
+  if (digits.length > 2) out += '-' + digits.slice(2, 5)
+  if (digits.length > 5) out += '-' + digits.slice(5, 7)
+  if (digits.length > 7) out += '-' + digits.slice(7, 9)
+  return out
+}
 
 const CONTACT_INFO = [
   { icon: <FaEnvelope />, label: 'toxir4626@gmail.com', href: GMAIL_COMPOSE_URL, target: '_blank' },
@@ -24,6 +40,8 @@ const fieldSx = {
   },
   '& .MuiInputLabel-root': { color: 'rgba(255,255,255,0.5)' },
   '& .MuiInputLabel-root.Mui-focused': { color: '#ff4d6d' },
+  '& .MuiFormHelperText-root': { color: '#ff6b6b', marginLeft: 0 },
+  '& .MuiOutlinedInput-root.Mui-error fieldset': { borderColor: '#ff6b6b' },
   '& input:-webkit-autofill': {
     WebkitBoxShadow: '0 0 0 100px rgba(30,10,15,0.9) inset',
     WebkitTextFillColor: '#fff',
@@ -35,14 +53,28 @@ const fieldSx = {
 
 export default function Contact() {
   const { t } = useTranslation()
-  const [form, setForm] = useState({ name: '', phone: '', message: '', company: '' })
+  const [form, setForm] = useState({ name: '', phone: '+998', message: '', company: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [phoneError, setPhoneError] = useState(false)
 
   const handleChange = (field) => (e) =>
     setForm((f) => ({ ...f, [field]: e.target.value }))
 
+  const handlePhoneChange = (e) => {
+    setForm((f) => ({ ...f, phone: formatPhone(e.target.value) }))
+    if (phoneError) setPhoneError(false)
+  }
+
+  const handlePhoneBlur = () => {
+    setPhoneError(!PHONE_REGEX.test(form.phone))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!PHONE_REGEX.test(form.phone)) {
+      setPhoneError(true)
+      return
+    }
     setStatus('sending')
     try {
       const res = await fetch('/api/send-message', {
@@ -52,7 +84,7 @@ export default function Contact() {
       })
       if (!res.ok) throw new Error('request failed')
       setStatus('success')
-      setForm({ name: '', phone: '', message: '', company: '' })
+      setForm({ name: '', phone: '+998', message: '', company: '' })
     } catch {
       setStatus('error')
     }
@@ -130,10 +162,15 @@ export default function Contact() {
           <TextField
             label={t('CONTACT_FORM_PHONE')}
             type="tel"
+            inputMode="numeric"
             value={form.phone}
-            onChange={handleChange('phone')}
+            onChange={handlePhoneChange}
+            onBlur={handlePhoneBlur}
+            error={phoneError}
+            helperText={phoneError ? t('CONTACT_FORM_PHONE_INVALID') : ''}
             required
             fullWidth
+            inputProps={{ maxLength: 18 }}
             sx={fieldSx}
           />
           <TextField

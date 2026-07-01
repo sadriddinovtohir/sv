@@ -139,6 +139,25 @@ export default function Home() {
                                 boxShadow: '0 0 8px #22c55e', animation: 'pulse 2s infinite' }} />
                             {t("Now")}
                         </Box>
+
+                        <Link to="/offer" style={{ textDecoration: 'none' }}>
+                            <Box sx={{
+                                display: 'flex', alignItems: 'center', gap: '6px',
+                                color: '#a855f7', fontSize: '13px', fontWeight: 600,
+                                background: 'rgba(168,85,247,0.08)',
+                                backdropFilter: 'blur(12px)',
+                                border: '1px solid rgba(168,85,247,0.3)',
+                                borderRadius: '20px', px: '12px', py: '6px',
+                                cursor: 'pointer',
+                                transition: 'all 0.25s ease',
+                                '&:hover': {
+                                    background: 'rgba(168,85,247,0.16)',
+                                    borderColor: '#a855f7',
+                                },
+                            }}>
+                                {t('SERVICES_TITLE')} <FaArrowRight size={10} />
+                            </Box>
+                        </Link>
                     </Stack>
 
                     {/* Divider */}

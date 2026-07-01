@@ -1,6 +1,7 @@
 import Header from '../components/Header/Header'
 import { Outlet } from 'react-router'
 import Footer from '../components/Footer/Footer'
+import FloatingContact from '../components/FloatingContact/FloatingContact'
 import { Stack, Box } from '@mui/material'
 
 export default function MainLayout() {
@@ -41,6 +42,8 @@ export default function MainLayout() {
             <footer style={{ position: 'relative', zIndex: 1 }}>
                 <Footer />
             </footer>
+
+            <FloatingContact />
         </Stack>
     )
 }

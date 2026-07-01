@@ -2,7 +2,23 @@
   "permissions": {
     "allow": [
       "Read(//d/idea/Parthub Bold Icon Mark/**)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/en.json'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/uz.json'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/ru.json'\\)\\); console.log\\('all valid'\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5174/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5174/contact)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/en.json'\\)\\);JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/uz.json'\\)\\);JSON.parse\\(require\\('fs'\\).readFileSync\\('src/locales/ru.json'\\)\\);console.log\\('json ok'\\)\")",
+      "Bash(curl -s -i -X POST http://localhost:5174/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"test\",\"email\":\"a@a.com\",\"message\":\"hi\"}')",
+      "Bash(powershell -c 'Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '\\\\''*vite*'\\\\'' } | Select-Object ProcessId,CommandLine')",
+      "Bash(curl -s -i -X POST http://localhost:5175/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"test\",\"phone\":\"+998901234567\",\"message\":\"hi\"}')",
+      "Bash(env)",
+      "Bash(curl -s -i -X POST http://localhost:5176/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"test\",\"phone\":\"+998901234567\",\"message\":\"hi\"}')",
+      "Bash(curl -s \"https://api.telegram.org/bot8972143501:AAEJ6N12tsekbysuQOapKU6qSuWSyDvKSTM/getUpdates\")",
+      "Bash(curl -s -i -X POST http://localhost:5177/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test \\(Claude\\)\",\"phone\":\"+998900000000\",\"message\":\"Bu Vite dev serverdan yuborilgan test xabar.\"}')",
+      "Bash(curl -s -X POST http://localhost:5178/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test \\(Claude\\)\",\"phone\":\"+998900000000\",\"message\":\"diagnostic test\"}')",
+      "Bash(curl -s -i -X POST http://localhost:5178/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test \\(Claude\\)\",\"phone\":\"+998900000000\",\"message\":\"diagnostic test\"}')",
+      "Bash(curl -s -i -X POST http://localhost:5178/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test\",\"phone\":\"+998900000000\",\"message\":\"Ishlayaptimi tekshiruv\"}')",
+      "Bash(curl -s -i -X POST http://localhost:5173/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Test\",\"phone\":\"+998900000000\",\"message\":\"tekshiruv 5173\"}')",
+      "Bash(curl -s -i -X POST http://localhost:5173/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Final check\",\"phone\":\"+998900000000\",\"message\":\"5173 portda tuzatilgandan keyingi test\"}')"
     ],
     "additionalDirectories": [
       "D:\\idea\\Parthub Bold Icon Mark"

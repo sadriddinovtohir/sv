@@ -8,6 +8,7 @@ import Skills from './Page/Skills/Skills'
 import Contact from './Page/Contact/Contact'
 import Home from './Page/Home/Home'
 import Notfound from './components/NotFound/Notfound'
+import Offer from './components/Offer/Offer'
 
 function App() {
   const [showSetTime, setShowSetTime] = useState(true)
@@ -40,6 +41,7 @@ function App() {
               <Route path='/projects' element={<Projects />} />
               <Route path='/skills' element={<Skills />} />
               <Route path='/contact' element={<Contact />} />
+              <Route path='/offer' element={<Offer />} />
               <Route path='*' element={<Notfound />} />
             </Route>
           </Routes>

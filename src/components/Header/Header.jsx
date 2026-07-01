@@ -4,7 +4,7 @@ import { BsPerson, BsFolder } from 'react-icons/bs'
 import { BiCode, BiX } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
 import React from 'react'
-import { FiMenu, FiGlobe, FiChevronDown } from 'react-icons/fi'
+import { FiMenu, FiGlobe, FiChevronDown, FiMail } from 'react-icons/fi'
 import { COLOR } from '../../config/ui/color'
 
 const LANGS = [
@@ -157,6 +157,7 @@ export default function Header() {
                 <NavLink to="/about" className="nav-link"><BsPerson /> {t("NAV_ABOUT")}</NavLink>
                 <NavLink to="/projects" className="nav-link"><BsFolder /> {t("NAV_PROJECTS")}</NavLink>
                 <NavLink to="/skills" className="nav-link"><BiCode /> {t("NAV_SKILLS")}</NavLink>
+                <NavLink to="/contact" className="nav-link"><FiMail /> {t("NAV_CONTACT")}</NavLink>
               </nav>
             </Stack>
             <LangDropdown currentLang={currentLang} changeLang={changeLang} />
@@ -174,6 +175,7 @@ export default function Header() {
                     <NavLink onClick={toggleDrawer(false)} to="/about" className="nav-link"><BsPerson /> {t("NAV_ABOUT")}</NavLink>
                     <NavLink onClick={toggleDrawer(false)} to="/projects" className="nav-link"><BsFolder /> {t("NAV_PROJECTS")}</NavLink>
                     <NavLink onClick={toggleDrawer(false)} to="/skills" className="nav-link"><BiCode /> {t("NAV_SKILLS")}</NavLink>
+                    <NavLink onClick={toggleDrawer(false)} to="/contact" className="nav-link"><FiMail /> {t("NAV_CONTACT")}</NavLink>
                   </nav>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <LangDropdown currentLang={currentLang} changeLang={changeLang} />

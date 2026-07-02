@@ -137,7 +137,7 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                         borderRadius: "24px",
                         boxShadow: "0 32px 80px rgba(0,0,0,0.8)",
                         overflow: "hidden",
-                        height: { xs: "88vh", sm: "640px" },
+                        height: { xs: "88vh", sm: "640px", md: "680px" },
                         maxHeight: "90vh",
                         display: "flex",
                         flexDirection: "column",
@@ -191,17 +191,24 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                         )}
                     </Box>
 
-                    {/* Modal Content */}
-                    <Box sx={{ px: 3, pb: 3, pt: 2 }}>
+                    {/* Modal Content — scrollable so long descriptions never get clipped */}
+                    <Box sx={{
+                        px: { xs: 2, sm: 3 },
+                        pt: { xs: 2, sm: 2.5 },
+                        pb: { xs: 2.5, sm: 3 },
+                        flex: "1 1 auto",
+                        overflowY: "auto",
+                        overflowX: "hidden",
+                    }}>
                         {/* Title */}
-                        <Typography sx={{ color: "#fff", fontWeight: 800, fontSize: "20px", mb: 1.5 }}>
+                        <Typography sx={{ color: "#fff", fontWeight: 800, fontSize: { xs: "17px", sm: "20px" }, mb: 1.5 }}>
                             {title}
                         </Typography>
 
                         {/* Full Description */}
                         <Typography sx={{
                             color: "rgba(255,255,255,0.65)",
-                            fontSize: "13.5px",
+                            fontSize: { xs: "13px", sm: "13.5px" },
                             lineHeight: 1.75,
                             mb: 2.5,
                         }}>
@@ -224,7 +231,7 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                         </Stack>
 
                         {/* Buttons */}
-                        <Stack direction="row" gap={1.5}>
+                        <Stack direction={{ xs: "column", sm: "row" }} gap={1.5}>
                             {giturl && (
                                 <a target="_blank" href={giturl} style={{ flex: 1 }} onClick={(e) => e.stopPropagation()}>
                                     <Button fullWidth startIcon={<FaGithub size={15} />} variant="outlined" sx={{

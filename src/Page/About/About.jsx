@@ -1,7 +1,7 @@
 import { Stack, Typography, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import Profiler from "../../assets/img/about.jpg";
-import AboutProfile from "../../assets/img/About_Profile.jpg";
+import Profiler from "../../assets/img/about.webp";
+import AboutProfile from "../../assets/img/About_Profile.webp";
 
 export default function About() {
   const { t } = useTranslation();

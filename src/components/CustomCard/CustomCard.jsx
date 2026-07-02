@@ -17,9 +17,8 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                 onClick={() => setOpen(true)}
                 sx={{
                     width: "100%",
-                    maxWidth: { xs: "100%", sm: 310 },
-                    borderRadius: "20px",
-                    p: 2,
+                    borderRadius: { xs: "14px", sm: "20px" },
+                    p: { xs: 1.25, sm: 2 },
                     background: "rgba(255,255,255,0.04)",
                     backdropFilter: "blur(20px)",
                     WebkitBackdropFilter: "blur(20px)",
@@ -36,27 +35,32 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                 }}
             >
                 {/* Image + Badge */}
-                <Box sx={{ position: "relative", mb: 1.5 }}>
+                <Box sx={{ position: "relative", mb: { xs: 1, sm: 1.5 } }}>
                     <Box
                         component="img"
                         src={img}
                         alt={title}
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="150"
                         sx={{
-                            height: "150px", width: "100%", borderRadius: "14px",
+                            height: { xs: "100px", sm: "150px" }, width: "100%",
+                            borderRadius: { xs: "10px", sm: "14px" },
                             objectFit: "contain", display: "block",
                             background: "rgba(0,0,0,0.25)",
                         }}
                     />
                     {badge && (
                         <Box sx={{
-                            position: "absolute", top: 8, right: 8,
+                            position: "absolute", top: 6, right: 6,
                             display: "flex", alignItems: "center", gap: "4px",
                             background: "rgba(34,197,94,0.15)", backdropFilter: "blur(10px)",
                             border: "1px solid rgba(34,197,94,0.4)", borderRadius: "20px",
-                            px: "10px", py: "4px",
+                            px: { xs: "6px", sm: "10px" }, py: "4px",
                         }}>
-                            <MdAutoAwesome size={11} color="#22c55e" />
-                            <Typography sx={{ fontSize: "10px", color: "#22c55e", fontWeight: 700 }}>
+                            <MdAutoAwesome size={10} color="#22c55e" />
+                            <Typography sx={{ fontSize: { xs: "8px", sm: "10px" }, color: "#22c55e", fontWeight: 700 }}>
                                 {badge}
                             </Typography>
                         </Box>
@@ -64,18 +68,18 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                 </Box>
 
                 {/* Title */}
-                <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: "15px", mb: 0.75 }}>
+                <Typography sx={{ color: "#fff", fontWeight: 700, fontSize: { xs: "12.5px", sm: "15px" }, mb: 0.5, lineHeight: 1.3 }}>
                     {title}
                 </Typography>
 
-                {/* Truncated description — 3 lines */}
+                {/* Truncated description — 3 lines (2 on mobile) */}
                 <Typography sx={{
                     color: "rgba(255,255,255,0.5)",
-                    fontSize: "12px",
-                    lineHeight: 1.65,
-                    mb: 1.5,
+                    fontSize: { xs: "10.5px", sm: "12px" },
+                    lineHeight: 1.55,
+                    mb: { xs: 1, sm: 1.5 },
                     display: "-webkit-box",
-                    WebkitLineClamp: 3,
+                    WebkitLineClamp: { xs: 2, sm: 3 },
                     WebkitBoxOrient: "vertical",
                     overflow: "hidden",
                 }}>
@@ -83,25 +87,25 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                 </Typography>
 
                 {/* Tech — max 4 tags + counter */}
-                <Stack direction="row" flexWrap="wrap" gap="6px" mb={1.5}>
+                <Stack direction="row" flexWrap="wrap" gap={{ xs: "4px", sm: "6px" }} mb={{ xs: 1, sm: 1.5 }}>
                     {visibleTech.map((item, i) => (
                         <Box key={i} sx={{
-                            px: 1.2, py: 0.4, borderRadius: "20px",
+                            px: { xs: 0.8, sm: 1.2 }, py: 0.3, borderRadius: "20px",
                             background: "rgba(255,255,255,0.07)",
                             border: "1px solid rgba(255,255,255,0.1)",
                             color: "rgba(255,255,255,0.65)",
-                            fontSize: "11px", fontWeight: 500,
+                            fontSize: { xs: "9px", sm: "11px" }, fontWeight: 500,
                         }}>
                             {item}
                         </Box>
                     ))}
                     {extraCount > 0 && (
                         <Box sx={{
-                            px: 1.2, py: 0.4, borderRadius: "20px",
+                            px: { xs: 0.8, sm: 1.2 }, py: 0.3, borderRadius: "20px",
                             background: "rgba(192,16,58,0.15)",
                             border: "1px solid rgba(192,16,58,0.3)",
                             color: "#ff2d55",
-                            fontSize: "11px", fontWeight: 600,
+                            fontSize: { xs: "9px", sm: "11px" }, fontWeight: 600,
                         }}>
                             +{extraCount}
                         </Box>
@@ -110,7 +114,7 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
 
                 {/* Ko'proq hint */}
                 <Typography sx={{
-                    fontSize: "12px", color: "#ff2d55", fontWeight: 600,
+                    fontSize: { xs: "10.5px", sm: "12px" }, color: "#ff2d55", fontWeight: 600,
                     opacity: 0.8, letterSpacing: "0.2px",
                 }}>
                     Ko'proq ko'rish →
@@ -133,18 +137,22 @@ export default function CustomCard({ img, title, desc, tech, giturl, link, badge
                         borderRadius: "24px",
                         boxShadow: "0 32px 80px rgba(0,0,0,0.8)",
                         overflow: "hidden",
+                        height: { xs: "88vh", sm: "640px" },
+                        maxHeight: "90vh",
+                        display: "flex",
+                        flexDirection: "column",
                     },
                 }}
             >
-                <DialogContent sx={{ p: 0 }}>
+                <DialogContent sx={{ p: 0, display: "flex", flexDirection: "column", flex: 1, overflow: "hidden" }}>
                     {/* Modal Image */}
-                    <Box sx={{ position: "relative" }}>
+                    <Box sx={{ position: "relative", flexShrink: 0 }}>
                         <Box
                             component="img"
                             src={img}
                             alt={title}
                             sx={{
-                                width: "100%", height: "220px",
+                                width: "100%", height: { xs: "200px", sm: "400px" },
                                 objectFit: "contain", display: "block",
                                 background: "rgba(0,0,0,0.35)",
                             }}

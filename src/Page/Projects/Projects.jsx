@@ -2,13 +2,13 @@ import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import CustomCard from "../../components/CustomCard/CustomCard";
-import RadioatorPro from "../../assets/img/RadioatorPro.png"
-import bizCore from "../../assets/img/bizCore.png"
-import parthubLogo from "../../assets/img/parthub.png"
-import studense from "../../assets/img/studense.png"
-import sun_energy_img from "../../assets/img/sun_energy_img.jpg"
-import ITPARKIMG from "../../assets/img/ITPARK.png"
-import clubMraa from "../../assets/img/image.png"
+import RadioatorPro from "../../assets/img/RadioatorPro.webp"
+import bizCore from "../../assets/img/bizCore.webp"
+import parthubLogo from "../../assets/img/parthub.webp"
+import studense from "../../assets/img/studense.webp"
+import sun_energy_img from "../../assets/img/sun_energy_img.webp"
+import ITPARKIMG from "../../assets/img/ITPARK.webp"
+import clubMraa from "../../assets/img/image.webp"
 
 export default function Projects() {
   const { t } = useTranslation();
@@ -94,12 +94,19 @@ export default function Projects() {
 
       <Box sx={{
         display: 'grid',
-        gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
-        gap: '24px',
-        justifyItems: 'center',
-        justifyContent: 'start',
+        gridTemplateColumns: '1fr',
+        gap: { xs: '12px', sm: '16px', md: '24px' },
         width: '100%',
         pb: 4,
+        '@media (min-width:505px)': {
+          gridTemplateColumns: 'repeat(2, 1fr)',
+        },
+        '@media (min-width:900px)': {
+          gridTemplateColumns: 'repeat(3, 1fr)',
+        },
+        '@media (min-width:1310px)': {
+          gridTemplateColumns: 'repeat(4, 1fr)',
+        },
       }}>
         {data.map((item, index) => (
           <CustomCard

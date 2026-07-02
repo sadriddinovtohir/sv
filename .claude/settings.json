@@ -21,7 +21,13 @@
       "Bash(curl -s -i -X POST http://localhost:5173/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Final check\",\"phone\":\"+998900000000\",\"message\":\"5173 portda tuzatilgandan keyingi test\"}')",
       "Bash(curl -s -i -X POST https://rezumi2.vercel.app/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Diagnostic\",\"phone\":\"+998900000000\",\"message\":\"Deploy diagnostikasi\"}')",
       "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('vercel.json'\\)\\); console.log\\('vercel.json valid'\\)\")",
-      "Bash(curl -s -i -X POST https://rezumi2.vercel.app/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Diagnostic\",\"phone\":\"+998-90-123-45-67\",\"message\":\"tekshiruv\"}')"
+      "Bash(curl -s -i -X POST https://rezumi2.vercel.app/api/send-message -H \"Content-Type: application/json\" -d '{\"name\":\"Diagnostic\",\"phone\":\"+998-90-123-45-67\",\"message\":\"tekshiruv\"}')",
+      "Bash(powershell -c \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id,CPU,WorkingSet,StartTime | Format-Table -AutoSize\")",
+      "Bash(curl -s http://localhost:5173/src/components/SetTime/SetTime.jsx)",
+      "Bash(sort -k5 -n -r)",
+      "Bash(npx --yes sharp-cli --version)",
+      "Bash(grep -rn \"parthub\\\\.png\\\\|about\\\\.jpg\\\\|homePage\\\\.jpg\\\\|About_Profile\\\\.jpg\" src/)",
+      "Bash(rm -v src/assets/img/parthub.png src/assets/img/about.jpg src/assets/img/homePage.jpg src/assets/img/About_Profile.jpg)"
     ],
     "additionalDirectories": [
       "D:\\idea\\Parthub Bold Icon Mark"

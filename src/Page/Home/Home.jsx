@@ -9,7 +9,7 @@ import {
     SiReactquery, SiDocker, SiPostgresql,
 } from 'react-icons/si'
 import { TbBrandNodejs } from 'react-icons/tb'
-import profileImg from '../../assets/img/homePage.jpg'
+import profileImg from '../../assets/img/homePage.webp'
 import { Link } from 'react-router-dom'
 import { totalSkillsCount } from '../../data/skillsData'
 

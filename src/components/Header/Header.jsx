@@ -8,10 +8,37 @@ import { FiMenu, FiGlobe, FiChevronDown, FiMail } from 'react-icons/fi'
 import { COLOR } from '../../config/ui/color'
 
 const LANGS = [
-  { code: 'en', flag: '🇬🇧', label: 'English' },
-  { code: 'uz', flag: '🇺🇿', label: "O'zbek" },
-  { code: 'ru', flag: '🇷🇺', label: 'Русский' },
+  { code: 'en', country: 'gb', badge: 'EN', color: '#38bdf8', label: 'English' },
+  { code: 'uz', country: 'uz', badge: 'UZ', color: '#22c55e', label: "O'zbek" },
+  { code: 'ru', country: 'ru', badge: 'RU', color: '#ff2d55', label: 'Русский' },
 ]
+
+function LangBadge({ country, badge, color }) {
+  return (
+    <span style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '22px',
+      height: '16px',
+      borderRadius: '3px',
+      overflow: 'hidden',
+      background: `${color}22`,
+      border: `1px solid ${color}55`,
+      flexShrink: 0,
+    }}>
+      <img
+        src={`https://flagcdn.com/24x18/${country}.png`}
+        srcSet={`https://flagcdn.com/48x36/${country}.png 2x`}
+        alt={badge}
+        width={22}
+        height={16}
+        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        onError={(e) => { e.currentTarget.style.display = 'none' }}
+      />
+    </span>
+  )
+}
 
 function LangDropdown({ currentLang, changeLang }) {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -57,7 +84,7 @@ function LangDropdown({ currentLang, changeLang }) {
         }}
       >
         <FiGlobe size={14} style={{ color: '#c0103a' }} />
-        <span>{current.flag}</span>
+        <LangBadge country={current.country} badge={current.badge} color={current.color} />
         <span>{current.label}</span>
         <FiChevronDown
           size={12}
@@ -116,7 +143,7 @@ function LangDropdown({ currentLang, changeLang }) {
                 }
               }}
             >
-              <span style={{ fontSize: '16px' }}>{lang.flag}</span>
+              <LangBadge country={lang.country} badge={lang.badge} color={lang.color} />
               <span>{lang.label}</span>
               {currentLang === lang.code && (
                 <span style={{ marginLeft: 'auto', fontSize: '10px', color: '#c0103a' }}>✓</span>

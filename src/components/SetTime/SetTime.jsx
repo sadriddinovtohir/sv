@@ -1,11 +1,11 @@
-import { COLOR } from '../../config/ui/color'
 import { Roundedspan } from '../../config/ui/style'
 import { Stack, Typography, Box } from '@mui/material';
-import imgProfile from "../../assets/img/about.jpg"
+import imgProfile from "../../assets/img/about.webp"
 
+const EXIT_AT = 3
 const s = (dir, delay) => ({
     opacity: 0,
-    animation: `anim-${dir} 0.6s ease forwards ${delay}s, anim-${dir}-out 0.6s ease forwards 3.8s`,
+    animation: `anim-${dir} 0.55s ease forwards ${delay}s, anim-${dir}-out 0.55s ease forwards ${EXIT_AT}s`,
 });
 const styles = `
     @keyframes anim-top    { from { opacity:0; transform:translateY(-40px) } to { opacity:1; transform:none } }
@@ -31,19 +31,19 @@ export default function SetTime() {
         <div style={{ paddingInline: "10px", overflowX: "hidden" }}>
             <style>{styles}</style>
             <Stack style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", padding: "16px" }}>
-                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, gap: { xs: "28px", md: "32px" }, boxShadow: COLOR.shadow, borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>
+                <Stack className="portfolio-card" flexDirection={"row"} flexWrap={"wrap"} sx={{ padding: { xs: "24px", sm: "36px", md: "50px" }, gap: { xs: "28px", md: "32px" }, boxShadow: "0 8px 32px rgba(0,0,0,0.5), inset 0 0 120px rgba(0,0,0,0.4)", borderRadius: "30px", maxWidth: "100%", ...s("top", 0) }}>
                     <div>
                         <Stack>
-                            <Stack flexDirection="row" style={s("top", 0.7)}>
+                            <Stack flexDirection="row" style={s("top", 0.55)}>
                                 <Roundedspan>UI LOADING...</Roundedspan>
                             </Stack>
-                            <Typography style={s("left", 1.75)} marginY="10px" variant="h3" sx={{ maxWidth: { xs: "100%", sm: "300px" }, fontSize: { xs: "26px", sm: "32px", md: "40px" } }} fontWeight={700}>
+                            <Typography style={s("left", 1.35)} marginY="10px" variant="h3" sx={{ maxWidth: { xs: "100%", sm: "300px" }, fontSize: { xs: "26px", sm: "32px", md: "40px" } }} fontWeight={700}>
                                 Welcome to my Portfolio Website
                             </Typography>
-                            <Typography style={s("left", 1.9)} marginBottom="20px" variant="p" sx={{ maxWidth: { xs: "100%", sm: "500px" }, opacity: 0.5 }} fontWeight={200}>
+                            <Typography style={s("left", 1.47)} marginBottom="20px" variant="p" sx={{ maxWidth: { xs: "100%", sm: "500px" }, opacity: 0.5 }} fontWeight={200}>
                                 Building modern, reliable, and fast digital experiences with a focus on clean UI and solid engineering.
                             </Typography>
-                            <Typography className="hide-mobile" style={s("left", 2.05)} marginBottom="20px" variant="p" fontWeight={700} fontSize="15px" color="rgba(205,12,12,0.729)">
+                            <Typography className="hide-mobile" style={s("left", 1.6)} marginBottom="20px" variant="p" fontWeight={700} fontSize="15px" color="rgba(205,12,12,0.729)">
                                 LIVE STATUS
                             </Typography>
                         </Stack>
@@ -51,7 +51,7 @@ export default function SetTime() {
                         <Stack sx={{ maxWidth: { xs: "100%", sm: "400px" } }}>
 
                             <Typography
-                                style={s("bottom", 2.2)}
+                                style={s("bottom", 1.72)}
                                 fontSize="12px"
                                 sx={{ opacity: 0.5 }}
                             >
@@ -59,7 +59,7 @@ export default function SetTime() {
                             </Typography>
 
                             <div style={{
-                                ...s("bottom", 2.35),
+                                ...s("bottom", 1.85),
                                 width: "100%",
                                 height: "4px",
                                 background: "rgba(255,255,255,0.1)",
@@ -70,7 +70,7 @@ export default function SetTime() {
                                     width: "100%",
                                     height: "100%",
                                     background: "red",
-                                    animation: "load 4s linear forwards"
+                                    animation: "load 3.3s linear forwards"
                                 }} />
                             </div>
 
@@ -85,7 +85,7 @@ export default function SetTime() {
                             borderRadius: "20px",
                             boxShadow: "0 4px 15px rgba(255, 0, 0, 0.7)",
                             mx: "auto",
-                            ...s("right", 1.8)
+                            ...s("right", 1.4)
                         }}
                         src={imgProfile}
                         alt="my photo"

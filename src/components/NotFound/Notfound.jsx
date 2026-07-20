@@ -1,44 +1,25 @@
-import React from 'react';
-import { Stack, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
 
 export default function Notfound() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
-    <Stack
-      justifyContent="center"
-      alignItems="center"
-      spacing={3}
-      marginTop={"35px"}
-      sx={{
-        color: '#fff',
-        textAlign: 'center',
-        px: 2,
-      }}
-    >
-      <Typography variant="h1" sx={{ fontSize: { xs: 80, md: 120 }, fontWeight: 'bold' }}>
+    <div className="mt-9 flex flex-col items-center justify-center gap-6 px-4 text-center text-white">
+      <p className="text-[80px] leading-none font-bold md:text-[120px]">
         {t('NOTFOUND_404')}
-      </Typography>
-      <Typography variant="h5">{t('NOTFOUND_TITLE')}</Typography>
-      <Typography variant="body1" sx={{ maxWidth: 400 }}>
-        {t('NOTFOUND_DESC')}
-      </Typography>
+      </p>
+      <p className="text-xl">{t('NOTFOUND_TITLE')}</p>
+      <p className="max-w-[400px]">{t('NOTFOUND_DESC')}</p>
       <Button
-        variant="contained"
+        variant="brand"
         onClick={() => navigate('/')}
-        sx={{
-          background: 'linear-gradient(45deg, #ff416c, #ff4b2b)',
-          textTransform: 'none',
-          borderRadius: '10px',
-          px: 4,
-          py: 1.5,
-        }}
+        className="h-auto rounded-[10px] bg-gradient-to-br from-[#ff416c] to-[#ff4b2b] px-8 py-3"
       >
         {t('NOTFOUND_BUTTON')}
       </Button>
-    </Stack>
+    </div>
   );
 }

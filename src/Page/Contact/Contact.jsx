@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { Box, Stack, Typography, TextField, Button, CircularProgress } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { FaEnvelope, FaPhone, FaTelegram, FaLinkedin } from 'react-icons/fa'
-import { FiSend, FiCheckCircle } from 'react-icons/fi'
+import { FiSend, FiCheckCircle, FiLoader } from 'react-icons/fi'
+import { GlassPanel } from '@/components/common/GlassPanel'
+import { Pill } from '@/components/common/Pill'
+import { FormField } from '@/components/common/FormField'
+import { Button } from '@/components/ui/button'
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
 const PHONE_REGEX = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/
@@ -28,28 +31,6 @@ const CONTACT_INFO = [
   { icon: <FaTelegram />, label: 'Telegram', href: 'https://t.me/tohir_sadriddinov', target: '_blank' },
   { icon: <FaLinkedin />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/', target: '_blank' },
 ]
-
-const fieldSx = {
-  '& .MuiOutlinedInput-root': {
-    color: '#fff',
-    background: 'rgba(255,255,255,0.03)',
-    borderRadius: '12px',
-    '& fieldset': { borderColor: 'rgba(255,255,255,0.12)' },
-    '&:hover fieldset': { borderColor: 'rgba(255,255,255,0.25)' },
-    '&.Mui-focused fieldset': { borderColor: '#c0103a' },
-  },
-  '& .MuiInputLabel-root': { color: 'rgba(255,255,255,0.5)' },
-  '& .MuiInputLabel-root.Mui-focused': { color: '#ff4d6d' },
-  '& .MuiFormHelperText-root': { color: '#ff6b6b', marginLeft: 0 },
-  '& .MuiOutlinedInput-root.Mui-error fieldset': { borderColor: '#ff6b6b' },
-  '& input:-webkit-autofill': {
-    WebkitBoxShadow: '0 0 0 100px rgba(30,10,15,0.9) inset',
-    WebkitTextFillColor: '#fff',
-    caretColor: '#fff',
-    borderRadius: '12px',
-    transition: 'background-color 9999s ease-in-out 0s',
-  },
-}
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -91,173 +72,112 @@ export default function Contact() {
   }
 
   return (
-    <Box className="container" sx={{ pt: { xs: 4, md: 6 }, pb: 8, color: '#fff' }}>
-      <Stack mb={5} gap={1} sx={{ maxWidth: '640px' }}>
-        <Typography variant="h4" fontWeight={800} sx={{ color: '#ff4d6d', letterSpacing: '1px', fontSize: { xs: '26px', md: '34px' } }}>
+    <div className="container pt-8 pb-16 text-white md:pt-12">
+      <div className="mb-10 flex max-w-[640px] flex-col gap-1">
+        <h1 className="text-[26px] font-extrabold tracking-wide text-[#ff4d6d] md:text-[34px]">
           {t('CONTACT_TITLE')}
-        </Typography>
-        <Typography sx={{ color: '#ccc', fontSize: { xs: '14px', md: '15px' } }}>
+        </h1>
+        <p className="text-[14px] text-[#ccc] md:text-[15px]">
           {t('CONTACT_SUBTITLE')}
-        </Typography>
+        </p>
 
-        <Stack direction="row" gap="10px" flexWrap="wrap" mt={1.5}>
-          <Box sx={{
-            display: 'flex', alignItems: 'center', gap: '6px',
-            color: '#22c55e', fontSize: '13px', fontWeight: 600,
-            background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)',
-            borderRadius: '20px', px: '12px', py: '6px',
-          }}>
-            <Box sx={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e' }} />
+        <div className="mt-3 flex flex-row flex-wrap gap-2.5">
+          <Pill accent="#22c55e" dot>
             {t('CONTACT_AVAILABILITY')}
-          </Box>
-          <Box sx={{
-            display: 'flex', alignItems: 'center', gap: '6px',
-            color: 'rgba(255,255,255,0.55)', fontSize: '13px',
-            background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '20px', px: '12px', py: '6px',
-          }}>
+          </Pill>
+          <Pill>
             {t('CONTACT_RESPONSE_TIME')}
-          </Box>
-        </Stack>
-      </Stack>
+          </Pill>
+        </div>
+      </div>
 
-      <Stack direction="column" gap={4} alignItems="stretch" sx={{ width: '100%' }}>
+      <div className="flex w-full flex-col items-stretch gap-8">
         {/* === Form === */}
-        <Box
-          component="form"
+        <GlassPanel
+          as="form"
           onSubmit={handleSubmit}
-          sx={{
-            minWidth: 0,
-            width: '100%',
-            p: { xs: 2.5, md: 4 },
-            borderRadius: '20px',
-            background: 'rgba(255,255,255,0.04)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.07)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2.5,
-          }}
+          className="relative flex w-full min-w-0 flex-col gap-6 p-5 md:p-8"
         >
           {/* Honeypot — hidden from real visitors, catches basic bots */}
-          <Box
-            component="input"
+          <input
             type="text"
             name="company"
             value={form.company}
             onChange={handleChange('company')}
             tabIndex={-1}
             autoComplete="off"
-            sx={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+            className="absolute left-[-9999px] h-px w-px opacity-0"
           />
-          <TextField
+          <FormField
+            id="contact-name"
             label={t('CONTACT_FORM_NAME')}
             value={form.name}
             onChange={handleChange('name')}
             required
-            fullWidth
-            sx={fieldSx}
           />
-          <TextField
+          <FormField
+            id="contact-phone"
             label={t('CONTACT_FORM_PHONE')}
             type="tel"
             inputMode="numeric"
             value={form.phone}
             onChange={handlePhoneChange}
             onBlur={handlePhoneBlur}
-            error={phoneError}
-            helperText={phoneError ? t('CONTACT_FORM_PHONE_INVALID') : ''}
+            error={phoneError ? t('CONTACT_FORM_PHONE_INVALID') : ''}
             required
-            fullWidth
-            inputProps={{ maxLength: 18 }}
-            sx={fieldSx}
+            maxLength={18}
           />
-          <TextField
+          <FormField
+            id="contact-message"
+            as="textarea"
             label={t('CONTACT_FORM_MESSAGE')}
             placeholder={t('CONTACT_FORM_MESSAGE_PLACEHOLDER')}
             value={form.message}
             onChange={handleChange('message')}
             required
-            fullWidth
-            multiline
             rows={5}
-            sx={fieldSx}
           />
           <Button
             type="submit"
+            variant="brand"
             disabled={status === 'sending'}
-            endIcon={status === 'sending' ? <CircularProgress size={15} sx={{ color: '#fff' }} /> : <FiSend size={15} />}
-            sx={{
-              alignSelf: { xs: 'stretch', sm: 'flex-start' },
-              background: 'linear-gradient(135deg, #c0103a, #ff2d55)',
-              color: '#fff',
-              borderRadius: '12px',
-              textTransform: 'none',
-              fontWeight: 600,
-              px: 3,
-              py: 1.3,
-              boxShadow: '0 4px 14px rgba(192,16,58,0.4)',
-              '&:hover': { boxShadow: '0 6px 20px rgba(192,16,58,0.6)' },
-              '&.Mui-disabled': { color: '#fff', opacity: 0.7 },
-            }}
+            className="h-11 self-stretch rounded-xl px-6 sm:self-start"
           >
             {status === 'sending' ? t('CONTACT_FORM_SENDING') : t('CONTACT_FORM_SUBMIT')}
+            {status === 'sending' ? <FiLoader size={15} className="animate-spin" /> : <FiSend size={15} />}
           </Button>
 
           {status === 'success' && (
-            <Stack direction="row" gap={1} alignItems="center" sx={{ color: '#22c55e', fontSize: '13px' }}>
+            <div className="flex items-center gap-2 text-[13px] text-[#22c55e]">
               <FiCheckCircle size={16} /> {t('CONTACT_FORM_SUCCESS')}
-            </Stack>
+            </div>
           )}
           {status === 'error' && (
-            <Typography sx={{ color: '#ff6b6b', fontSize: '13px' }}>
+            <p className="text-[13px] text-[#ff6b6b]">
               {t('CONTACT_FORM_ERROR')}
-            </Typography>
+            </p>
           )}
-        </Box>
+        </GlassPanel>
 
         {/* === Contact Info === */}
-        <Stack
-          sx={{
-            minWidth: 0,
-            width: '100%',
-            p: { xs: 2.5, md: 3 },
-            borderRadius: '20px',
-            background: 'rgba(255,255,255,0.04)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.07)',
-            gap: 1.5,
-            height: 'fit-content',
-          }}
-        >
-          <Typography sx={{ color: '#fff', fontWeight: 700, fontSize: '15px', mb: 0.5 }}>
+        <GlassPanel className="flex h-fit w-full min-w-0 flex-col gap-3 p-5 md:p-6">
+          <p className="mb-1 text-[15px] font-bold text-white">
             {t('CONTACT_INFO_TITLE')}
-          </Typography>
+          </p>
           {CONTACT_INFO.map((item) => (
-            <Box
+            <a
               key={item.label}
-              component="a"
               href={item.href}
               target={item.target || '_self'}
               rel="noreferrer"
-              sx={{
-                display: 'flex', alignItems: 'center', gap: '10px',
-                color: 'rgba(255,255,255,0.65)', fontSize: '13.5px',
-                textDecoration: 'none',
-                px: 1.5, py: 1,
-                borderRadius: '10px',
-                border: '1px solid rgba(255,255,255,0.06)',
-                transition: 'all 0.2s ease',
-                overflowWrap: 'anywhere',
-                '&:hover': { background: '#c0103a', color: '#fff', borderColor: '#c0103a' },
-              }}
+              className="flex items-center gap-2.5 overflow-hidden rounded-[10px] border border-white/6 px-3 py-2 text-[13.5px] text-white/65 break-words transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
             >
-              <Box component="span" sx={{ display: 'flex', flexShrink: 0 }}>{item.icon}</Box>
+              <span className="flex shrink-0">{item.icon}</span>
               {item.label}
-            </Box>
+            </a>
           ))}
-        </Stack>
-      </Stack>
-    </Box>
+        </GlassPanel>
+      </div>
+    </div>
   )
 }

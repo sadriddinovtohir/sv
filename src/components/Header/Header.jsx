@@ -1,11 +1,22 @@
-import { Box, Button, Drawer, Stack, Typography, useMediaQuery } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { BsPerson, BsFolder } from 'react-icons/bs'
-import { BiCode, BiX } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
-import React from 'react'
-import { FiMenu, FiGlobe, FiChevronDown, FiMail } from 'react-icons/fi'
-import { COLOR } from '../../config/ui/color'
+import { FiMenu, FiGlobe, FiChevronDown } from 'react-icons/fi'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+} from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { cn } from '@/lib/utils'
+import { NAV_ITEMS } from '@/config/nav'
+import { useState } from 'react'
 
 const LANGS = [
   { code: 'en', country: 'gb', badge: 'EN', color: '#38bdf8', label: 'English' },
@@ -13,206 +24,128 @@ const LANGS = [
   { code: 'ru', country: 'ru', badge: 'RU', color: '#ff2d55', label: 'Русский' },
 ]
 
-function LangBadge({ country, badge, color }) {
+function LangFlag({ country, badge, color }) {
   return (
-    <span style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '22px',
-      height: '16px',
-      borderRadius: '3px',
-      overflow: 'hidden',
-      background: `${color}22`,
-      border: `1px solid ${color}55`,
-      flexShrink: 0,
-    }}>
+    <span
+      className="inline-flex h-4 w-5.5 shrink-0 items-center justify-center overflow-hidden rounded-[3px] border"
+      style={{ background: `${color}22`, borderColor: `${color}55` }}
+    >
       <img
         src={`https://flagcdn.com/24x18/${country}.png`}
         srcSet={`https://flagcdn.com/48x36/${country}.png 2x`}
         alt={badge}
         width={22}
         height={16}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        className="block h-full w-full object-cover"
         onError={(e) => { e.currentTarget.style.display = 'none' }}
       />
     </span>
   )
 }
 
-function LangDropdown({ currentLang, changeLang }) {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const ref = React.useRef(null)
-
-  const current = LANGS.find(l => l.code === currentLang) || LANGS[0]
-
-  React.useEffect(() => {
-    const handler = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setIsOpen(false)
-    }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
+function LanguageSwitcher({ currentLang, changeLang, className }) {
+  const current = LANGS.find((l) => l.code === currentLang) || LANGS[0]
 
   return (
-    <div ref={ref} style={{ position: 'relative', userSelect: 'none' }}>
-      <button
-        onClick={() => setIsOpen(o => !o)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          padding: '6px 12px',
-          height: '36px',
-          borderRadius: '8px',
-          border: '1px solid rgba(255,255,255,0.15)',
-          background: 'rgba(255,255,255,0.05)',
-          color: 'rgba(255,255,255,0.85)',
-          fontSize: '13px',
-          fontWeight: 500,
-          cursor: 'pointer',
-          transition: 'all 0.2s ease',
-          backdropFilter: 'blur(10px)',
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
-          e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'
-          e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-        }}
-      >
-        <FiGlobe size={14} style={{ color: '#c0103a' }} />
-        <LangBadge country={current.country} badge={current.badge} color={current.color} />
-        <span>{current.label}</span>
-        <FiChevronDown
-          size={12}
-          style={{
-            color: 'rgba(255,255,255,0.5)',
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.2s ease',
-          }}
-        />
-      </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={cn(
+            'flex h-9 items-center gap-1.5 rounded-lg border border-white/15 bg-white/5 px-3 text-[13px] font-medium text-white/85 backdrop-blur-md transition-all duration-200 hover:border-white/30 hover:bg-white/10',
+            className
+          )}
+        >
+          <FiGlobe size={14} className="text-primary" />
+          <LangFlag country={current.country} badge={current.badge} color={current.color} />
+          <span>{current.label}</span>
+          <FiChevronDown size={12} className="text-white/50" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-[150px] border-white/10 bg-[rgba(18,18,28,0.95)] backdrop-blur-2xl">
+        {LANGS.map((lang) => (
+          <DropdownMenuItem
+            key={lang.code}
+            onClick={() => changeLang(lang.code)}
+            className={cn(
+              'gap-2.5 text-[13px]',
+              currentLang === lang.code ? 'font-semibold text-accent' : 'text-white/75'
+            )}
+          >
+            <LangFlag country={lang.country} badge={lang.badge} color={lang.color} />
+            <span>{lang.label}</span>
+            {currentLang === lang.code && <span className="ml-auto text-[10px] text-primary">✓</span>}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
-      {isOpen && (
-        <div style={{
-          position: 'absolute',
-          top: 'calc(100% + 8px)',
-          right: 0,
-          minWidth: '150px',
-          maxWidth: 'calc(100vw - 32px)',
-          background: 'rgba(18,18,28,0.95)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '10px',
-          overflow: 'hidden',
-          zIndex: 1000,
-          boxShadow: '0 16px 40px rgba(0,0,0,0.5)',
-        }}>
-          {LANGS.map(lang => (
-            <button
-              key={lang.code}
-              onClick={() => { changeLang(lang.code); setIsOpen(false) }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                width: '100%',
-                padding: '10px 14px',
-                border: 'none',
-                background: currentLang === lang.code ? 'rgba(192,16,58,0.15)' : 'transparent',
-                color: currentLang === lang.code ? '#ff4d6d' : 'rgba(255,255,255,0.75)',
-                fontSize: '13px',
-                fontWeight: currentLang === lang.code ? 600 : 400,
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all 0.15s ease',
-              }}
-              onMouseEnter={e => {
-                if (currentLang !== lang.code) {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-                  e.currentTarget.style.color = '#fff'
-                }
-              }}
-              onMouseLeave={e => {
-                if (currentLang !== lang.code) {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.75)'
-                }
-              }}
-            >
-              <LangBadge country={lang.country} badge={lang.badge} color={lang.color} />
-              <span>{lang.label}</span>
-              {currentLang === lang.code && (
-                <span style={{ marginLeft: 'auto', fontSize: '10px', color: '#c0103a' }}>✓</span>
-              )}
-            </button>
-          ))}
-        </div>
+function NavLinks({ orientation = 'row', onNavigate }) {
+  const { t } = useTranslation()
+  return (
+    <nav
+      className={cn(
+        'flex gap-1.5 rounded-full border border-white/7 bg-white/4 p-2 backdrop-blur-2xl',
+        orientation === 'row' ? 'flex-row flex-wrap items-center' : 'flex-col items-stretch gap-2 border-none bg-transparent p-0'
       )}
-    </div>
+    >
+      {NAV_ITEMS.map(({ to, labelKey, icon: Icon, end }) => (
+        <NavLink
+          key={to}
+          to={to}
+          end={end}
+          onClick={onNavigate}
+          className={({ isActive }) =>
+            cn(
+              'flex items-center justify-center gap-1.5 rounded-full px-4 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-all duration-300 hover:bg-white/8 hover:text-white',
+              orientation === 'column' && 'justify-start bg-white/4 py-2.5',
+              isActive && 'bg-primary text-white hover:bg-primary hover:text-white'
+            )
+          }
+        >
+          <Icon /> {t(labelKey)}
+        </NavLink>
+      ))}
+    </nav>
   )
 }
 
 export default function Header() {
-  const [open, setOpen] = React.useState(false)
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen)
-  }
-
+  const [open, setOpen] = useState(false)
   const { i18n, t } = useTranslation()
+  const isMobile = useMediaQuery('(max-width:724px)')
 
   const changeLang = (lang) => {
     i18n.changeLanguage(lang)
-    localStorage.setItem("lang", lang)
+    localStorage.setItem('lang', lang)
+  }
+  const currentLang = i18n.language
+
+  if (isMobile) {
+    return (
+      <div className="flex items-center justify-between p-2.5">
+        <span className="text-lg font-medium">T.S</span>
+        <Button variant="ghost" size="icon" onClick={() => setOpen(true)} aria-label={t('NAV_HOME')}>
+          <FiMenu size={22} />
+        </Button>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetContent side="right" className="border-white/10 bg-[#1a0008] text-white">
+            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <div className="flex flex-col items-center gap-6 p-5 pt-10">
+              <NavLinks orientation="column" onNavigate={() => setOpen(false)} />
+              <LanguageSwitcher currentLang={currentLang} changeLang={changeLang} />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    )
   }
 
-  const currentLang = i18n.language
-  const isMobile = useMediaQuery("(max-width:724px)")
-
   return (
-    <Box>
-      <div style={{ padding: "5px" }}>
-        {!isMobile ? (
-          <Stack padding={"10px"} flexDirection={"row"} maxWidth={"100%"} alignItems={"center"} justifyContent={"space-between"}>
-            <Stack style={{ maxWidth: "700px" }}>
-              <nav className="navbar">
-                <NavLink to="/" className="nav-link"><BsPerson /> {t("NAV_HOME")}</NavLink>
-                <NavLink to="/about" className="nav-link"><BsPerson /> {t("NAV_ABOUT")}</NavLink>
-                <NavLink to="/projects" className="nav-link"><BsFolder /> {t("NAV_PROJECTS")}</NavLink>
-                <NavLink to="/skills" className="nav-link"><BiCode /> {t("NAV_SKILLS")}</NavLink>
-                <NavLink to="/contact" className="nav-link"><FiMail /> {t("NAV_CONTACT")}</NavLink>
-              </nav>
-            </Stack>
-            <LangDropdown currentLang={currentLang} changeLang={changeLang} />
-          </Stack>
-        ) : (
-          <Stack flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
-            <Typography variant='h5'>T.S</Typography>
-            <Button onClick={toggleDrawer(true)}><FiMenu size={24} /></Button>
-            <Drawer anchor='right' open={open} onClose={toggleDrawer(false)}>
-              <div style={{ padding: "20px", backgroundColor: COLOR.bgcolor, height: "100vh" }}>
-                <button onClick={toggleDrawer(false)} className='btn'><BiX size={30} /></button>
-                <Stack justifyContent={"center"} gap={"20px"}>
-                  <nav className="columNavbar">
-                    <NavLink onClick={toggleDrawer(false)} to="/" className="nav-link"><BsPerson /> {t("NAV_HOME")}</NavLink>
-                    <NavLink onClick={toggleDrawer(false)} to="/about" className="nav-link"><BsPerson /> {t("NAV_ABOUT")}</NavLink>
-                    <NavLink onClick={toggleDrawer(false)} to="/projects" className="nav-link"><BsFolder /> {t("NAV_PROJECTS")}</NavLink>
-                    <NavLink onClick={toggleDrawer(false)} to="/skills" className="nav-link"><BiCode /> {t("NAV_SKILLS")}</NavLink>
-                    <NavLink onClick={toggleDrawer(false)} to="/contact" className="nav-link"><FiMail /> {t("NAV_CONTACT")}</NavLink>
-                  </nav>
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LangDropdown currentLang={currentLang} changeLang={changeLang} />
-                  </div>
-                </Stack>
-              </div>
-            </Drawer>
-          </Stack>
-        )}
-      </div>
-    </Box>
+    <div className="flex items-center justify-between p-2.5">
+      <NavLinks orientation="row" />
+      <LanguageSwitcher currentLang={currentLang} changeLang={changeLang} />
+    </div>
   )
 }

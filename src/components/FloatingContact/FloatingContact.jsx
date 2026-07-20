@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Box, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { FaTelegram, FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { FiMessageCircle } from 'react-icons/fi'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { SocialIconLink } from '@/components/common/SocialIconLink'
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
 
@@ -20,69 +21,39 @@ export default function FloatingContact() {
     const [open, setOpen] = useState(false)
 
     return (
-        <Box
+        <div
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
-            sx={{
-                position: 'fixed',
-                bottom: { xs: 16, md: 28 },
-                right: { xs: 16, md: 28 },
-                zIndex: 1200,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-end',
-                gap: '12px',
-            }}>
+            className="fixed right-4 bottom-4 z-[1200] flex flex-col items-end gap-3 md:right-7 md:bottom-7"
+        >
             {CHANNELS.map((ch, i) => (
-                <Tooltip key={ch.label} title={ch.label} placement="left">
-                    <Box
-                        component="a"
-                        href={ch.href}
-                        target={ch.href.startsWith('http') ? '_blank' : undefined}
-                        rel="noreferrer"
-                        sx={{
-                            display: open ? 'flex' : 'none',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: { xs: 42, md: 46 },
-                            height: { xs: 42, md: 46 },
-                            borderRadius: '50%',
-                            background: 'rgba(18,18,28,0.95)',
-                            backdropFilter: 'blur(20px)',
-                            border: `1px solid ${ch.color}55`,
-                            color: ch.color,
-                            boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
-                            animation: `fadeInUp 0.25s ease ${i * 0.05}s both`,
-                            transition: 'transform 0.2s ease',
-                            '&:hover': { transform: 'scale(1.1)', background: ch.color, color: '#fff' },
-                        }}
-                    >
-                        {ch.icon}
-                    </Box>
+                <Tooltip key={ch.label}>
+                    <TooltipTrigger asChild>
+                        <SocialIconLink
+                            icon={ch.icon}
+                            href={ch.href}
+                            accent={ch.color}
+                            tint
+                            className={open ? 'flex' : 'hidden'}
+                            style={{ animation: `fadeInUp 0.25s ease ${i * 0.05}s both` }}
+                        />
+                    </TooltipTrigger>
+                    <TooltipContent side="left">{ch.label}</TooltipContent>
                 </Tooltip>
             ))}
 
-            <Tooltip title={t('FLOATING_CTA_LABEL')} placement="left">
-                <Box
-                    onClick={() => navigate('/contact')}
-                    role="button"
-                    aria-label={t('FLOATING_CTA_LABEL')}
-                    sx={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        width: { xs: 52, md: 58 },
-                        height: { xs: 52, md: 58 },
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, #c0103a, #ff2d55)',
-                        color: '#fff',
-                        cursor: 'pointer',
-                        boxShadow: '0 10px 30px rgba(192,16,58,0.5)',
-                        transition: 'transform 0.25s ease',
-                        '&:hover': { transform: 'scale(1.08)' },
-                    }}
-                >
-                    <FiMessageCircle size={24} />
-                </Box>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <button
+                        onClick={() => navigate('/contact')}
+                        aria-label={t('FLOATING_CTA_LABEL')}
+                        className="flex h-13 w-13 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-[0_10px_30px_rgba(192,16,58,0.5)] transition-transform duration-250 hover:scale-108 md:h-14.5 md:w-14.5"
+                    >
+                        <FiMessageCircle size={24} />
+                    </button>
+                </TooltipTrigger>
+                <TooltipContent side="left">{t('FLOATING_CTA_LABEL')}</TooltipContent>
             </Tooltip>
-        </Box>
+        </div>
     )
 }

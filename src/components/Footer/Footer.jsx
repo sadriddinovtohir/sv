@@ -1,4 +1,3 @@
-import { Stack, Box, Typography } from '@mui/material'
 import { FaEnvelope, FaFileAlt, FaLinkedin, FaPhone, FaTelegram, FaUser } from "react-icons/fa";
 import { useTranslation } from 'react-i18next'
 
@@ -15,70 +14,27 @@ export default function Footer() {
   ]
 
   return (
-    <Box
-      component="footer"
-      style={{
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        padding: '24px 0 16px',
-        marginTop: '40px',
-      }}
-    >
-      <div className='container'>
-        <Stack
-          flexDirection="row"
-          flexWrap="wrap"
-          gap="10px"
-          justifyContent="center"
-          mb="20px"
-        >
+    <footer className="mt-10 border-t border-white/7 py-6 pb-4">
+      <div className="container">
+        <div className="mb-5 flex flex-row flex-wrap justify-center gap-2.5">
           {links.map((item, i) => (
             <a
               key={i}
               href={item.href}
               target={item.target || '_self'}
               rel="noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "9px 16px",
-                background: "rgba(255,255,255,0.04)",
-                color: "rgba(255,255,255,0.65)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "10px",
-                cursor: "pointer",
-                fontSize: "13px",
-                textDecoration: "none",
-                transition: "all 0.25s ease",
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = "#c0103a"
-                e.currentTarget.style.color = "#fff"
-                e.currentTarget.style.borderColor = "#c0103a"
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.04)"
-                e.currentTarget.style.color = "rgba(255,255,255,0.65)"
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"
-              }}
+              className="flex items-center gap-2 rounded-[10px] border border-white/8 bg-white/4 px-4 py-2.25 text-[13px] text-white/65 transition-all duration-250 hover:border-primary hover:bg-primary hover:text-white"
             >
               {item.icon}
               {item.label}
             </a>
           ))}
-        </Stack>
+        </div>
 
-        {/* Bottom line */}
-        <Typography
-          style={{
-            textAlign: "center",
-            color: "rgba(255,255,255,0.25)",
-            fontSize: "12px",
-          }}
-        >
+        <p className="text-center text-xs text-white/25">
           © {new Date().getFullYear()} Tohirbek Sadriddinov. {t('FOOTER_RIGHTS')}
-        </Typography>
+        </p>
       </div>
-    </Box>
+    </footer>
   )
 }

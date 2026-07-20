@@ -1,8 +1,8 @@
-import React from 'react'
-import { Box, Grid, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
 import { skillCategoryData } from '../../data/skillsData'
+import { GlassPanel } from '@/components/common/GlassPanel'
+import { SectionHeading } from '@/components/common/SectionHeading'
+import { Progress } from '@/components/ui/progress'
 
 import { FaHtml5, FaJs, FaReact, FaGithub } from 'react-icons/fa'
 import {
@@ -54,94 +54,47 @@ const skillCategoryKeys = skillCategoryData.map((cat) => ({
     skills: cat.skills.map((s) => ({ ...s, icon: skillIcons[s.name] })),
 }))
 
-const CardWrapper = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'accentcolor',
-})(({ accentcolor }) => ({
-    background: 'rgba(255, 255, 255, 0.04)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
-    borderRadius: '18px',
-    padding: '20px 12px 16px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '10px',
-    transition: 'all 0.3s ease',
-    cursor: 'default',
-    width: '100%',
-    animation: 'fadeInUp 0.45s ease forwards',
-    '&:hover': {
-        transform: 'translateY(-6px)',
-        borderColor: accentcolor + '55',
-        boxShadow: `0 14px 36px ${accentcolor}20`,
-        background: 'rgba(255, 255, 255, 0.07)',
-    },
-}))
-
-const IconBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'accentcolor',
-})(({ accentcolor }) => ({
-    width: 56,
-    height: 56,
-    borderRadius: '14px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: `linear-gradient(135deg, ${accentcolor}28, ${accentcolor}10)`,
-    color: accentcolor,
-    border: `1px solid ${accentcolor}30`,
-    boxShadow: `0 4px 14px ${accentcolor}18`,
-    flexShrink: 0,
-}))
-
-const ProgressBar = styled(Box)({
-    width: '100%',
-    height: 3,
-    background: 'rgba(255,255,255,0.07)',
-    borderRadius: 4,
-    overflow: 'hidden',
-})
-
-const ProgressFill = styled(Box, {
-    shouldForwardProp: (prop) => !['level', 'accentcolor'].includes(prop),
-})(({ level, accentcolor }) => ({
-    height: '100%',
-    width: `${level}%`,
-    background: `linear-gradient(90deg, ${accentcolor}, ${accentcolor}70)`,
-    borderRadius: 4,
-}))
-
 function SkillCard({ skill, accent }) {
     const { t } = useTranslation()
     return (
-        <CardWrapper accentcolor={accent}>
-            <IconBox accentcolor={accent}>{skill.icon}</IconBox>
+        <GlassPanel
+            accent={accent}
+            hover
+            className="flex w-full animate-[fadeInUp_0.45s_ease_forwards] cursor-default flex-col items-center gap-2.5 rounded-[18px] px-3 pt-5 pb-4"
+        >
+            <div
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] border"
+                style={{
+                    background: `linear-gradient(135deg, ${accent}28, ${accent}10)`,
+                    color: accent,
+                    borderColor: `${accent}30`,
+                    boxShadow: `0 4px 14px ${accent}18`,
+                }}
+            >
+                {skill.icon}
+            </div>
 
-            <Typography sx={{
-                color: '#e4e4e7',
-                fontSize: { xs: '11px', md: '12.5px' },
-                fontWeight: 600,
-                textAlign: 'center',
-                lineHeight: 1.35,
-            }}>
+            <p className="text-center text-[11px] leading-[1.35] font-semibold text-[#e4e4e7] md:text-[12.5px]">
                 {skill.name}
-            </Typography>
+            </p>
 
-            <Box sx={{ width: '100%' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
-                    <Typography sx={{ fontSize: '9px', color: 'rgba(255,255,255,0.3)', fontWeight: 500 }}>
+            <div className="w-full">
+                <div className="mb-1 flex justify-between">
+                    <span className="text-[9px] font-medium text-white/30">
                         {t('SKILL_PROFICIENCY')}
-                    </Typography>
-                    <Typography sx={{ fontSize: '9px', color: accent, fontWeight: 600 }}>
+                    </span>
+                    <span className="text-[9px] font-semibold" style={{ color: accent }}>
                         {skill.level}%
-                    </Typography>
-                </Box>
-                <ProgressBar>
-                    <ProgressFill level={skill.level} accentcolor={accent} />
-                </ProgressBar>
-            </Box>
-        </CardWrapper>
+                    </span>
+                </div>
+                <Progress
+                    value={skill.level}
+                    className="h-[3px] bg-white/7"
+                    indicatorClassName="bg-none"
+                    indicatorStyle={{ background: `linear-gradient(90deg, ${accent}, ${accent}70)` }}
+                />
+            </div>
+        </GlassPanel>
     )
 }
 
@@ -154,76 +107,49 @@ export default function Skills() {
     }))
 
     return (
-        <Box sx={{ px: { xs: '0', md: '0' }, py: { xs: '24px', md: '36px' }, maxWidth: 1160, mx: 'auto' }}>
+        <div className="mx-auto max-w-[1160px] px-0 py-6 md:py-9">
 
             {/* Page Title */}
-            <Box sx={{ textAlign: 'center', mb: { xs: 4, md: 6 } }}>
-                <Typography sx={{
-                    fontWeight: 800,
-                    background: 'linear-gradient(135deg, #ff2d55 0%, #ff7b7b 60%, #ffaaaa 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    fontSize: { xs: '28px', md: '38px' },
-                    letterSpacing: '-0.5px',
-                    lineHeight: 1.15,
-                    mb: 1,
-                }}>
-                    {t('SKILLS_TITLE')}
-                </Typography>
-                <Typography sx={{
-                    color: 'rgba(255,255,255,0.4)',
-                    fontSize: { xs: '13px', md: '15px' },
-                    fontWeight: 400,
-                }}>
-                    {t('SKILLS_SUBTITLE')}
-                </Typography>
-            </Box>
+            <div className="mb-8 text-center md:mb-12">
+                <SectionHeading
+                    className="mb-1 items-center"
+                    title={t('SKILLS_TITLE')}
+                    subtitle={t('SKILLS_SUBTITLE')}
+                    gradient
+                    titleClassName="text-[28px] md:text-[38px] tracking-tight"
+                />
+            </div>
 
             {/* Skill Categories */}
             {skillCategories.map((category) => (
-                <Box key={category.labelKey} sx={{ mb: { xs: 4, md: 5 } }}>
+                <div key={category.labelKey} className="mb-8 md:mb-10">
 
                     {/* Category Header */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: { xs: 2, md: 2.5 } }}>
-                        <Box sx={{
-                            width: 3,
-                            height: 22,
-                            borderRadius: 4,
-                            background: category.accent,
-                            boxShadow: `0 0 12px ${category.accent}80`,
-                            flexShrink: 0,
-                        }} />
-                        <Typography sx={{
-                            color: '#fff',
-                            fontWeight: 700,
-                            fontSize: { xs: '13px', md: '15px' },
-                            letterSpacing: '0.2px',
-                        }}>
+                    <div className="mb-4 flex items-center gap-3 md:mb-5">
+                        <span
+                            className="h-5.5 w-[3px] shrink-0 rounded"
+                            style={{ background: category.accent, boxShadow: `0 0 12px ${category.accent}80` }}
+                        />
+                        <p className="text-[13px] font-bold tracking-wide text-white md:text-[15px]">
                             {category.label}
-                        </Typography>
-                        <Box sx={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.06)' }} />
-                        <Typography sx={{
-                            fontSize: '10px',
-                            color: category.accent,
-                            fontWeight: 600,
-                            opacity: 0.75,
-                            flexShrink: 0,
-                        }}>
+                        </p>
+                        <span className="h-px flex-1 bg-white/6" />
+                        <span
+                            className="shrink-0 text-[10px] font-semibold opacity-75"
+                            style={{ color: category.accent }}
+                        >
                             {t('SKILL_COUNT', { count: category.skills.length })}
-                        </Typography>
-                    </Box>
+                        </span>
+                    </div>
 
                     {/* Cards Grid */}
-                    <Grid container spacing={{ xs: 1.5, md: 2 }} justifyContent="center">
+                    <div className="grid grid-cols-2 justify-center gap-3 md:grid-cols-4 md:gap-4">
                         {category.skills.map((skill) => (
-                            <Grid item xs={6} md={3} key={skill.name}>
-                                <SkillCard skill={skill} accent={category.accent} />
-                            </Grid>
+                            <SkillCard key={skill.name} skill={skill} accent={category.accent} />
                         ))}
-                    </Grid>
-                </Box>
+                    </div>
+                </div>
             ))}
-        </Box>
+        </div>
     )
 }

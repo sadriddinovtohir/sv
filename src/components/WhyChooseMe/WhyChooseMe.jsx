@@ -1,6 +1,7 @@
-import { Box, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { FiCheckCircle } from 'react-icons/fi'
+import { GlassPanel } from '@/components/common/GlassPanel'
+import { SectionHeading } from '@/components/common/SectionHeading'
 
 const REASONS = ['WHY_1', 'WHY_2', 'WHY_3', 'WHY_4']
 
@@ -8,43 +9,31 @@ export default function WhyChooseMe() {
     const { t } = useTranslation()
 
     return (
-        <Box sx={{
-            mb: '56px',
-            p: { xs: '20px', md: '32px' },
-            borderRadius: '24px',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.06)',
-        }}>
-            <Stack mb={'20px'} gap={'4px'}>
-                <Typography sx={{ fontWeight: 800, fontSize: { xs: '20px', md: '24px' }, color: '#ff4d6d' }}>
-                    {t('WHY_TITLE')}
-                </Typography>
-                <Typography sx={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px' }}>
-                    {t('WHY_SUBTITLE')}
-                </Typography>
-            </Stack>
+        <GlassPanel className="mb-14 rounded-3xl border-white/6 bg-white/3 p-5 md:p-8">
+            <SectionHeading
+                className="mb-5"
+                title={t('WHY_TITLE')}
+                subtitle={t('WHY_SUBTITLE')}
+                titleClassName="text-[20px] md:text-2xl text-[#ff4d6d]"
+            />
 
-            <Box sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
-                gap: '18px',
-            }}>
+            <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
                 {REASONS.map((key) => (
-                    <Stack key={key} direction="row" gap={'12px'} alignItems="flex-start">
-                        <Box sx={{ color: '#22c55e', mt: '2px', flexShrink: 0 }}>
+                    <div key={key} className="flex flex-row items-start gap-3">
+                        <span className="mt-0.5 shrink-0 text-[#22c55e]">
                             <FiCheckCircle size={18} />
-                        </Box>
-                        <Box>
-                            <Typography sx={{ color: '#fff', fontWeight: 700, fontSize: '14px', mb: '4px' }}>
+                        </span>
+                        <div>
+                            <p className="mb-1 text-sm font-bold text-white">
                                 {t(`${key}_TITLE`)}
-                            </Typography>
-                            <Typography sx={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', lineHeight: 1.6 }}>
+                            </p>
+                            <p className="text-[13px] leading-[1.6] text-white/50">
                                 {t(`${key}_DESC`)}
-                            </Typography>
-                        </Box>
-                    </Stack>
+                            </p>
+                        </div>
+                    </div>
                 ))}
-            </Box>
-        </Box>
+            </div>
+        </GlassPanel>
     )
 }

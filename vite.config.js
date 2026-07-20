@@ -1,5 +1,7 @@
+import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { handleContactSubmission } from './api/_lib/sendTelegram.js'
 
 // Serves /api/send-message during `vite dev`, since Vite doesn't run
@@ -37,6 +39,11 @@ export default defineConfig(({ mode }) => {
   if (env.TELEGRAM_CHAT_ID) process.env.TELEGRAM_CHAT_ID = env.TELEGRAM_CHAT_ID
 
   return {
-    plugins: [react(), telegramDevApi()],
+    plugins: [react(), tailwindcss(), telegramDevApi()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
   }
 })

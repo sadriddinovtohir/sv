@@ -1,7 +1,6 @@
-import React from "react";
-import { Box, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import CustomCard from "../../components/CustomCard/CustomCard";
+import { SectionHeading } from "@/components/common/SectionHeading";
 import RadioatorPro from "../../assets/img/RadioatorPro.webp"
 import bizCore from "../../assets/img/bizCore.webp"
 import parthubLogo from "../../assets/img/parthub.webp"
@@ -72,42 +71,15 @@ export default function Projects() {
   ];
 
   return (
-    <Box
-      className="container"
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
-        marginTop: "40px"
-      }}
-    >
-      <Stack width="100%" px={{ xs: 0, md: 2 }} mb={4}>
-        <Typography
-          variant="h4"
-          fontWeight={800}
-          sx={{ color: "#ff4d6d", letterSpacing: "2px" }}
-        >
-          {t("PROJECTS_TITLE")}
-        </Typography>
-        <Typography color="#ccc">{t("PROJECTS_SUBTITLE")}</Typography>
-      </Stack>
+    <div className="container mt-10 flex flex-wrap justify-between">
+      <SectionHeading
+        className="mb-0 w-full px-0 md:px-2"
+        title={t("PROJECTS_TITLE")}
+        subtitle={t("PROJECTS_SUBTITLE")}
+        titleClassName="text-[#ff4d6d] tracking-wide text-2xl md:text-[34px]"
+      />
 
-      <Box sx={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gap: { xs: '12px', sm: '16px', md: '24px' },
-        width: '100%',
-        pb: 4,
-        '@media (min-width:505px)': {
-          gridTemplateColumns: 'repeat(2, 1fr)',
-        },
-        '@media (min-width:900px)': {
-          gridTemplateColumns: 'repeat(3, 1fr)',
-        },
-        '@media (min-width:1310px)': {
-          gridTemplateColumns: 'repeat(4, 1fr)',
-        },
-      }}>
+      <div className="grid w-full grid-cols-1 gap-3 pb-8 min-[505px]:grid-cols-2 min-[900px]:grid-cols-3 min-[1310px]:grid-cols-4 sm:gap-4 md:gap-6">
         {data.map((item, index) => (
           <CustomCard
             key={index}
@@ -120,7 +92,7 @@ export default function Projects() {
             badge={item.badge}
           />
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

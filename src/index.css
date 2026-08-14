@@ -198,6 +198,11 @@ body {
     opacity: 0.4;
   }
 }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* SetTime intro staggered enter/exit keyframes */
 @keyframes anim-top {

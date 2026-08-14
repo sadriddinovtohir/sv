@@ -5,6 +5,7 @@ import { FaTelegram, FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { FiMessageCircle } from 'react-icons/fi'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { SocialIconLink } from '@/components/common/SocialIconLink'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
 
@@ -19,12 +20,17 @@ export default function FloatingContact() {
     const { t } = useTranslation()
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
+    // Touch devices never fire mouseenter/mouseleave, so the hover-reveal
+    // below would leave the channel icons permanently unreachable there —
+    // show them outright instead of gating them behind a hover that can't happen.
+    const hasHover = useMediaQuery('(hover: hover) and (pointer: fine)')
+    const showChannels = hasHover ? open : true
 
     return (
         <div
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setOpen(false)}
-            className="fixed right-4 bottom-4 z-[1200] flex flex-col items-end gap-3 md:right-7 md:bottom-7"
+            onMouseEnter={hasHover ? () => setOpen(true) : undefined}
+            onMouseLeave={hasHover ? () => setOpen(false) : undefined}
+            className="fixed right-4 bottom-4 z-1200 flex flex-col items-end gap-3 md:right-7 md:bottom-7"
         >
             {CHANNELS.map((ch, i) => (
                 <Tooltip key={ch.label}>
@@ -34,7 +40,7 @@ export default function FloatingContact() {
                             href={ch.href}
                             accent={ch.color}
                             tint
-                            className={open ? 'flex' : 'hidden'}
+                            className={showChannels ? 'flex' : 'hidden'}
                             style={{ animation: `fadeInUp 0.25s ease ${i * 0.05}s both` }}
                         />
                     </TooltipTrigger>

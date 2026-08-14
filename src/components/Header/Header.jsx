@@ -87,7 +87,9 @@ function NavLinks({ orientation = 'row', onNavigate }) {
     <nav
       className={cn(
         'flex gap-1.5 rounded-full border border-white/7 bg-white/4 p-2 backdrop-blur-2xl',
-        orientation === 'row' ? 'flex-row flex-wrap items-center' : 'flex-col items-stretch gap-2 border-none bg-transparent p-0'
+        orientation === 'row'
+          ? 'flex-row flex-wrap items-center'
+          : 'w-full flex-col items-stretch gap-3 border-none bg-transparent p-0'
       )}
     >
       {NAV_ITEMS.map(({ to, labelKey, icon: Icon, end }) => (
@@ -99,12 +101,12 @@ function NavLinks({ orientation = 'row', onNavigate }) {
           className={({ isActive }) =>
             cn(
               'flex items-center justify-center gap-1.5 rounded-full px-4 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-all duration-300 hover:bg-white/8 hover:text-white',
-              orientation === 'column' && 'justify-start bg-white/4 py-2.5',
+              orientation === 'column' && 'justify-start gap-3 bg-white/5 px-5 py-3.5 text-base',
               isActive && 'bg-primary text-white hover:bg-primary hover:text-white'
             )
           }
         >
-          <Icon /> {t(labelKey)}
+          <Icon size={orientation === 'column' ? 19 : undefined} /> {t(labelKey)}
         </NavLink>
       ))}
     </nav>
@@ -130,11 +132,18 @@ export default function Header() {
           <FiMenu size={22} />
         </Button>
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent side="right" className="border-white/10 bg-[#1a0008] text-white">
+          <SheetContent
+            side="right"
+            className="z-1300 w-4/5 border-white/10 bg-[#1a0008] text-white"
+          >
             <SheetTitle className="sr-only">Navigation</SheetTitle>
-            <div className="flex flex-col items-center gap-6 p-5 pt-10">
-              <NavLinks orientation="column" onNavigate={() => setOpen(false)} />
-              <LanguageSwitcher currentLang={currentLang} changeLang={changeLang} />
+            <div className="flex h-full flex-col p-6">
+              <span className="text-xl font-semibold">T.S</span>
+
+              <div className="flex flex-1 flex-col items-center justify-center gap-8">
+                <NavLinks orientation="column" onNavigate={() => setOpen(false)} />
+                <LanguageSwitcher currentLang={currentLang} changeLang={changeLang} className="w-full justify-center py-2.5" />
+              </div>
             </div>
           </SheetContent>
         </Sheet>

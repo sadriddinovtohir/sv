@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { FaTelegram, FaLinkedin, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { FiMessageCircle } from 'react-icons/fi'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -19,12 +19,19 @@ const CHANNELS = [
 export default function FloatingContact() {
     const { t } = useTranslation()
     const navigate = useNavigate()
+    const { pathname } = useLocation()
     const [open, setOpen] = useState(false)
-    // Touch devices never fire mouseenter/mouseleave, so the hover-reveal
-    // below would leave the channel icons permanently unreachable there —
-    // show them outright instead of gating them behind a hover that can't happen.
+    // Touch devices never fire mouseenter/mouseleave, so only wire the
+    // hover-reveal on devices that actually have hover — on touch the
+    // channel icons just stay collapsed instead of permanently covering
+    // page content near the bottom-right corner.
     const hasHover = useMediaQuery('(hover: hover) and (pointer: fine)')
-    const showChannels = hasHover ? open : true
+    const showChannels = hasHover && open
+
+    // The Contact page already lists every channel and has its own form,
+    // so the floating CTA is redundant there and, on mobile where the
+    // channel icons are always shown, it overlaps the page's submit button.
+    if (pathname === '/contact') return null
 
     return (
         <div

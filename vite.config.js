@@ -45,5 +45,26 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // Split the rarely-changing dependencies out of the app chunk so a
+          // redeploy doesn't invalidate them and the browser can fetch/parse
+          // them in parallel. react-icons is left alone — Vite already emits a
+          // small per-icon-set chunk, which beats one big icon bundle.
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return
+            const p = id.replace(/\\/g, '/')
+            // react-dom and react-router must stay with react: splitting them
+            // apart risks module-init ordering problems.
+            if (/node_modules\/(react|react-dom|scheduler|react-router|react-router-dom)\//.test(p))
+              return 'vendor-react'
+            if (/node_modules\/(i18next|react-i18next)/.test(p)) return 'vendor-i18n'
+            if (/node_modules\/(radix-ui|@radix-ui|class-variance-authority|clsx|tailwind-merge)/.test(p))
+              return 'vendor-ui'
+          },
+        },
+      },
+    },
   }
 })

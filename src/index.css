@@ -170,6 +170,28 @@ body {
   }
 }
 
+/* === Scroll reveal ===
+   Elements marked `data-reveal` stay hidden until useReveal's shared
+   IntersectionObserver flips them to `in`, so a card animates when it actually
+   reaches the viewport instead of burning its entrance off-screen.
+   `backwards` (not `forwards`) holds the hidden state during the stagger delay
+   and then lets go, leaving no transform stuck on the element afterwards. */
+[data-reveal] {
+  opacity: 0;
+}
+[data-reveal="in"] {
+  opacity: 1;
+  animation: fadeInUp 0.5s ease var(--reveal-delay, 0s) backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal="in"] {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 /* === Animations === */
 @keyframes fadeInUp {
   from {

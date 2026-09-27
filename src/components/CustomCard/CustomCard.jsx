@@ -7,9 +7,8 @@ import { useReveal } from "@/hooks/useReveal";
 import { AiBadge } from "./AiBadge";
 
 /**
- * Presentational project tile. The details modal lives once at the page level
- * (see ProjectDialog) instead of one Dialog per card, so the grid stays cheap
- * to mount — clicking a card just hands the project back up via `onOpen`.
+ * Presentational project tile. Clicking it hands the project back up via
+ * `onOpen`, which navigates to the project's detail page (ProjectDetail).
  *
  * `project` comes from a memoized list in Projects.jsx, so the memo() below
  * actually holds between renders.
@@ -17,10 +16,10 @@ import { AiBadge } from "./AiBadge";
 function CustomCard({ project, onOpen }) {
     const { t } = useTranslation();
     const revealRef = useReveal();
-    const { img, title, desc, tech, link, badge } = project;
+    const { img, title, desc, tech, techTotal, link, badge } = project;
 
-    const visibleTech = Array.isArray(tech) ? tech.slice(0, 4) : [];
-    const extraCount = Array.isArray(tech) ? tech.length - 4 : 0;
+    const visibleTech = tech.slice(0, 4);
+    const extraCount = techTotal - visibleTech.length;
 
     return (
         <GlassPanel
@@ -89,7 +88,7 @@ function CustomCard({ project, onOpen }) {
                     {t("PROJECT_MORE")} →
                 </span>
 
-                {/* One-click shortcut straight to the live site, skipping the modal. */}
+                {/* One-click shortcut straight to the live site, skipping the detail page. */}
                 <a
                     href={link}
                     target="_blank"

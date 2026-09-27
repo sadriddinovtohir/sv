@@ -5,6 +5,7 @@ import SetTime from './components/SetTime/SetTime'
 
 const About = lazy(() => import('./Page/About/About'))
 const Projects = lazy(() => import('./Page/Projects/Projects'))
+const ProjectDetail = lazy(() => import('./Page/Projects/ProjectDetail'))
 const Skills = lazy(() => import('./Page/Skills/Skills'))
 const Contact = lazy(() => import('./Page/Contact/Contact'))
 const Home = lazy(() => import('./Page/Home/Home'))
@@ -48,6 +49,7 @@ function App() {
     import('./Page/Home/Home')
     import('./Page/About/About')
     import('./Page/Projects/Projects')
+    import('./Page/Projects/ProjectDetail')
     import('./Page/Skills/Skills')
     import('./Page/Contact/Contact')
     import('./components/Offer/Offer')
@@ -77,6 +79,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/projects' element={<Projects />} />
+                <Route path='/projects/:id' element={<ProjectDetail />} />
                 <Route path='/skills' element={<Skills />} />
                 <Route path='/contact' element={<Contact />} />
                 <Route path='/offer' element={<Offer />} />

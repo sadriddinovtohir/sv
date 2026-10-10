@@ -16,6 +16,37 @@ import clubMraa from "../../assets/img/image.webp"
  */
 export const STACK_GROUPS = ["web", "mobile", "backend", "services", "testing"]
 
+// UzFixCar's mobile app and backend also get their own cards, so these lists are shared.
+const UZFIXCAR_MOBILE = [
+  "React Native", "Expo", "Expo Router", "TypeScript", "Hermes", "Metro",
+  "Zustand", "TanStack React Query", "Axios", "Zod", "i18next", "react-i18next",
+  "AsyncStorage", "Expo SecureStore", "Expo Location", "Expo Notifications",
+  "Expo Image Picker", "Expo Image Manipulator", "Expo Linking", "Expo Constants",
+  "Expo Device", "Expo Splash Screen", "Expo Status Bar", "Expo Updates (OTA)",
+  "React Native WebView", "React Native SVG", "React Native Safe Area Context",
+  "React Native Screens", "React Native Toast Message", "Lucide React Native",
+  "Expo Vector Icons", "Yandex Maps JS API", "Google reCAPTCHA", "WebSocket",
+  "Firebase Cloud Messaging", "Expo Push", "Payme", "EAS Build", "EAS Update",
+  "GitHub Actions",
+]
+
+const UZFIXCAR_BACKEND = [
+  "Node.js", "TypeScript", "Express", "MongoDB", "Mongoose", "Redis", "ioredis",
+  "Zod", "jsonwebtoken", "argon2", "Helmet", "cors", "cookie-parser", "compression",
+  "express-rate-limit", "rate-limit-redis", "ws (WebSocket)", "multer", "sharp",
+  "heic-convert", "pdfkit", "dejavu-fonts-ttf", "exceljs", "nodemailer", "aws4fetch",
+  "pino", "pino-http", "pino-pretty", "swagger-jsdoc", "swagger-ui-express",
+  "date-fns", "nanoid", "dotenv", "tsx", "ESLint", "typescript-eslint",
+  "Docker", "Docker Compose", "Caddy", "GitHub Actions", "Git",
+]
+
+const UZFIXCAR_SERVICES = [
+  "MongoDB Atlas", "Hetzner Cloud (VPS)", "Ubuntu", "Cloudflare R2",
+  "Payme (Merchant + Subscribe API)", "Eskiz.uz (SMS)", "Telegram Bot API",
+  "Expo Push Notifications", "Google reCAPTCHA v2", "Google OAuth", "Gmail SMTP",
+  "Yandex Navigator / Maps", "Google Maps",
+]
+
 /**
  * Tech names aren't translated, so big projects keep their stack here, grouped,
  * instead of repeating it in every locale file. Small projects still use their
@@ -44,37 +75,37 @@ export const PROJECTS = [
         "eslint-plugin-react", "eslint-plugin-react-hooks", "eslint-plugin-react-refresh",
         "globals", "@types/react", "@types/react-dom",
       ],
-      mobile: [
-        "React Native", "Expo", "Expo Router", "TypeScript", "Hermes", "Metro",
-        "Zustand", "TanStack React Query", "Axios", "Zod", "i18next", "react-i18next",
-        "AsyncStorage", "Expo SecureStore", "Expo Location", "Expo Notifications",
-        "Expo Image Picker", "Expo Image Manipulator", "Expo Linking", "Expo Constants",
-        "Expo Device", "Expo Splash Screen", "Expo Status Bar", "Expo Updates (OTA)",
-        "React Native WebView", "React Native SVG", "React Native Safe Area Context",
-        "React Native Screens", "React Native Toast Message", "Lucide React Native",
-        "Expo Vector Icons", "Yandex Maps JS API", "Google reCAPTCHA", "WebSocket",
-        "Firebase Cloud Messaging", "Expo Push", "Payme", "EAS Build", "EAS Update",
-        "GitHub Actions",
-      ],
-      backend: [
-        "Node.js", "TypeScript", "Express", "MongoDB", "Mongoose", "Redis", "ioredis",
-        "Zod", "jsonwebtoken", "argon2", "Helmet", "cors", "cookie-parser", "compression",
-        "express-rate-limit", "rate-limit-redis", "ws (WebSocket)", "multer", "sharp",
-        "heic-convert", "pdfkit", "dejavu-fonts-ttf", "exceljs", "nodemailer", "aws4fetch",
-        "pino", "pino-http", "pino-pretty", "swagger-jsdoc", "swagger-ui-express",
-        "date-fns", "nanoid", "dotenv", "tsx", "ESLint", "typescript-eslint",
-        "Docker", "Docker Compose", "Caddy", "GitHub Actions", "Git",
-      ],
-      services: [
-        "MongoDB Atlas", "Hetzner Cloud (VPS)", "Ubuntu", "Cloudflare R2",
-        "Payme (Merchant + Subscribe API)", "Eskiz.uz (SMS)", "Telegram Bot API",
-        "Expo Push Notifications", "Google reCAPTCHA v2", "Google OAuth", "Gmail SMTP",
-        "Yandex Navigator / Maps", "Google Maps",
-      ],
+      mobile: UZFIXCAR_MOBILE,
+      backend: UZFIXCAR_BACKEND,
+      services: UZFIXCAR_SERVICES,
       testing: [
         "Vitest", "jsdom", "Testing Library (React)", "Testing Library (jest-dom)",
         "Testing Library (user-event)", "Jest (jest-expo)", "React Test Renderer",
       ],
+    },
+  },
+  {
+    id: "uzfixcar-mobile",
+    img: uzfixcar,
+    titleKey: "PROJECT_UZFIXCAR_MOBILE_TITLE",
+    descKey: "PROJECT_UZFIXCAR_MOBILE_DESC",
+    link: "https://www.uzfixcar.com/",
+    highlights: ["React Native", "Expo", "TypeScript", "Zustand"],
+    stack: {
+      mobile: UZFIXCAR_MOBILE,
+      testing: ["Jest (jest-expo)", "React Test Renderer"],
+    },
+  },
+  {
+    id: "uzfixcar-backend",
+    img: uzfixcar,
+    titleKey: "PROJECT_UZFIXCAR_BACKEND_TITLE",
+    descKey: "PROJECT_UZFIXCAR_BACKEND_DESC",
+    link: "https://www.uzfixcar.com/",
+    highlights: ["Node.js", "Express", "MongoDB", "Redis"],
+    stack: {
+      backend: UZFIXCAR_BACKEND,
+      services: UZFIXCAR_SERVICES,
     },
   },
   {

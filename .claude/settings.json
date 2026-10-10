@@ -27,7 +27,10 @@
       "Bash(sort -k5 -n -r)",
       "Bash(npx --yes sharp-cli --version)",
       "Bash(grep -rn \"parthub\\\\.png\\\\|about\\\\.jpg\\\\|homePage\\\\.jpg\\\\|About_Profile\\\\.jpg\" src/)",
-      "Bash(rm -v src/assets/img/parthub.png src/assets/img/about.jpg src/assets/img/homePage.jpg src/assets/img/About_Profile.jpg)"
+      "Bash(rm -v src/assets/img/parthub.png src/assets/img/about.jpg src/assets/img/homePage.jpg src/assets/img/About_Profile.jpg)",
+      "Bash(grep -v -E '\\\\.\\(png|jpe?g|svg|webp|ico|woff2?|ttf|mp4|pdf\\)$')",
+      "Bash(git diff *)",
+      "Read(//c/Users/user/AppData/Local/Temp/claude/d--sv2-sv-sv/29374379-9a50-4b52-aa56-46775edbaa1e/scratchpad/**)"
     ],
     "additionalDirectories": [
       "D:\\idea\\Parthub Bold Icon Mark"

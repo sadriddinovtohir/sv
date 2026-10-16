@@ -43,7 +43,7 @@ export default function Home() {
     const { t } = useTranslation()
 
     const stats = [
-        { value: '1+',                    label: t('STAT_YEARS_EXP'),    accent: '#ff2d55' },
+        { value: '2+',                  label: t('STAT_YEARS_EXP'),    accent: '#ff2d55' },
         { value: `${PROJECTS_COUNT}`,     label: t('STAT_PROJECTS'),     accent: '#38bdf8' },
         { value: `${totalSkillsCount}`,   label: t('STAT_TECHNOLOGIES'), accent: '#a855f7' },
         { value: '∞',                     label: t('STAT_CURIOSITY'),    accent: '#22c55e' },

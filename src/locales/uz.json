@@ -2,7 +2,7 @@
   "HI": "Salom men Tohir",
   "Loaction": "Toshkent",
   "Now": "Hozir bo'shman",
-  "I": "Men chiroyli, funksional va foydalanuvchiga yo'naltirilgan raqamli tajribalar yarataman. Web dasturlash sohasida 1 yillik tajribaga ega bo'lib, g'oyalarni toza kod va puxta o'ylangan dizayn orqali hayotga tatbiq etaman.",
+  "I": "Men chiroyli, funksional va foydalanuvchiga yo'naltirilgan raqamli tajribalar yarataman. Web dasturlash sohasida 2 yillik tajribaga ega bo'lib, g'oyalarni toza kod va puxta o'ylangan dizayn orqali hayotga tatbiq etaman.",
   "Hire": "Yollash",
   "CV": "CV yuklash",
   "job": "Frontend muhandis",
@@ -14,7 +14,7 @@
   "p5": "Yangi loyihalarda esa arxitekturadan boshlab implementatsiyagacha to'liq javobgarlikni o'z zimmamga olaman — toza struktura, qayta ishlatiladigan komponentlar va minimal texnik qarzdorlikni ta'minlayman.",
   "p6": "Men Claude AI dan faol foydalanib, production darajasidagi tizimlar — jumladan JWT, Redis, PostgreSQL, Docker va to'liq test qoplami bilan enterprise REST API — yaratdim. AI kodni men uchun yozmaydi; men uni aniq fayl strukturam, arxitekturaviy fikrlashim va tuzilgan promptlarim orqali boshqaraman.",
   "experience": "Tajriba",
-  "exp_text": "Men frontend dasturchi sifatida 1 yildan ortiq amaliy tajribaga egaman va real loyihalarda ishlaganman. Asosiy e'tiborim — samaradorlik, masshtablilik va qo'llab-quvvatlashga qulay kod yozish.",
+  "exp_text": "Men frontend dasturchi sifatida 2 yillik amaliy tajribaga egaman va real loyihalarda ishlaganman. Asosiy e'tiborim — samaradorlik, masshtablilik va qo'llab-quvvatlashga qulay kod yozish.",
 
   "NAV_HOME": "Bosh sahifa",
   "NAV_ABOUT": "Haqimda",

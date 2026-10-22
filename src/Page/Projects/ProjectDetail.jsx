@@ -97,7 +97,8 @@ export default function ProjectDetail() {
                 </div>
             </div>
 
-            {/* Stack */}
+            {/* Stack — skipped entirely for projects that list no technologies */}
+            {techTotal > 0 && (<>
             <div className="mt-10 mb-4 flex items-baseline justify-between gap-3">
                 <h2 className="text-xl font-extrabold text-[#ff4d6d] md:text-2xl">
                     {t("PROJECT_STACK_TITLE")}
@@ -126,6 +127,7 @@ export default function ProjectDetail() {
                     <TechList items={tech} />
                 </GlassPanel>
             )}
+            </>)}
         </div>
     );
 }

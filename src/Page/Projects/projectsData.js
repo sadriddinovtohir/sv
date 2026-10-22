@@ -3,6 +3,8 @@ import tomservis from "../../assets/img/tomservis.webp"
 import uymakon from "../../assets/img/uymakon.webp"
 import gitpodClone from "../../assets/img/gitpodClone.webp"
 import karvon from "../../assets/img/karvon.webp"
+import cooksDelight from "../../assets/img/cooksDelight.webp"
+import rentcars from "../../assets/img/rentcars.webp"
 import RadioatorPro from "../../assets/img/RadioatorPro.webp"
 import bizCore from "../../assets/img/bizCore.webp"
 import studense from "../../assets/img/studense.webp"
@@ -109,6 +111,20 @@ export const PROJECTS = [
     },
   },
   {
+    id: "rentcars",
+    img: rentcars,
+    titleKey: "PROJECT_RENTCARS_TITLE",
+    descKey: "PROJECT_RENTCARS_DESC",
+    link: "https://car-indol-ten.vercel.app/",
+  },
+  {
+    id: "cooks-delight",
+    img: cooksDelight,
+    titleKey: "PROJECT_COOKS_TITLE",
+    descKey: "PROJECT_COOKS_DESC",
+    link: "https://food-two-rosy.vercel.app/",
+  },
+  {
     id: "tomservis",
     img: tomservis,
     titleKey: "PROJECT_TOMSERVIS_TITLE",
@@ -204,7 +220,8 @@ export function localizeProject(p, t) {
     const total = new Set(Object.values(p.stack).flat()).size
     return { ...p, title: t(p.titleKey), desc: t(p.descKey), tech: p.highlights, techTotal: total }
   }
-  const tech = t(p.techKey, { returnObjects: true })
+  // Projects without a `techKey` simply list no technologies.
+  const tech = p.techKey ? t(p.techKey, { returnObjects: true }) : []
   const list = Array.isArray(tech) ? tech : []
   return { ...p, title: t(p.titleKey), desc: t(p.descKey), tech: list, techTotal: list.length }
 }

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Small rounded icon+text badge (location/availability/status pills on Home
- * and Contact, the "UI LOADING..." badge on the boot screen, ...). `accent`
+ * and Contact, the services link, ...). `accent`
  * can be a real brand color or a neutral `rgba(255,255,255,x)` string — both
  * work since border/background/text all derive from the same CSS variable.
  */

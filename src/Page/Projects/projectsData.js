@@ -11,6 +11,8 @@ import studense from "../../assets/img/studense.webp"
 import sun_energy_img from "../../assets/img/sun_energy_img.webp"
 import ITPARKIMG from "../../assets/img/ITPARK.webp"
 import clubMraa from "../../assets/img/image.webp"
+import zukkoCrm from "../../assets/img/zukkoCrm.webp"
+import zukkoLms from "../../assets/img/zukkoLms.webp"
 
 /**
  * Order of the stack groups on the detail page. Each key maps to a
@@ -47,6 +49,22 @@ const UZFIXCAR_SERVICES = [
   "Payme (Merchant + Subscribe API)", "Eskiz.uz (SMS)", "Telegram Bot API",
   "Expo Push Notifications", "Google reCAPTCHA v2", "Google OAuth", "Gmail SMTP",
   "Yandex Navigator / Maps", "Google Maps",
+]
+
+// Zukko is three repos (CRM, public site, API) sharing one backend, so the
+// backend and infra lists are reused across all three cards.
+const ZUKKO_API = "https://zukko-backend-p6aw.onrender.com"
+const ZUKKO_CRM_URL = "https://comfy-conkies-9193d3.netlify.app/"
+
+const ZUKKO_BACKEND = [
+  "Node.js", "Express", "Prisma ORM", "PostgreSQL", "jsonwebtoken", "bcryptjs",
+  "Zod", "Helmet", "cors", "compression", "express-rate-limit", "multer",
+  "In-memory TTL cache", "Multi-tenant architecture", "RBAC (4 roles)", "REST API",
+]
+
+const ZUKKO_SERVICES = [
+  "Render (API)", "Render PostgreSQL", "Netlify (CRM + LMS)", "GitLab",
+  "Content Security Policy", "HSTS",
 ]
 
 /**
@@ -108,6 +126,61 @@ export const PROJECTS = [
     stack: {
       backend: UZFIXCAR_BACKEND,
       services: UZFIXCAR_SERVICES,
+    },
+  },
+  {
+    id: "zukko-crm",
+    img: zukkoCrm,
+    titleKey: "PROJECT_ZUKKO_CRM_TITLE",
+    descKey: "PROJECT_ZUKKO_CRM_DESC",
+    link: ZUKKO_CRM_URL,
+    gitlab: "https://gitlab.com/zukko1/zukko-crm",
+    highlights: ["React 19", "TypeScript", "TanStack Query", "Node.js"],
+    stack: {
+      web: [
+        "React 19", "React DOM", "TypeScript", "Vite", "@vitejs/plugin-react",
+        "React Router DOM", "TanStack React Query", "Tailwind CSS 4", "@tailwindcss/vite",
+        "tw-animate-css", "shadcn/ui", "Radix UI (Dialog, Slot, Switch, Tabs)",
+        "class-variance-authority", "clsx", "tailwind-merge", "Lucide React", "Sonner",
+        "Fontsource Space Grotesk", "Code splitting / lazy routes", "Dark mode",
+      ],
+      backend: ZUKKO_BACKEND,
+      services: ZUKKO_SERVICES,
+    },
+  },
+  {
+    id: "zukko-lms",
+    img: zukkoLms,
+    titleKey: "PROJECT_ZUKKO_LMS_TITLE",
+    descKey: "PROJECT_ZUKKO_LMS_DESC",
+    link: "https://incandescent-phoenix-93a42e.netlify.app/",
+    gitlab: "https://gitlab.com/zukko1/zukko-lms",
+    highlights: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS"],
+    stack: {
+      web: [
+        "Next.js 15 (App Router)", "React 19", "React DOM", "TypeScript",
+        "React Server Components", "ISR", "Tailwind CSS 4", "@tailwindcss/postcss",
+        "tw-animate-css", "shadcn/ui", "Radix UI Slot", "class-variance-authority",
+        "clsx", "tailwind-merge", "Lucide React", "next/font (Space Grotesk)",
+        "API rewrites / image proxy", "Dark mode",
+      ],
+      backend: ZUKKO_BACKEND,
+      services: ZUKKO_SERVICES,
+    },
+  },
+  {
+    id: "zukko-backend",
+    img: zukkoCrm,
+    titleKey: "PROJECT_ZUKKO_BACKEND_TITLE",
+    descKey: "PROJECT_ZUKKO_BACKEND_DESC",
+    // The API has no UI of its own, so "Live Demo" opens the CRM that runs on it.
+    link: ZUKKO_CRM_URL,
+    gitlab: "https://gitlab.com/zukko1/zukko-backend",
+    api: `${ZUKKO_API}/api/health`,
+    highlights: ["Node.js", "Express", "Prisma", "PostgreSQL"],
+    stack: {
+      backend: ZUKKO_BACKEND,
+      services: ZUKKO_SERVICES,
     },
   },
   {

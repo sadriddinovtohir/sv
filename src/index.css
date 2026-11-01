@@ -203,14 +203,6 @@ body {
     transform: translateY(0);
   }
 }
-@keyframes load {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
-  }
-}
 @keyframes pulse {
   0%,
   100% {
@@ -223,88 +215,6 @@ body {
 @keyframes spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-/* SetTime intro staggered enter/exit keyframes */
-@keyframes anim-top {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes anim-left {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes anim-bottom {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes anim-right {
-  from {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes anim-top-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-}
-@keyframes anim-left-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-}
-@keyframes anim-bottom-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-  to {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-}
-@keyframes anim-right-out {
-  from {
-    opacity: 1;
-    transform: none;
-  }
-  to {
-    opacity: 0;
-    transform: translateX(60px);
   }
 }
 

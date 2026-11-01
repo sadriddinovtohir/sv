@@ -1,14 +1,14 @@
-import { useState, useEffect, Suspense, lazy } from 'react'
+import { useEffect, Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainLayout from './Layout/MainLayout'
-import SetTime from './components/SetTime/SetTime'
+// The landing page is imported eagerly so the first paint needs no extra chunk.
+import Home from './Page/Home/Home'
 
 const About = lazy(() => import('./Page/About/About'))
 const Projects = lazy(() => import('./Page/Projects/Projects'))
 const ProjectDetail = lazy(() => import('./Page/Projects/ProjectDetail'))
 const Skills = lazy(() => import('./Page/Skills/Skills'))
 const Contact = lazy(() => import('./Page/Contact/Contact'))
-const Home = lazy(() => import('./Page/Home/Home'))
 const Notfound = lazy(() => import('./components/NotFound/Notfound'))
 const Offer = lazy(() => import('./components/Offer/Offer'))
 
@@ -40,56 +40,33 @@ function RouteLoader() {
 }
 
 function App() {
-  const [showSetTime, setShowSetTime] = useState(true)
-
   useEffect(() => {
-    // Prefetch every route's chunk while the intro is showing so mobile
-    // nav taps swap pages instantly instead of sitting on a blank screen
-    // while the chunk downloads (which reads as "navigation is stuck").
-    import('./Page/Home/Home')
+    // Prefetch every route's chunk after first paint so mobile nav taps swap
+    // pages instantly instead of sitting on a blank screen while the chunk
+    // downloads (which reads as "navigation is stuck").
     import('./Page/About/About')
     import('./Page/Projects/Projects')
     import('./Page/Projects/ProjectDetail')
     import('./Page/Skills/Skills')
     import('./Page/Contact/Contact')
     import('./components/Offer/Offer')
-    const timer = setTimeout(() => setShowSetTime(false), 3500)
-    return () => clearTimeout(timer)
   }, [])
 
   return (
-    <div>
-      {showSetTime
-        ? (
-          <div style={{
-            height: "100vh",
-            position: "relative",
-            zIndex: 2,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-            <SetTime />
-          </div>
-        )
-        : (
-          <Suspense fallback={<RouteLoader />}>
-            <Routes>
-              <Route path='/' element={<MainLayout />}>
-                <Route index element={<Home />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/projects' element={<Projects />} />
-                <Route path='/projects/:id' element={<ProjectDetail />} />
-                <Route path='/skills' element={<Skills />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/offer' element={<Offer />} />
-                <Route path='*' element={<Notfound />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        )
-      }
-    </div>
+    <Suspense fallback={<RouteLoader />}>
+      <Routes>
+        <Route path='/' element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/projects' element={<Projects />} />
+          <Route path='/projects/:id' element={<ProjectDetail />} />
+          <Route path='/skills' element={<Skills />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/offer' element={<Offer />} />
+          <Route path='*' element={<Notfound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 

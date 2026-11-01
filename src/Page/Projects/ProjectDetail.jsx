@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { FaGithub } from "react-icons/fa";
-import { FiArrowLeft, FiExternalLink } from "react-icons/fi";
+import { FaGithub, FaGitlab } from "react-icons/fa";
+import { FiArrowLeft, FiExternalLink, FiServer } from "react-icons/fi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlassPanel } from "@/components/common/GlassPanel";
@@ -42,7 +42,12 @@ export default function ProjectDetail() {
 
     if (!project) return <Notfound />;
 
-    const { img, title, desc, tech, techTotal, stack, giturl, link, badge } = project;
+    const { img, title, desc, tech, techTotal, stack, giturl, gitlab, api, link, badge } = project;
+    const repoLinks = [
+        giturl && { href: giturl, icon: <FaGithub size={15} />, label: "GitHub" },
+        gitlab && { href: gitlab, icon: <FaGitlab size={15} />, label: "GitLab" },
+        api && { href: api, icon: <FiServer size={14} />, label: "API" },
+    ].filter(Boolean);
     const groups = stack
         ? STACK_GROUPS.filter((key) => stack[key]?.length).map((key) => ({
               key,
@@ -80,14 +85,14 @@ export default function ProjectDetail() {
                         {desc}
                     </p>
 
-                    <div className="flex flex-col gap-3 sm:flex-row sm:max-w-md">
-                        {giturl && (
-                            <Button asChild variant="outline" className="h-10.5 flex-1 rounded-xl border-white/15 bg-transparent text-[14px] text-white/75 hover:border-accent hover:bg-accent/6 hover:text-accent">
-                                <a target="_blank" href={giturl} rel="noreferrer">
-                                    <FaGithub size={15} /> GitHub
+                    <div className="flex flex-col gap-3 sm:flex-row sm:max-w-lg">
+                        {repoLinks.map(({ href, icon, label }) => (
+                            <Button key={label} asChild variant="outline" className="h-10.5 flex-1 rounded-xl border-white/15 bg-transparent text-[14px] text-white/75 hover:border-accent hover:bg-accent/6 hover:text-accent">
+                                <a target="_blank" href={href} rel="noreferrer">
+                                    {icon} {label}
                                 </a>
                             </Button>
-                        )}
+                        ))}
                         <Button asChild variant="brand" className="h-10.5 flex-1 rounded-xl text-[14px]">
                             <a target="_blank" href={link} rel="noreferrer">
                                 <FiExternalLink size={14} /> Live Demo

@@ -1,39 +1,41 @@
 import { useTranslation } from 'react-i18next'
 import { CiLocationOn } from 'react-icons/ci'
 import { FaArrowRight, FaPlay, FaTelegram } from 'react-icons/fa'
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
-import { FaHtml5, FaJs, FaReact } from 'react-icons/fa'
+import { FaGithub, FaGitlab, FaLinkedin, FaInstagram } from 'react-icons/fa'
+import { FaJs, FaReact } from 'react-icons/fa'
 import {
-    SiTailwindcss, SiNextdotjs, SiTypescript, SiRedux,
-    SiReactquery, SiDocker, SiPostgresql,
+    SiTailwindcss, SiNextdotjs, SiTypescript, SiExpress, SiPrisma, SiMongodb,
+    SiReactquery, SiDocker, SiPostgresql, SiRedis,
 } from 'react-icons/si'
-import { TbBrandNodejs } from 'react-icons/tb'
+import { TbBrandNodejs, TbBrandReactNative } from 'react-icons/tb'
 import profileImg from '../../assets/img/homePage.webp'
 import { Link } from 'react-router-dom'
 import { totalSkillsCount } from '../../data/skillsData'
+import { PROJECTS } from '../Projects/projectsData'
 import { Pill } from '@/components/common/Pill'
 import { StatTile } from '@/components/common/StatTile'
 import { SocialIconLink } from '@/components/common/SocialIconLink'
 
-const PROJECTS_COUNT = 7
-
 const techStack = [
-    { icon: <FaHtml5 size={22} />,       name: 'HTML5',        color: '#e34f26' },
-    { icon: <SiTailwindcss size={22} />, name: 'Tailwind',     color: '#38bdf8' },
-    { icon: <FaJs size={22} />,          name: 'JavaScript',   color: '#f7df1e' },
-    { icon: <SiTypescript size={22} />,  name: 'TypeScript',   color: '#3178c6' },
-    { icon: <FaReact size={22} />,       name: 'React',        color: '#61dafb' },
-    { icon: <SiNextdotjs size={22} />,   name: 'Next.js',      color: '#ffffff' },
-    { icon: <SiRedux size={22} />,       name: 'Redux',        color: '#764abc' },
-    { icon: <SiReactquery size={22} />,  name: 'TanStack',     color: '#ff4154' },
-    { icon: <TbBrandNodejs size={22} />, name: 'Node.js',      color: '#68a063' },
-    { icon: <SiPostgresql size={22} />,  name: 'PostgreSQL',   color: '#336791' },
-    { icon: <SiDocker size={22} />,      name: 'Docker',       color: '#2496ed' },
+    { icon: <FaJs size={22} />,               name: 'JavaScript',   color: '#f7df1e' },
+    { icon: <SiTypescript size={22} />,       name: 'TypeScript',   color: '#3178c6' },
+    { icon: <FaReact size={22} />,            name: 'React',        color: '#61dafb' },
+    { icon: <SiNextdotjs size={22} />,        name: 'Next.js',      color: '#ffffff' },
+    { icon: <TbBrandReactNative size={22} />, name: 'React Native', color: '#61dafb' },
+    { icon: <SiReactquery size={22} />,       name: 'TanStack',     color: '#ff4154' },
+    { icon: <SiTailwindcss size={22} />,      name: 'Tailwind',     color: '#38bdf8' },
+    { icon: <TbBrandNodejs size={22} />,      name: 'Node.js',      color: '#68a063' },
+    { icon: <SiExpress size={22} />,          name: 'Express',      color: '#ffffff' },
+    { icon: <SiPostgresql size={22} />,       name: 'PostgreSQL',   color: '#336791' },
+    { icon: <SiPrisma size={22} />,           name: 'Prisma',       color: '#5a67d8' },
+    { icon: <SiMongodb size={22} />,          name: 'MongoDB',      color: '#47a248' },
+    { icon: <SiRedis size={22} />,            name: 'Redis',        color: '#dc382d' },
+    { icon: <SiDocker size={22} />,           name: 'Docker',       color: '#2496ed' },
+    { icon: <FaGitlab size={22} />,           name: 'GitLab',       color: '#fc6d26' },
 ]
 
 const SOCIALS = [
-    { icon: <FaGithub size={18} />,    href: "https://github.com/sadriddinovtohir" },
-    { icon: <FaTelegram size={18} />,  href: "https://t.me/tohir_sadriddinov" },
+    { icon: <FaGithub size={18} />,    href: "https://github.com/sadriddinovtohir" },    { icon: <FaTelegram size={18} />,  href: "https://t.me/tohir_sadriddinov" },
     { icon: <FaLinkedin size={18} />,  href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/' },
     { icon: <FaInstagram size={18} />, href: 'https://www.instagram.com/tohirbek_sadriddinov/' },
     { icon: <FaPlay size={18} />,      href: 'https://vercel.com/sadriddinovtohirs-projects' },
@@ -44,7 +46,7 @@ export default function Home() {
 
     const stats = [
         { value: '2+',                  label: t('STAT_YEARS_EXP'),    accent: '#ff2d55' },
-        { value: `${PROJECTS_COUNT}`,     label: t('STAT_PROJECTS'),     accent: '#38bdf8' },
+        { value: `${PROJECTS.length}+`,   label: t('STAT_PROJECTS'),     accent: '#38bdf8' },
         { value: `${totalSkillsCount}`,   label: t('STAT_TECHNOLOGIES'), accent: '#a855f7' },
         { value: '∞',                     label: t('STAT_CURIOSITY'),    accent: '#22c55e' },
     ]
@@ -62,7 +64,7 @@ export default function Home() {
                     </h1>
 
                     <h2 className="mb-3.5 bg-gradient-to-br from-accent to-[#ff7b7b] bg-clip-text text-[18px] font-extrabold text-transparent md:text-2xl">
-                        {t("FRONTEND_DEVELOPER")}
+                        {t("ROLE_TITLE")}
                     </h2>
 
                     <p className="mb-5.5 text-[13px] leading-[1.75] text-white/60 md:text-[15px]">

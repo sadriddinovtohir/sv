@@ -4,17 +4,20 @@ import { GlassPanel } from '@/components/common/GlassPanel'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Progress } from '@/components/ui/progress'
 
-import { FaHtml5, FaJs, FaReact, FaGithub } from 'react-icons/fa'
+import { FaHtml5, FaJs, FaReact, FaGithub, FaGitlab } from 'react-icons/fa'
 import {
     SiTailwindcss, SiNextdotjs, SiTypescript, SiRedux,
     SiReactquery, SiVercel, SiShadcnui, SiAntdesign, SiMui, SiOpenai,
 } from 'react-icons/si'
 import {
-    MdDeveloperMode, MdRocketLaunch, MdAutoAwesome,
+    MdAutoAwesome,
     MdHub, MdAccountTree, MdSmartToy, MdSecurity, MdVerifiedUser,
 } from 'react-icons/md'
-import { SiPostgresql, SiPrisma, SiRedis, SiSwagger, SiDocker, SiExpress } from 'react-icons/si'
-import { TbBrandNodejs, TbShieldLock } from 'react-icons/tb'
+import {
+    SiPostgresql, SiPrisma, SiRedis, SiSwagger, SiDocker, SiExpress,
+    SiMongodb, SiRender, SiGithubactions,
+} from 'react-icons/si'
+import { TbBrandNodejs, TbShieldLock, TbBrandReactNative, TbPlugConnected, TbBuildingSkyscraper, TbTopologyStar3 } from 'react-icons/tb'
 
 const skillIcons = {
     'HTML5':                   <FaHtml5 size={28} />,
@@ -23,6 +26,7 @@ const skillIcons = {
     'TypeScript':              <SiTypescript size={28} />,
     'React':                   <FaReact size={28} />,
     'Next.js':                 <SiNextdotjs size={28} />,
+    'React Native / Expo':     <TbBrandReactNative size={28} />,
     'Redux / Zustand':         <SiRedux size={28} />,
     'TanStack Query':          <SiReactquery size={28} />,
     'Shadcn UI':               <SiShadcnui size={28} />,
@@ -35,18 +39,23 @@ const skillIcons = {
     'Express.js':              <SiExpress size={28} />,
     'PostgreSQL':              <SiPostgresql size={28} />,
     'Prisma ORM':              <SiPrisma size={28} />,
+    'MongoDB / Mongoose':      <SiMongodb size={28} />,
     'Redis':                   <SiRedis size={28} />,
     'JWT / Argon2':            <TbShieldLock size={28} />,
     'Zod':                     <MdVerifiedUser size={28} />,
+    'WebSocket':               <TbPlugConnected size={28} />,
     'Swagger':                 <SiSwagger size={28} />,
-    'Docker':                  <SiDocker size={28} />,
     'Rate Limiting / Helmet':  <MdSecurity size={28} />,
-    'File Structure':          <MdAccountTree size={28} />,
+    'System Design':           <TbTopologyStar3 size={28} />,
+    'Multi-tenant SaaS':       <TbBuildingSkyscraper size={28} />,
     'Networking / REST':       <MdHub size={28} />,
-    'DOM Manipulation':        <MdDeveloperMode size={28} />,
-    'SaaS Development':        <MdRocketLaunch size={28} />,
+    'RBAC / Security':         <MdAccountTree size={28} />,
+    'Docker':                  <SiDocker size={28} />,
+    'CI/CD':                   <SiGithubactions size={28} />,
     'Git / GitHub':            <FaGithub size={28} />,
+    'GitLab':                  <FaGitlab size={28} />,
     'Vercel / Netlify':        <SiVercel size={28} />,
+    'Render / Hetzner':        <SiRender size={28} />,
 }
 
 const skillCategoryKeys = skillCategoryData.map((cat) => ({

@@ -25,7 +25,7 @@ function CustomCard({ project, onOpen }) {
         <GlassPanel
             as="div"
             hover
-            accent="#c0103a"
+            accent="#7c5cff"
             ref={revealRef}
             data-reveal=""
             role="button"
@@ -37,12 +37,10 @@ function CustomCard({ project, onOpen }) {
                     onOpen(project);
                 }
             }}
-            // transition-[...] instead of GlassPanel's transition-all: animating
-            // backdrop-filter on every card is what makes this grid janky on mobile.
-            className="w-full cursor-pointer rounded-[14px] p-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-[translate,background-color,border-color,box-shadow] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(192,16,58,0.15)] sm:rounded-[20px] sm:p-4"
+            className="group w-full cursor-pointer rounded-[14px] p-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_-8px_rgba(124,92,255,0.5)] sm:rounded-[20px] sm:p-4"
         >
             {/* Image + Badge */}
-            <div className="relative mb-2 sm:mb-3">
+            <div className="relative mb-2 overflow-hidden rounded-[10px] bg-black/25 sm:mb-3 sm:rounded-[14px]">
                 <img
                     src={img}
                     alt={title}
@@ -50,7 +48,7 @@ function CustomCard({ project, onOpen }) {
                     decoding="async"
                     width="400"
                     height="150"
-                    className="block h-[100px] w-full rounded-[10px] bg-black/25 object-contain sm:h-[150px] sm:rounded-[14px]"
+                    className="block h-[100px] w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04] sm:h-[150px]"
                 />
                 {badge && <AiBadge />}
             </div>

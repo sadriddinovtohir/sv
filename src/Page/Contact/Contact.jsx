@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Seo } from '@/components/common/Seo'
+import { useLocation } from 'react-router-dom'
 import { FaEnvelope, FaPhone, FaTelegram, FaLinkedin } from 'react-icons/fa'
 import { FiSend, FiCheckCircle, FiLoader } from 'react-icons/fi'
 import { GlassPanel } from '@/components/common/GlassPanel'
@@ -34,7 +36,9 @@ const CONTACT_INFO = [
 
 export default function Contact() {
   const { t } = useTranslation()
-  const [form, setForm] = useState({ name: '', phone: '+998', message: '', company: '' })
+  // Pages like a project's "request demo access" link pass a ready-made message via router state
+  const { state } = useLocation()
+  const [form, setForm] = useState({ name: '', phone: '+998', message: state?.message ?? '', company: '' })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [phoneError, setPhoneError] = useState(false)
 
@@ -72,9 +76,10 @@ export default function Contact() {
   }
 
   return (
-    <div className="container pt-8 pb-16 text-white md:pt-12">
+    <div className="pt-8 pb-16 text-white md:pt-12">
+      <Seo title={t('NAV_CONTACT')} description={t('CONTACT_TITLE')} />
       <div className="mb-10 flex max-w-[640px] flex-col gap-1">
-        <h1 className="text-[26px] font-extrabold tracking-wide text-[#ff4d6d] md:text-[34px]">
+        <h1 className="text-[26px] font-extrabold tracking-wide text-aurora md:text-[34px]">
           {t('CONTACT_TITLE')}
         </h1>
         <p className="text-[14px] text-[#ccc] md:text-[15px]">
@@ -153,7 +158,7 @@ export default function Contact() {
             </div>
           )}
           {status === 'error' && (
-            <p className="text-[13px] text-[#ff6b6b]">
+            <p className="text-[13px] text-destructive">
               {t('CONTACT_FORM_ERROR')}
             </p>
           )}

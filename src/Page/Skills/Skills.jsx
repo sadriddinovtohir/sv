@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { Seo } from '@/components/common/Seo'
 import { skillCategoryData } from '../../data/skillsData'
 import { GlassPanel } from '@/components/common/GlassPanel'
 import { SectionHeading } from '@/components/common/SectionHeading'
@@ -89,7 +90,7 @@ function SkillCard({ skill, accent }) {
 
             <div className="w-full">
                 <div className="mb-1 flex justify-between">
-                    <span className="text-[9px] font-medium text-white/30">
+                    <span className="text-[9px] font-medium text-white/55">
                         {t('SKILL_PROFICIENCY')}
                     </span>
                     <span className="text-[9px] font-semibold" style={{ color: accent }}>
@@ -117,6 +118,7 @@ export default function Skills() {
 
     return (
         <div className="mx-auto max-w-[1160px] px-0 py-6 md:py-9">
+            <Seo title={t('NAV_SKILLS')} description={t('SKILLS_SUBTITLE')} />
 
             {/* Page Title */}
             <div className="mb-8 text-center md:mb-12">

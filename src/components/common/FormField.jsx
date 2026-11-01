@@ -8,19 +8,19 @@ export function FormField({ id, label, error, as = "input", className, ...props 
   const Comp = as === "textarea" ? Textarea : Input
   return (
     <div className="flex flex-col gap-1.5">
-      <Label htmlFor={id} className={cn("text-white/50", error && "text-accent")}>
+      <Label htmlFor={id} className={cn("text-white/65", error && "text-destructive")}>
         {label}
       </Label>
       <Comp
         id={id}
         aria-invalid={!!error}
         className={cn(
-          "rounded-xl border-white/12 bg-white/3 text-white placeholder:text-white/30 focus-visible:border-primary focus-visible:ring-primary/30",
+          "rounded-xl border-white/12 bg-white/3 text-white placeholder:text-white/40 focus-visible:border-primary focus-visible:ring-primary/30",
           className
         )}
         {...props}
       />
-      {error && <p className="text-xs text-[#ff6b6b]">{error}</p>}
+      {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
   )
 }

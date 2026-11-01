@@ -14,7 +14,7 @@ export default function WhyChooseMe() {
                 className="mb-5"
                 title={t('WHY_TITLE')}
                 subtitle={t('WHY_SUBTITLE')}
-                titleClassName="text-[20px] md:text-2xl text-[#ff4d6d]"
+                titleClassName="text-[20px] md:text-2xl text-aurora"
             />
 
             <div className="grid grid-cols-1 gap-4.5 sm:grid-cols-2">

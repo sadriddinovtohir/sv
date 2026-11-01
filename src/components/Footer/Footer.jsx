@@ -31,7 +31,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <p className="text-center text-xs text-white/25">
+        <p className="text-center text-xs text-white/50">
           © {new Date().getFullYear()} Tohirbek Sadriddinov. {t('FOOTER_RIGHTS')}
         </p>
       </div>

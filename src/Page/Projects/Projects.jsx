@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Seo } from "@/components/common/Seo";
 import { useNavigate } from "react-router-dom";
 import CustomCard from "../../components/CustomCard/CustomCard";
 import { SectionHeading } from "@/components/common/SectionHeading";
@@ -19,12 +20,13 @@ export default function Projects() {
   );
 
   return (
-    <div className="container mt-10 flex flex-wrap justify-between">
+    <div className="mt-10 flex flex-wrap justify-between">
+      <Seo title={t("NAV_PROJECTS")} description={t("PROJECTS_SUBTITLE")} />
       <SectionHeading
         className="mb-0 w-full px-0 md:px-2"
         title={t("PROJECTS_TITLE")}
         subtitle={t("PROJECTS_SUBTITLE")}
-        titleClassName="text-[#ff4d6d] tracking-wide text-2xl md:text-[34px]"
+        titleClassName="text-aurora tracking-wide text-2xl md:text-[34px]"
       />
 
       <div className="grid w-full grid-cols-1 gap-3 pb-8 min-[505px]:grid-cols-2 min-[900px]:grid-cols-3 min-[1310px]:grid-cols-4 sm:gap-4 md:gap-6">

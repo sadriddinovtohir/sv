@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { Seo } from "@/components/common/Seo";
 import { Link, useParams } from "react-router-dom";
 import { FaGithub, FaGitlab } from "react-icons/fa";
-import { FiArrowLeft, FiExternalLink, FiServer } from "react-icons/fi";
+import { FiArrowLeft, FiExternalLink, FiKey, FiSend, FiServer } from "react-icons/fi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlassPanel } from "@/components/common/GlassPanel";
@@ -42,7 +43,7 @@ export default function ProjectDetail() {
 
     if (!project) return <Notfound />;
 
-    const { img, title, desc, tech, techTotal, stack, giturl, gitlab, api, link, badge } = project;
+    const { img, title, desc, tech, techTotal, stack, giturl, gitlab, api, link, badge, demoAccess } = project;
     const repoLinks = [
         giturl && { href: giturl, icon: <FaGithub size={15} />, label: "GitHub" },
         gitlab && { href: gitlab, icon: <FaGitlab size={15} />, label: "GitLab" },
@@ -57,7 +58,8 @@ export default function ProjectDetail() {
         : [];
 
     return (
-        <div className="container mt-8 pb-12">
+        <div className="mt-8 pb-12">
+            <Seo title={title} description={desc} />
             <Link
                 to="/projects"
                 className="mb-5 inline-flex items-center gap-2 text-sm font-semibold text-white/60 transition-colors hover:text-accent"
@@ -99,16 +101,43 @@ export default function ProjectDetail() {
                             </a>
                         </Button>
                     </div>
+
+                    {/* Test logins are handed out on request, so the button leads to the contact form with a prefilled message */}
+                    {demoAccess && (
+                        <GlassPanel className="mt-5 flex flex-col gap-3 border-accent/30 p-4 sm:max-w-lg sm:p-5">
+                            <div className="flex items-start gap-3">
+                                <span className="mt-0.5 flex shrink-0 text-accent">
+                                    <FiKey size={18} />
+                                </span>
+                                <div>
+                                    <p className="text-[14px] font-bold text-white sm:text-[15px]">
+                                        {t("PROJECT_DEMO_ACCESS_TITLE")}
+                                    </p>
+                                    <p className="mt-1 text-[13px] leading-[1.6] text-white/65">
+                                        {t("PROJECT_DEMO_ACCESS_DESC")}
+                                    </p>
+                                </div>
+                            </div>
+                            <Button asChild variant="brand" className="h-10 self-stretch rounded-xl text-[14px] sm:self-start">
+                                <Link
+                                    to="/contact"
+                                    state={{ message: t("PROJECT_DEMO_ACCESS_MESSAGE", { project: title }) }}
+                                >
+                                    <FiSend size={14} /> {t("PROJECT_DEMO_ACCESS_BUTTON")}
+                                </Link>
+                            </Button>
+                        </GlassPanel>
+                    )}
                 </div>
             </div>
 
             {/* Stack — skipped entirely for projects that list no technologies */}
             {techTotal > 0 && (<>
             <div className="mt-10 mb-4 flex items-baseline justify-between gap-3">
-                <h2 className="text-xl font-extrabold text-[#ff4d6d] md:text-2xl">
+                <h2 className="text-xl font-extrabold text-aurora md:text-2xl">
                     {t("PROJECT_STACK_TITLE")}
                 </h2>
-                <span className="text-sm font-semibold text-white/45">
+                <span className="text-sm font-semibold text-white/60">
                     {t("PROJECT_STACK_TOTAL", { count: techTotal })}
                 </span>
             </div>

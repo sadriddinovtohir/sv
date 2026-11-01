@@ -2,32 +2,73 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Tohirbek Sadriddinov — Software Engineer</title>
-    <meta name="description" content="Tohirbek Sadriddinov — Software Engineer. Full-stack web, mobile and backend: React, Next.js, React Native, Node.js, PostgreSQL, MongoDB." />
+    <meta name="description" content="Tohirbek Sadriddinov — Full-stack Software Engineer from Tashkent. Web, mobile and backend apps with React, Next.js, React Native, Node.js, PostgreSQL and MongoDB." />
+    <meta name="author" content="Tohirbek Sadriddinov" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#070a17" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Lines containing __SITE_URL__ are filled from VITE_SITE_URL at build time,
+         or dropped entirely when it isn't set (see seoPlugin in vite.config.js). -->
+    <link rel="canonical" href="__SITE_URL__/" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tohirbek Sadriddinov" />
+    <meta property="og:title" content="Tohirbek Sadriddinov — Software Engineer" />
+    <meta property="og:description" content="Full-stack web, mobile and backend developer: React, Next.js, React Native, Node.js." />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tohirbek Sadriddinov — Software Engineer" />
+    <meta name="twitter:description" content="Full-stack web, mobile and backend developer: React, Next.js, React Native, Node.js." />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Tohirbek Sadriddinov",
+        "jobTitle": "Software Engineer",
+        "address": { "@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ" },
+        "knowsAbout": ["React", "Next.js", "React Native", "Node.js", "TypeScript", "PostgreSQL", "MongoDB"],
+        "sameAs": [
+          "https://github.com/sadriddinovtohir",
+          "https://www.linkedin.com/in/tohirbek-sadriddinov-dev/",
+          "https://t.me/tohir_sadriddinov",
+          "https://www.instagram.com/tohirbek_sadriddinov/"
+        ]
+      }
+    </script>
   </head>
-  <body style="background-color: #1a0008">
+  <body style="background-color: #070a17">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      const GA_ID = '%VITE_GA_ID%';
-      if (GA_ID && GA_ID !== 'G-XXXXXXX') {
-        const gtagScript = document.createElement('script');
-        gtagScript.async = true;
-        gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-        document.head.appendChild(gtagScript);
-
+      // gtag.js costs ~0.5s of main-thread time, so it is fetched on the
+      // visitor's first interaction (or after 6s at the latest) instead of
+      // during load, where it would block the page from responding.
+      (function () {
+        var GA_ID = '%VITE_GA_ID%';
+        if (!GA_ID || GA_ID.indexOf('%') === 0 || GA_ID === 'G-XXXXXXX') return;
         window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          window.dataLayer.push(arguments);
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID);
+        var events = ['pointerdown', 'keydown', 'scroll', 'touchstart'];
+        var loaded = false;
+        function load() {
+          if (loaded) return;
+          loaded = true;
+          events.forEach(function (e) { window.removeEventListener(e, load); });
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+          document.head.appendChild(s);
         }
-        window.gtag = gtag;
-        gtag('js', new Date());
-        gtag('config', GA_ID);
-      } else {
-        console.warn('Google Analytics ID is not set. Add VITE_GA_ID to .env');
-      }
+        events.forEach(function (e) { window.addEventListener(e, load, { once: true, passive: true }); });
+        setTimeout(load, 6000);
+      })();
     </script>
   </body>
 </html>

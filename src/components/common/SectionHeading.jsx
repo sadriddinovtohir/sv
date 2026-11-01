@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils"
 
 /**
  * Title + subtitle block reused at the top of Projects/Skills/Services/
- * WhyChooseMe/Contact. Pass `gradient` for the crimson gradient text used on
- * Skills, or a color via `titleClassName` for the flat brand-pink headings.
+ * WhyChooseMe/Contact. Pass `gradient` for the animated aurora gradient text,
+ * or a color via `titleClassName` for a flat heading.
  */
 export function SectionHeading({
   title,
@@ -17,14 +17,13 @@ export function SectionHeading({
       <h2
         className={cn(
           "text-xl leading-tight font-extrabold tracking-tight text-white md:text-2xl",
-          gradient &&
-            "bg-gradient-to-br from-accent via-[#ff7b7b] to-[#ffaaaa] bg-clip-text text-transparent",
+          gradient && "text-aurora",
           titleClassName
         )}
       >
         {title}
       </h2>
-      {subtitle && <p className="text-[13px] text-white/45 md:text-[15px]">{subtitle}</p>}
+      {subtitle && <p className="text-[13px] text-white/60 md:text-[15px]">{subtitle}</p>}
     </div>
   )
 }

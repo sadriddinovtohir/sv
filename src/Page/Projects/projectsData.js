@@ -73,6 +73,8 @@ const ZUKKO_SERVICES = [
  * `techKey` translation as a flat list.
  *
  * `highlights` are the few tags shown on the card; the rest collapse into "+N".
+ * `demoAccess` shows a "ready-made logins per role — contact me" banner on the
+ * detail page; credentials are handed out personally, never published here.
  */
 export const PROJECTS = [
   {
@@ -135,6 +137,7 @@ export const PROJECTS = [
     descKey: "PROJECT_ZUKKO_CRM_DESC",
     link: ZUKKO_CRM_URL,
     gitlab: "https://gitlab.com/zukko1/zukko-crm",
+    demoAccess: true,
     highlights: ["React 19", "TypeScript", "TanStack Query", "Node.js"],
     stack: {
       web: [
@@ -155,6 +158,7 @@ export const PROJECTS = [
     descKey: "PROJECT_ZUKKO_LMS_DESC",
     link: "https://incandescent-phoenix-93a42e.netlify.app/",
     gitlab: "https://gitlab.com/zukko1/zukko-lms",
+    demoAccess: true,
     highlights: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS"],
     stack: {
       web: [
@@ -177,6 +181,7 @@ export const PROJECTS = [
     link: ZUKKO_CRM_URL,
     gitlab: "https://gitlab.com/zukko1/zukko-backend",
     api: `${ZUKKO_API}/api/health`,
+    demoAccess: true,
     highlights: ["Node.js", "Express", "Prisma", "PostgreSQL"],
     stack: {
       backend: ZUKKO_BACKEND,

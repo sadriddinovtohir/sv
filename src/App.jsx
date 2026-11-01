@@ -31,7 +31,7 @@ function RouteLoader() {
           height: 40,
           borderRadius: '50%',
           border: '3px solid rgba(255,255,255,0.15)',
-          borderTopColor: '#c0103a',
+          borderTopColor: 'var(--color-primary)',
           animation: 'spin 0.7s linear infinite',
         }}
       />
@@ -43,13 +43,22 @@ function App() {
   useEffect(() => {
     // Prefetch every route's chunk after first paint so mobile nav taps swap
     // pages instantly instead of sitting on a blank screen while the chunk
-    // downloads (which reads as "navigation is stuck").
-    import('./Page/About/About')
-    import('./Page/Projects/Projects')
-    import('./Page/Projects/ProjectDetail')
-    import('./Page/Skills/Skills')
-    import('./Page/Contact/Contact')
-    import('./components/Offer/Offer')
+    // downloads (which reads as "navigation is stuck"). Deferred to idle time
+    // so these downloads don't compete with the landing page's own loading.
+    const prefetch = () => {
+      import('./Page/About/About')
+      import('./Page/Projects/Projects')
+      import('./Page/Projects/ProjectDetail')
+      import('./Page/Skills/Skills')
+      import('./Page/Contact/Contact')
+      import('./components/Offer/Offer')
+    }
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(prefetch, { timeout: 3000 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(prefetch, 1500)
+    return () => clearTimeout(id)
   }, [])
 
   return (

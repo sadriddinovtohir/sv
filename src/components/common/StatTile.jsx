@@ -14,7 +14,7 @@ export function StatTile({ value, label, accent }) {
       >
         {value}
       </div>
-      <div className="text-[10px] font-medium tracking-wide text-white/45 md:text-xs">
+      <div className="text-[10px] font-medium tracking-wide text-white/60 md:text-xs">
         {label}
       </div>
     </GlassPanel>

@@ -1,42 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @theme {
-  --font-sans: "Roboto", sans-serif;
+  /* Self-hosted variable font (see main.jsx) — no render-blocking request to
+     Google Fonts, and unicode-range subsets mean only latin/cyrillic glyphs
+     that are actually used get downloaded. */
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
 
-  --color-background: #0d0007;
+  /* === Midnight Aurora palette === */
+  --color-background: #070a17;
   --color-foreground: #ffffff;
 
-  --color-card: #150109;
+  --color-card: #0e1328;
   --color-card-foreground: #ffffff;
 
-  --color-popover: #140108;
+  --color-popover: #0d1124;
   --color-popover-foreground: #ffffff;
 
-  --color-primary: #c0103a;
+  --color-primary: #7c5cff;
   --color-primary-foreground: #ffffff;
 
-  --color-secondary: #1a0008;
+  --color-secondary: #111735;
   --color-secondary-foreground: #ffffff;
 
-  --color-muted: #1a0008;
+  --color-muted: #111735;
   --color-muted-foreground: #ffffff80;
 
-  --color-accent: #ff2d55;
-  --color-accent-foreground: #ffffff;
+  --color-accent: #22d3ee;
+  --color-accent-foreground: #070a17;
 
-  --color-destructive: #ff6b6b;
+  /* Third brand hue — used in gradients next to primary/accent. */
+  --color-glow: #f472b6;
+
+  --color-destructive: #fb7185;
   --color-destructive-foreground: #ffffff;
 
-  --color-border: #ffffff1f;
+  --color-border: #ffffff1a;
   --color-input: #ffffff1f;
-  --color-ring: #c0103a;
+  --color-ring: #7c5cff;
 
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.25rem;
+
+  --animate-marquee: marquee 38s linear infinite;
 }
 
 * {
@@ -46,128 +54,195 @@
 html {
   overflow-x: hidden;
   width: 100%;
-  scroll-behavior: smooth;
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  background-color: #0d0007;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
   color: #fff;
   margin: 0;
   overflow-x: hidden;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* iOS-like custom scrollbar */
+::selection {
+  background: rgba(124, 92, 255, 0.45);
+  color: #fff;
+}
+
+/* Slim custom scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(192, 16, 58, 0.5);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #c0103a;
+  background: linear-gradient(var(--color-primary), var(--color-accent));
+  border-radius: 6px;
 }
 
-/* === Background Orbs for Glassmorphism === */
-.bg-orb {
+/* === Aurora background ===
+   One fixed layer painted with radial gradients. Unlike the old blurred orbs
+   there is no `filter: blur()` here — the softness comes from the gradients
+   themselves — so the GPU only has to translate a pre-rasterized texture,
+   which is what keeps scrolling smooth on low-end phones. */
+.aurora {
   position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
+  inset: -20%;
   z-index: 0;
-}
-.bg-orb-1 {
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(
-    circle,
-    rgba(200, 16, 58, 0.28) 0%,
-    transparent 70%
-  );
-  filter: blur(90px);
-  top: -220px;
-  left: -180px;
-  animation: orb1 14s ease-in-out infinite;
-}
-.bg-orb-2 {
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(
-    circle,
-    rgba(130, 0, 180, 0.18) 0%,
-    transparent 70%
-  );
-  filter: blur(80px);
-  top: 35%;
-  right: -140px;
-  animation: orb2 18s ease-in-out infinite;
-}
-.bg-orb-3 {
-  width: 440px;
-  height: 440px;
-  background: radial-gradient(
-    circle,
-    rgba(170, 10, 55, 0.2) 0%,
-    transparent 70%
-  );
-  filter: blur(80px);
-  bottom: 0;
-  left: 28%;
-  animation: orb3 22s ease-in-out infinite;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 32% at 18% 22%, rgba(124, 92, 255, 0.28), transparent 70%),
+    radial-gradient(34% 30% at 82% 30%, rgba(34, 211, 238, 0.16), transparent 70%),
+    radial-gradient(40% 34% at 55% 85%, rgba(244, 114, 182, 0.13), transparent 70%);
+  will-change: transform;
+  animation: aurora-drift 28s ease-in-out infinite alternate;
 }
 
-@keyframes orb1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
+/* Faint dot grid on top of the aurora, faded out toward the edges. */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 100%);
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
   }
   50% {
-    transform: translate(70px, 50px) scale(1.12);
+    transform: translate3d(4%, 3%, 0) rotate(6deg);
   }
-}
-@keyframes orb2 {
-  0%,
   100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-45px, 35px) scale(0.92);
-  }
-  66% {
-    transform: translate(25px, -30px) scale(1.08);
-  }
-}
-@keyframes orb3 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-55px, -35px) scale(1.1);
+    transform: translate3d(-3%, 5%, 0) rotate(-4deg);
   }
 }
 
-@media (max-width: 768px) {
-  .bg-orb-1 {
-    width: 380px;
-    height: 380px;
-    top: -140px;
-    left: -120px;
+/* === Brand gradient text ===
+   The shine only runs on hover: animating background-position repaints the
+   text on the main thread every frame, which is too costly to leave running. */
+.text-aurora {
+  background: linear-gradient(
+    100deg,
+    #9d85ff 0%,
+    var(--color-accent) 35%,
+    var(--color-glow) 65%,
+    #9d85ff 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+@media (hover: hover) {
+  .text-aurora:hover {
+    animation: text-shine 2.5s linear infinite;
   }
-  .bg-orb-2 {
-    width: 300px;
-    height: 300px;
-    right: -100px;
+}
+
+@keyframes text-shine {
+  to {
+    background-position: 200% center;
   }
-  .bg-orb-3 {
-    width: 260px;
-    height: 260px;
-    left: 10%;
+}
+
+/* === Cursor spotlight ===
+   MainLayout writes --mx/--my on the hovered `.spotlight` element (one
+   delegated, rAF-throttled listener for the whole page). The glow is a
+   pseudo-element whose opacity is the only thing that transitions. */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent, var(--color-primary)) 22%, transparent),
+    transparent 70%
+  );
+  transition: opacity 0.3s ease;
+}
+@media (hover: hover) {
+  .spotlight:hover::before {
+    opacity: 1;
   }
+}
+
+/* === Marquee (tech stack) === */
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* === Page enter — replayed on every route change (MainLayout keys <main>) === */
+.page-enter {
+  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero entrance: children fade up one after another. */
+.stagger > * {
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger > *:nth-child(6) { animation-delay: 0.4s; }
+
+/* Slow floating motion for the hero portrait. */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Rotating conic border around the hero portrait. */
+.ring-spin {
+  background: conic-gradient(
+    from 0deg,
+    var(--color-primary),
+    var(--color-accent),
+    var(--color-glow),
+    var(--color-primary)
+  );
+  animation: spin 8s linear infinite;
 }
 
 /* === Scroll reveal ===
@@ -181,15 +256,7 @@ body {
 }
 [data-reveal="in"] {
   opacity: 1;
-  animation: fadeInUp 0.5s ease var(--reveal-delay, 0s) backwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal],
-  [data-reveal="in"] {
-    opacity: 1;
-    animation: none;
-  }
+  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) backwards;
 }
 
 /* === Animations === */
@@ -218,19 +285,36 @@ body {
   }
 }
 
+/* Small screens: the aurora stays but stops drifting — a static gradient costs
+   nothing per frame, and phones are where jank shows first. */
+@media (max-width: 768px) {
+  .aurora {
+    animation: none;
+    inset: -10%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  [data-reveal],
+  [data-reveal="in"] {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 .container {
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-@media (max-width: 400px) {
-  .container {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
+  padding-left: clamp(12px, 4vw, 24px);
+  padding-right: clamp(12px, 4vw, 24px);
 }
 
 a {

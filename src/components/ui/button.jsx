@@ -20,9 +20,9 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         brand:
-          "bg-gradient-to-br from-primary to-accent text-white font-semibold shadow-[0_4px_14px_rgba(192,16,58,0.4)] hover:shadow-[0_6px_20px_rgba(192,16,58,0.6)]",
+          "bg-gradient-to-br from-primary to-accent text-white font-semibold shadow-[0_4px_14px_rgba(124,92,255,0.4)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(34,211,238,0.45)]",
         glass:
-          "border border-white/20 bg-[rgba(135,57,57,0.1)] text-white font-bold backdrop-blur-md hover:scale-105 hover:bg-[rgba(135,57,57,0.2)]",
+          "border border-white/20 bg-primary/10 text-white font-bold hover:scale-105 hover:border-primary/50 hover:bg-primary/20",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

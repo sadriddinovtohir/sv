@@ -13,6 +13,8 @@ import ITPARKIMG from "../../assets/img/ITPARK.webp"
 import clubMraa from "../../assets/img/image.webp"
 import zukkoCrm from "../../assets/img/zukkoCrm.webp"
 import zukkoLms from "../../assets/img/zukkoLms.webp"
+import studanceCrm from "../../assets/img/studanceCrm.webp"
+import studanceBackend from "../../assets/img/studanceBackend.webp"
 
 /**
  * Order of the stack groups on the detail page. Each key maps to a
@@ -65,6 +67,22 @@ const ZUKKO_BACKEND = [
 const ZUKKO_SERVICES = [
   "Render (API)", "Render PostgreSQL", "Netlify (CRM + Web)", "GitLab",
   "Content Security Policy", "HSTS",
+]
+
+// Studance is two repos (web app + API); the backend card reuses the same lists.
+const STUDANCE_URL = "https://studence.netlify.app/"
+
+const STUDANCE_BACKEND = [
+  "Node.js 22", "Express 5", "Prisma ORM", "PostgreSQL", "Zod", "jsonwebtoken",
+  "bcryptjs", "Helmet", "cors", "compression", "express-rate-limit", "morgan",
+  "multer", "nodemailer", "web-push (VAPID)", "Server-Sent Events (SSE)",
+  "RBAC (4 roles)", "REST API", "i18n (uz/ru/en)", "node:test", "supertest",
+  "embedded-postgres",
+]
+
+const STUDANCE_SERVICES = [
+  "Render (API)", "Netlify (Web)", "Neon / Supabase PostgreSQL", "Cloudinary",
+  "SMTP (e-mail)", "Web Push", "GitLab",
 ]
 
 /**
@@ -186,6 +204,45 @@ export const PROJECTS = [
     stack: {
       backend: ZUKKO_BACKEND,
       services: ZUKKO_SERVICES,
+    },
+  },
+  {
+    id: "studance-crm",
+    img: studanceCrm,
+    titleKey: "PROJECT_STUDANCE_CRM_TITLE",
+    descKey: "PROJECT_STUDANCE_CRM_DESC",
+    link: STUDANCE_URL,
+    gitlab: "https://gitlab.com/sadriddinovtohir/studance-crm",
+    demoAccess: true,
+    highlights: ["React 19", "TanStack Query", "Tailwind CSS", "Node.js"],
+    stack: {
+      web: [
+        "React 19", "React DOM", "Vite", "@vitejs/plugin-react", "React Router DOM 7",
+        "TanStack React Query", "Axios", "React Hook Form", "@hookform/resolvers", "Zod",
+        "Tailwind CSS", "tailwindcss-animate", "PostCSS", "Autoprefixer", "shadcn/ui",
+        "Radix UI (Dialog, Alert Dialog, Select, Popover, Tabs, Tooltip, Avatar)",
+        "class-variance-authority", "clsx", "tailwind-merge", "Lucide React",
+        "Chart.js", "react-chartjs-2", "react-toastify", "jwt-decode", "use-debounce",
+        "SheetJS (xlsx)", "Service Worker", "Web Push", "Custom i18n (uz/ru/en)",
+        "Dark mode", "Vendor chunk splitting", "ESLint",
+      ],
+      backend: STUDANCE_BACKEND,
+      services: STUDANCE_SERVICES,
+    },
+  },
+  {
+    id: "studance-backend",
+    img: studanceBackend,
+    titleKey: "PROJECT_STUDANCE_BACKEND_TITLE",
+    descKey: "PROJECT_STUDANCE_BACKEND_DESC",
+    // The API has no UI of its own, so "Live Demo" opens the web app that runs on it.
+    link: STUDANCE_URL,
+    gitlab: "https://gitlab.com/sadriddinovtohir/studance-backent",
+    demoAccess: true,
+    highlights: ["Node.js", "Express 5", "Prisma", "PostgreSQL"],
+    stack: {
+      backend: STUDANCE_BACKEND,
+      services: STUDANCE_SERVICES,
     },
   },
   {

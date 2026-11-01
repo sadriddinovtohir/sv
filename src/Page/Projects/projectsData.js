@@ -54,7 +54,7 @@ const UZFIXCAR_SERVICES = [
 // Zukko is three repos (CRM, public site, API) sharing one backend, so the
 // backend and infra lists are reused across all three cards.
 const ZUKKO_API = "https://zukko-backend-p6aw.onrender.com"
-const ZUKKO_CRM_URL = "https://comfy-conkies-9193d3.netlify.app/"
+const ZUKKO_CRM_URL = "https://zukko-crm.netlify.app/"
 
 const ZUKKO_BACKEND = [
   "Node.js", "Express", "Prisma ORM", "PostgreSQL", "jsonwebtoken", "bcryptjs",
@@ -63,7 +63,7 @@ const ZUKKO_BACKEND = [
 ]
 
 const ZUKKO_SERVICES = [
-  "Render (API)", "Render PostgreSQL", "Netlify (CRM + LMS)", "GitLab",
+  "Render (API)", "Render PostgreSQL", "Netlify (CRM + Web)", "GitLab",
   "Content Security Policy", "HSTS",
 ]
 
@@ -152,11 +152,11 @@ export const PROJECTS = [
     },
   },
   {
-    id: "zukko-lms",
+    id: "zukko-web",
     img: zukkoLms,
-    titleKey: "PROJECT_ZUKKO_LMS_TITLE",
-    descKey: "PROJECT_ZUKKO_LMS_DESC",
-    link: "https://incandescent-phoenix-93a42e.netlify.app/",
+    titleKey: "PROJECT_ZUKKO_WEB_TITLE",
+    descKey: "PROJECT_ZUKKO_WEB_DESC",
+    link: "https://zukko-veb.netlify.app/",
     gitlab: "https://gitlab.com/zukko1/zukko-lms",
     demoAccess: true,
     highlights: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS"],

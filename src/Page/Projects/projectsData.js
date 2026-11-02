@@ -7,7 +7,6 @@ import cooksDelight from "../../assets/img/cooksDelight.webp"
 import rentcars from "../../assets/img/rentcars.webp"
 import RadioatorPro from "../../assets/img/RadioatorPro.webp"
 import bizCore from "../../assets/img/bizCore.webp"
-import studense from "../../assets/img/studense.webp"
 import sun_energy_img from "../../assets/img/sun_energy_img.webp"
 import ITPARKIMG from "../../assets/img/ITPARK.webp"
 import clubMraa from "../../assets/img/image.webp"
@@ -15,12 +14,20 @@ import zukkoCrm from "../../assets/img/zukkoCrm.webp"
 import zukkoLms from "../../assets/img/zukkoLms.webp"
 import studanceCrm from "../../assets/img/studanceCrm.webp"
 import studanceBackend from "../../assets/img/studanceBackend.webp"
+import gapBot from "../../assets/img/gapBot.png"
+import kallaPocha from "../../assets/img/kallaPocha.png"
 
 /**
  * Order of the stack groups on the detail page. Each key maps to a
  * `PROJECT_STACK_<KEY>` translation for its heading.
  */
 export const STACK_GROUPS = ["web", "mobile", "backend", "services", "testing"]
+
+/**
+ * Filter tabs on the projects page, in order. Each key maps to a
+ * `PROJECTS_FILTER_<KEY>` translation; a project lists its keys in `categories`.
+ */
+export const PROJECT_CATEGORIES = ["all", "web", "backend", "mobile", "bot", "ai"]
 
 // UzFixCar's mobile app and backend also get their own cards, so these lists are shared.
 const UZFIXCAR_MOBILE = [
@@ -93,10 +100,14 @@ const STUDANCE_SERVICES = [
  * `highlights` are the few tags shown on the card; the rest collapse into "+N".
  * `demoAccess` shows a "ready-made logins per role — contact me" banner on the
  * detail page; credentials are handed out personally, never published here.
+ * `pendingDeploy` shows a "not on a server yet — contact me to try it" banner.
+ * `paused` shows a "ran for a while, now stopped — can be relaunched" banner.
+ * `categories` decides which filter tabs on the projects page show the card.
  */
 export const PROJECTS = [
   {
     id: "uzfixcar",
+    categories: ["web"],
     img: uzfixcar,
     titleKey: "PROJECT_UZFIXCAR_TITLE",
     descKey: "PROJECT_UZFIXCAR_DESC",
@@ -126,6 +137,7 @@ export const PROJECTS = [
   },
   {
     id: "uzfixcar-mobile",
+    categories: ["mobile"],
     img: uzfixcar,
     titleKey: "PROJECT_UZFIXCAR_MOBILE_TITLE",
     descKey: "PROJECT_UZFIXCAR_MOBILE_DESC",
@@ -138,6 +150,7 @@ export const PROJECTS = [
   },
   {
     id: "uzfixcar-backend",
+    categories: ["backend"],
     img: uzfixcar,
     titleKey: "PROJECT_UZFIXCAR_BACKEND_TITLE",
     descKey: "PROJECT_UZFIXCAR_BACKEND_DESC",
@@ -150,6 +163,7 @@ export const PROJECTS = [
   },
   {
     id: "zukko-crm",
+    categories: ["web"],
     img: zukkoCrm,
     titleKey: "PROJECT_ZUKKO_CRM_TITLE",
     descKey: "PROJECT_ZUKKO_CRM_DESC",
@@ -171,6 +185,7 @@ export const PROJECTS = [
   },
   {
     id: "zukko-web",
+    categories: ["web"],
     img: zukkoLms,
     titleKey: "PROJECT_ZUKKO_WEB_TITLE",
     descKey: "PROJECT_ZUKKO_WEB_DESC",
@@ -192,6 +207,7 @@ export const PROJECTS = [
   },
   {
     id: "zukko-backend",
+    categories: ["backend"],
     img: zukkoCrm,
     titleKey: "PROJECT_ZUKKO_BACKEND_TITLE",
     descKey: "PROJECT_ZUKKO_BACKEND_DESC",
@@ -208,6 +224,7 @@ export const PROJECTS = [
   },
   {
     id: "studance-crm",
+    categories: ["web"],
     img: studanceCrm,
     titleKey: "PROJECT_STUDANCE_CRM_TITLE",
     descKey: "PROJECT_STUDANCE_CRM_DESC",
@@ -232,6 +249,7 @@ export const PROJECTS = [
   },
   {
     id: "studance-backend",
+    categories: ["backend"],
     img: studanceBackend,
     titleKey: "PROJECT_STUDANCE_BACKEND_TITLE",
     descKey: "PROJECT_STUDANCE_BACKEND_DESC",
@@ -246,7 +264,47 @@ export const PROJECTS = [
     },
   },
   {
+    id: "gap-bot",
+    categories: ["bot"],
+    img: gapBot,
+    titleKey: "PROJECT_GAP_TITLE",
+    descKey: "PROJECT_GAP_DESC",
+    link: "https://t.me/Gapni_Kim_oladi_Bot",
+    giturl: "https://github.com/sadriddinovtohir/gap",
+    pendingDeploy: true,
+    highlights: ["Python 3.12", "aiogram 3", "SQLite", "Docker"],
+    stack: {
+      backend: [
+        "Python 3.12", "aiogram 3", "asyncio", "SQLite", "Auto migrations",
+        "Long polling", "i18n (uz-Latn / uz-Cyrl / ru)", "Excel export", "Image export",
+        "Scheduled reminders (Asia/Tashkent)",
+      ],
+      services: ["Telegram Bot API", "Docker", "Docker Compose"],
+    },
+  },
+  {
+    id: "kallapocha-bot",
+    categories: ["bot"],
+    img: kallaPocha,
+    titleKey: "PROJECT_KALLAPOCHA_TITLE",
+    descKey: "PROJECT_KALLAPOCHA_DESC",
+    // The bot is switched off, so "Live Demo" opens the repo instead.
+    link: "https://github.com/sadriddinovtohir/Yashil-Makon",
+    giturl: "https://github.com/sadriddinovtohir/Yashil-Makon",
+    paused: true,
+    highlights: ["Node.js", "Telegraf", "JSON storage", "i18n"],
+    stack: {
+      backend: [
+        "Node.js 18+", "Telegraf 4", "dotenv", "JSON file storage (db.json)",
+        "Long polling", "i18n (uz-Latn / uz-Cyrl / ru)", "Role-based access (owner / staff / customer)",
+        "Flood protection", "Input sanitizing", "Timezone (Asia/Tashkent)",
+      ],
+      services: ["Telegram Bot API", "PM2"],
+    },
+  },
+  {
     id: "rentcars",
+    categories: ["web"],
     img: rentcars,
     titleKey: "PROJECT_RENTCARS_TITLE",
     descKey: "PROJECT_RENTCARS_DESC",
@@ -254,6 +312,7 @@ export const PROJECTS = [
   },
   {
     id: "cooks-delight",
+    categories: ["web"],
     img: cooksDelight,
     titleKey: "PROJECT_COOKS_TITLE",
     descKey: "PROJECT_COOKS_DESC",
@@ -261,6 +320,7 @@ export const PROJECTS = [
   },
   {
     id: "tomservis",
+    categories: ["web"],
     img: tomservis,
     titleKey: "PROJECT_TOMSERVIS_TITLE",
     descKey: "PROJECT_TOMSERVIS_DESC",
@@ -269,6 +329,7 @@ export const PROJECTS = [
   },
   {
     id: "uymakon",
+    categories: ["web"],
     img: uymakon,
     titleKey: "PROJECT_UYMAKON_TITLE",
     descKey: "PROJECT_UYMAKON_DESC",
@@ -277,6 +338,7 @@ export const PROJECTS = [
   },
   {
     id: "karvon",
+    categories: ["web"],
     img: karvon,
     titleKey: "PROJECT_KARVON_TITLE",
     descKey: "PROJECT_KARVON_DESC",
@@ -285,6 +347,7 @@ export const PROJECTS = [
   },
   {
     id: "gitpod",
+    categories: ["web"],
     img: gitpodClone,
     titleKey: "PROJECT_GITPOD_TITLE",
     descKey: "PROJECT_GITPOD_DESC",
@@ -293,6 +356,7 @@ export const PROJECTS = [
   },
   {
     id: "backend",
+    categories: ["backend", "ai"],
     img: bizCore,
     titleKey: "PROJECT_BACKEND_TITLE",
     descKey: "PROJECT_BACKEND_DESC",
@@ -303,6 +367,7 @@ export const PROJECTS = [
   },
   {
     id: "itpark",
+    categories: ["web"],
     img: ITPARKIMG,
     titleKey: "PROJECT_ITPARK_TITLE",
     descKey: "PROJECT_ITPARK_DESC",
@@ -310,16 +375,8 @@ export const PROJECTS = [
     link: "https://www.it-park.uz/",
   },
   {
-    id: "ttg",
-    img: studense,
-    titleKey: "PROJECT_TTG_TITLE",
-    descKey: "PROJECT_TTG_DESC",
-    techKey: "PROJECT_TTG_TECH",
-    link: "https://github.com/MaxmudAxmedov/admin-sun-energy",
-    giturl: "https://github.com/MaxmudAxmedov/admin-sun-energy",
-  },
-  {
     id: "sun-energy",
+    categories: ["web"],
     img: sun_energy_img,
     titleKey: "PROJECT_SUN_ENERGY_TITLE",
     descKey: "PROJECT_SUN_ENERGY_DESC",
@@ -329,6 +386,7 @@ export const PROJECTS = [
   },
   {
     id: "react-native",
+    categories: ["mobile"],
     img: clubMraa,
     titleKey: "PROJECT_REACTNATIVE_TITLE",
     descKey: "PROJECT_REACTNATIVE_DESC",
@@ -338,6 +396,7 @@ export const PROJECTS = [
   },
   {
     id: "radiator-pro",
+    categories: ["web"],
     img: RadioatorPro,
     titleKey: "RADIATORPRO_TITLE",
     descKey: "RADIATORPRO_DESC",

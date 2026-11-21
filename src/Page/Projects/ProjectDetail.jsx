@@ -2,14 +2,14 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Seo } from "@/components/common/Seo";
 import { Link, useParams } from "react-router-dom";
-import { FaGithub, FaGitlab } from "react-icons/fa";
+import { FaGithub, FaGitlab, FaTelegram } from "react-icons/fa";
 import { FiArrowLeft, FiExternalLink, FiKey, FiPause, FiSend, FiServer } from "react-icons/fi";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlassPanel } from "@/components/common/GlassPanel";
 import { AiBadge } from "@/components/CustomCard/AiBadge";
 import Notfound from "@/components/NotFound/Notfound";
-import { PROJECTS, STACK_GROUPS, localizeProject } from "./projectsData";
+import { PROJECTS, STACK_GROUPS, TELEGRAM_CONTACT, localizeProject } from "./projectsData";
 
 function TechList({ items }) {
     return (
@@ -43,8 +43,11 @@ export default function ProjectDetail() {
 
     if (!project) return <Notfound />;
 
-    const { img, title, desc, tech, techTotal, stack, giturl, gitlab, api, link, badge, demoAccess, pendingDeploy, paused } = project;
-    const banner = demoAccess
+    const { img, title, desc, tech, techTotal, stack, giturl, gitlab, api, link, badge, demoAccess, pendingDeploy, paused, telegramContact } = project;
+    // `href` banners open Telegram directly instead of the prefilled contact form.
+    const banner = telegramContact
+        ? { icon: <FaTelegram size={18} />, prefix: "PROJECT_TELEGRAM_CONTACT", href: TELEGRAM_CONTACT }
+        : demoAccess
         ? { icon: <FiKey size={18} />, prefix: "PROJECT_DEMO_ACCESS" }
         : pendingDeploy
           ? { icon: <FiServer size={18} />, prefix: "PROJECT_PENDING_DEPLOY" }
@@ -126,12 +129,18 @@ export default function ProjectDetail() {
                                 </div>
                             </div>
                             <Button asChild variant="brand" className="h-10 self-stretch rounded-xl text-[14px] sm:self-start">
+                                {banner.href ? (
+                                    <a target="_blank" href={banner.href} rel="noreferrer">
+                                        <FaTelegram size={14} /> {t(`${banner.prefix}_BUTTON`)}
+                                    </a>
+                                ) : (
                                 <Link
                                     to="/contact"
                                     state={{ message: t(`${banner.prefix}_MESSAGE`, { project: title }) }}
                                 >
                                     <FiSend size={14} /> {t("PROJECT_DEMO_ACCESS_BUTTON")}
                                 </Link>
+                                )}
                             </Button>
                         </GlassPanel>
                     )}

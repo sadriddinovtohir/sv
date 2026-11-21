@@ -16,6 +16,7 @@ import studanceCrm from "../../assets/img/studanceCrm.webp"
 import studanceBackend from "../../assets/img/studanceBackend.webp"
 import gapBot from "../../assets/img/gapBot.png"
 import kallaPocha from "../../assets/img/kallaPocha.png"
+import viraAi from "../../assets/img/viraAi.jpg"
 
 /**
  * Order of the stack groups on the detail page. Each key maps to a
@@ -102,9 +103,34 @@ const STUDANCE_SERVICES = [
  * detail page; credentials are handed out personally, never published here.
  * `pendingDeploy` shows a "not on a server yet — contact me to try it" banner.
  * `paused` shows a "ran for a while, now stopped — can be relaunched" banner.
+ * `telegramContact` shows a "built with AI — message on Telegram, he'll reply" banner.
  * `categories` decides which filter tabs on the projects page show the card.
  */
+export const TELEGRAM_CONTACT = "https://t.me/tohir_sadriddinov"
+
 export const PROJECTS = [
+  {
+    id: "vira-ai",
+    categories: ["ai", "bot"],
+    img: viraAi,
+    titleKey: "PROJECT_VIRA_TITLE",
+    descKey: "PROJECT_VIRA_DESC",
+    link: TELEGRAM_CONTACT,
+    badge: "AI Built",
+    telegramContact: true,
+    highlights: ["AI Agent", "Gmail", "Telegram", "LinkedIn"],
+    stack: {
+      backend: [
+        "AI Agent", "LLM", "Tool calling", "Speech-to-Text", "Text-to-Speech",
+        "Scheduled reminders", "Word (.docx)", "Excel (.xlsx)", "Code generation",
+        "Meeting notes & summaries",
+      ],
+      services: [
+        "Gmail", "Telegram", "Phone calls", "SMS", "LinkedIn", "hh.uz", "Upwork",
+        "Google Calendar", "Google Meet / Zoom",
+      ],
+    },
+  },
   {
     id: "uzfixcar",
     categories: ["web"],

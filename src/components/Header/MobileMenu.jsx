@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { FiX } from 'react-icons/fi'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/config/nav'
 import { LanguageSwitcher, Logo } from './HeaderParts'
+
+// Matches the panel's duration-300 slide.
+const CLOSE_MS = 300
 
 /**
  * Mobile drawer. Hand-rolled instead of a Radix Sheet: it is always mounted
@@ -18,6 +21,24 @@ export default function MobileMenu({ open, onOpenChange }) {
   const { t } = useTranslation()
   const panelRef = useRef(null)
   const close = () => onOpenChange(false)
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const pending = useRef(0)
+
+  // Tap on a link: slide the drawer shut first, then change the page, so the
+  // two animations don't run on top of each other. Ctrl/⌘/middle clicks keep
+  // their default (open in a new tab).
+  const go = (e, to) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    e.preventDefault()
+    close()
+    if (to === pathname) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    clearTimeout(pending.current)
+    pending.current = setTimeout(() => navigate(to), reduced ? 0 : CLOSE_MS)
+  }
+
+  useEffect(() => () => clearTimeout(pending.current), [])
 
   useEffect(() => {
     if (!open) return
@@ -64,7 +85,7 @@ export default function MobileMenu({ open, onOpenChange }) {
       >
         {/* Top bar: logo + close */}
         <div className="flex items-center justify-between border-b border-white/8 px-5 py-3.5">
-          <div onClick={close}>
+          <div onClickCapture={(e) => go(e, '/')}>
             <Logo />
           </div>
           <button
@@ -84,7 +105,7 @@ export default function MobileMenu({ open, onOpenChange }) {
               key={to}
               to={to}
               end={end}
-              onClick={close}
+              onClick={(e) => go(e, to)}
               style={{ transitionDelay: open ? `${60 + i * 35}ms` : '0ms' }}
               className={({ isActive }) =>
                 cn(

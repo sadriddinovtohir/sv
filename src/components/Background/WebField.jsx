@@ -88,7 +88,15 @@ export default function WebField() {
             }
         }
 
+        // Thread/knot colors per theme; read every frame (one attribute read)
+        // so a theme toggle repaints the web straight away.
+        const PALETTE = {
+            dark: { thread: '120, 150, 255', near: '46, 230, 166', knot: 'rgba(170, 195, 255, 0.75)', boost: 1 },
+            light: { thread: '61, 107, 255', near: '5, 150, 105', knot: 'rgba(61, 107, 255, 0.45)', boost: 0.9 },
+        }
+
         const draw = () => {
+            const pal = PALETTE[document.documentElement.dataset.theme === 'light' ? 'light' : 'dark']
             ctx.clearRect(0, 0, w, h)
             ctx.lineWidth = 1
 
@@ -99,15 +107,15 @@ export default function WebField() {
                     const dy = py[i] - py[j]
                     const d2 = dx * dx + dy * dy
                     if (d2 > LINK * LINK) continue
-                    const a = (1 - Math.sqrt(d2) / LINK) * 0.3
+                    const a = (1 - Math.sqrt(d2) / LINK) * 0.3 * pal.boost
 
                     // Threads near the cursor light up in the accent color.
                     const mx = (px[i] + px[j]) / 2 - mouseX
                     const my = (py[i] + py[j]) / 2 - mouseY
                     const near = mx * mx + my * my < RADIUS * RADIUS * 1.6
                     ctx.strokeStyle = near
-                        ? `rgba(46, 230, 166, ${Math.min(a * 1.8, 0.75)})`
-                        : `rgba(120, 150, 255, ${a})`
+                        ? `rgba(${pal.near}, ${Math.min(a * 1.8, 0.75)})`
+                        : `rgba(${pal.thread}, ${a})`
                     ctx.beginPath()
                     ctx.moveTo(px[i], py[i])
                     ctx.lineTo(px[j], py[j])
@@ -116,7 +124,7 @@ export default function WebField() {
             }
 
             // Knots
-            ctx.fillStyle = 'rgba(170, 195, 255, 0.75)'
+            ctx.fillStyle = pal.knot
             for (let i = 0; i < n; i++) {
                 ctx.beginPath()
                 ctx.arc(px[i], py[i], 1.6, 0, Math.PI * 2)
@@ -147,6 +155,10 @@ export default function WebField() {
         }
 
         window.addEventListener('resize', onResize)
+        // The animated loop picks up a theme change on its next frame; the
+        // static (reduced-motion) frame has to be repainted by hand.
+        const onTheme = () => { if (reduced) draw() }
+        window.addEventListener('themechange', onTheme)
         if (finePointer && !reduced) {
             window.addEventListener('pointermove', onMove, { passive: true })
             document.documentElement.addEventListener('pointerleave', onLeave)
@@ -154,6 +166,7 @@ export default function WebField() {
         return () => {
             cancelAnimationFrame(frame)
             window.removeEventListener('resize', onResize)
+            window.removeEventListener('themechange', onTheme)
             window.removeEventListener('pointermove', onMove)
             document.documentElement.removeEventListener('pointerleave', onLeave)
         }

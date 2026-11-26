@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
-import { LanguageSwitcher, Logo, NavLinks } from './HeaderParts'
+import { LanguageSwitcher, Logo, NavLinks, SearchButton, ThemeToggle } from './HeaderParts'
 
 const MobileMenu = lazy(() => import('./MobileMenu'))
 
@@ -24,21 +24,27 @@ export default function Header() {
       <div className="hidden flex-1 justify-center md:flex">
         <NavLinks orientation="row" />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden items-center gap-2 md:flex">
+        <SearchButton />
+        <ThemeToggle />
         <LanguageSwitcher compact />
       </div>
 
-      <button
-        type="button"
-        onClick={openMenu}
-        // Start fetching the menu chunk as soon as a finger lands on the button.
-        onPointerDown={() => import('./MobileMenu')}
-        aria-label="Menu"
-        aria-expanded={open}
-        className="flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 md:hidden"
-      >
-        <FiMenu size={22} />
-      </button>
+      <div className="flex items-center gap-2 md:hidden">
+        <SearchButton />
+        <ThemeToggle />
+        <button
+          type="button"
+          onClick={openMenu}
+          // Start fetching the menu chunk as soon as a finger lands on the button.
+          onPointerDown={() => import('./MobileMenu')}
+          aria-label="Menu"
+          aria-expanded={open}
+          className="flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"
+        >
+          <FiMenu size={22} />
+        </button>
+      </div>
 
       {menuMounted && (
         <Suspense fallback={null}>

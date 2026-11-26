@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 export function Pill({
   as: Comp = "div",
   icon,
-  accent = "rgba(255,255,255,0.55)",
+  accent = "color-mix(in srgb, var(--color-white) 55%, transparent)",
   dot = false,
   hover = false,
   className,
@@ -21,7 +21,7 @@ export function Pill({
     <Comp
       style={{ "--accent": accent, ...style }}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-(--accent)/30 bg-(--accent)/8 px-3 py-1.5 text-[13px] font-medium text-(--accent) transition-colors duration-300",
+        "inline-flex items-center gap-1.5 rounded-full border border-(--accent)/30 bg-(--accent)/8 px-3 py-1.5 tone-text text-[13px] font-medium text-(--accent) transition-colors duration-300",
         hover && "cursor-pointer hover:border-(--accent) hover:bg-(--accent)/16",
         className
       )}

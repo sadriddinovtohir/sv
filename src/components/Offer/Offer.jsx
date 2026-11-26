@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next'
 import { Seo } from '@/components/common/Seo'
 import Services from '../Services/Services'
 import WhyChooseMe from '../WhyChooseMe/WhyChooseMe'
+import Testimonials from '../Testimonials/Testimonials'
 
 export default function Offer() {
     const { t } = useTranslation()
@@ -10,6 +11,7 @@ export default function Offer() {
             <Seo title={t('SERVICES_TITLE')} description={t('SERVICES_TITLE')} />
             <Services />
             <WhyChooseMe />
+            <Testimonials />
         </div>
     )
 }

@@ -8,6 +8,11 @@ import { GlassPanel } from '@/components/common/GlassPanel'
 import { Pill } from '@/components/common/Pill'
 import { FormField } from '@/components/common/FormField'
 import { Button } from '@/components/ui/button'
+import { track } from '@/lib/analytics'
+
+// Mirrors LIMITS in api/_lib/sendTelegram.js.
+const MAX_NAME = 80
+const MAX_MESSAGE = 2000
 
 const GMAIL_COMPOSE_URL = 'https://mail.google.com/mail/?view=cm&fs=1&to=toxir4626@gmail.com'
 const PHONE_REGEX = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/
@@ -39,7 +44,7 @@ export default function Contact() {
   // Pages like a project's "request demo access" link pass a ready-made message via router state
   const { state } = useLocation()
   const [form, setForm] = useState({ name: '', phone: '+998', message: state?.message ?? '', company: '' })
-  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [status, setStatus] = useState('idle') // idle | sending | success | error | limited
   const [phoneError, setPhoneError] = useState(false)
 
   const handleChange = (field) => (e) =>
@@ -67,8 +72,13 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
+      if (res.status === 429) {
+        setStatus('limited')
+        return
+      }
       if (!res.ok) throw new Error('request failed')
       setStatus('success')
+      track('contact_submit')
       setForm({ name: '', phone: '+998', message: '', company: '' })
     } catch {
       setStatus('error')
@@ -82,7 +92,7 @@ export default function Contact() {
         <h1 className="text-[26px] font-extrabold tracking-wide text-aurora text-flow md:text-[34px]">
           {t('CONTACT_TITLE')}
         </h1>
-        <p className="text-[14px] text-[#ccc] md:text-[15px]">
+        <p className="text-[14px] text-white/75 md:text-[15px]">
           {t('CONTACT_SUBTITLE')}
         </p>
 
@@ -119,6 +129,8 @@ export default function Contact() {
             value={form.name}
             onChange={handleChange('name')}
             required
+            maxLength={MAX_NAME}
+            autoComplete="name"
           />
           <FormField
             id="contact-phone"
@@ -141,6 +153,7 @@ export default function Contact() {
             onChange={handleChange('message')}
             required
             rows={5}
+            maxLength={MAX_MESSAGE}
           />
           <Button
             type="submit"
@@ -153,12 +166,17 @@ export default function Contact() {
           </Button>
 
           {status === 'success' && (
-            <div className="flex items-center gap-2 text-[13px] text-[#22c55e]">
+            <div role="status" className="flex items-center gap-2 text-[13px] text-[#22c55e]">
               <FiCheckCircle size={16} /> {t('CONTACT_FORM_SUCCESS')}
             </div>
           )}
+          {status === 'limited' && (
+            <p role="alert" className="text-[13px] text-glow">
+              {t('CONTACT_FORM_LIMITED')}
+            </p>
+          )}
           {status === 'error' && (
-            <p className="text-[13px] text-destructive">
+            <p role="alert" className="text-[13px] text-destructive">
               {t('CONTACT_FORM_ERROR')}
             </p>
           )}
@@ -175,7 +193,7 @@ export default function Contact() {
               href={item.href}
               target={item.target || '_self'}
               rel="noreferrer"
-              className="flex items-center gap-2.5 overflow-hidden rounded-[10px] border border-white/6 px-3 py-2 text-[13.5px] text-white/65 break-words transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white"
+              className="flex items-center gap-2.5 overflow-hidden rounded-[10px] border border-white/6 px-3 py-2 text-[13.5px] text-white/65 break-words transition-all duration-200 hover:border-primary hover:bg-primary hover:text-snow"
             >
               <span className="flex shrink-0">{item.icon}</span>
               {item.label}

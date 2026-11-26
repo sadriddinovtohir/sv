@@ -11,6 +11,9 @@ const Skills = lazy(() => import('./Page/Skills/Skills'))
 const Contact = lazy(() => import('./Page/Contact/Contact'))
 const Notfound = lazy(() => import('./components/NotFound/Notfound'))
 const Offer = lazy(() => import('./components/Offer/Offer'))
+const Resume = lazy(() => import('./Page/Resume/Resume'))
+const Blog = lazy(() => import('./Page/Blog/Blog'))
+const BlogPost = lazy(() => import('./Page/Blog/BlogPost'))
 
 // Shown only while a route chunk that wasn't prefetched yet is downloading
 // (slow connections) — without this, Suspense renders nothing and a nav
@@ -54,6 +57,8 @@ function App() {
       import('./Page/Skills/Skills')
       import('./Page/Contact/Contact')
       import('./components/Offer/Offer')
+      import('./Page/Resume/Resume')
+      import('./Page/Blog/Blog')
     }
     if ('requestIdleCallback' in window) {
       const id = requestIdleCallback(prefetch, { timeout: 3000 })
@@ -74,6 +79,9 @@ function App() {
           <Route path='/skills' element={<Skills />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/offer' element={<Offer />} />
+          <Route path='/resume' element={<Resume />} />
+          <Route path='/blog' element={<Blog />} />
+          <Route path='/blog/:slug' element={<BlogPost />} />
           <Route path='*' element={<Notfound />} />
         </Route>
       </Routes>

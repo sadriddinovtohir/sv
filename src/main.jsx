@@ -13,3 +13,12 @@ createRoot(document.getElementById('root')).render(
     </I18nextProvider>
   </BrowserRouter>
 )
+
+// Offline support / installability (public/sw.js). Production only: in dev a
+// service worker would serve stale modules over Vite's hot reload. Registered
+// after load so it never competes with the first paint.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {})
+  })
+}

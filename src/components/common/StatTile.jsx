@@ -75,8 +75,8 @@ export function StatTile({ value, label, accent }) {
     >
       <div
         ref={numberRef}
-        className="mb-1 text-[26px] leading-none font-extrabold tabular-nums md:text-[34px]"
-        style={{ color: accent, textShadow: `0 0 22px ${accent}70` }}
+        className="tone-text mb-1 text-[26px] leading-none font-extrabold text-(--accent) tabular-nums md:text-[34px]"
+        style={{ textShadow: `0 0 22px ${accent}70` }}
       >
         {value}
       </div>

@@ -88,4 +88,22 @@ npm run dev       # dev server (Telegram API mock bilan)
 npm run build     # production build
 npm run preview   # build'ni local ko'rish
 npm run lint      # ESLint tekshiruvi
+npm test          # Vitest testlari (API, utilitalar, komponentlar, tarjimalar)
 ```
+
+## Qo'shimcha funksiyalar
+
+| Funksiya | Qayerda | Izoh |
+|---|---|---|
+| Dark / Light tema | `src/lib/theme.js`, `index.html` (inline skript) | Tanlov `localStorage.theme`da; birinchi chizilishdan oldin qo'llanadi, miltillamaydi. Komponentlar `white/xx` ishlatadi — yorug' temada faqat `--color-white` o'zgaradi |
+| Command palette | `src/components/CommandPalette/` | `Ctrl/⌘+K` yoki `/`: sahifalar, loyihalar, tema, til, email nusxalash |
+| Rezyume | `/resume` | Sayt ma'lumotlaridan yig'iladi; "PDF yuklab olish" → brauzerning print oynasi (A4, oq fon) |
+| GitHub & GitLab | `api/github.js`, `api/_lib/github.js`, `src/components/GitHubStats/` | Profillar + ochiq/yopiq/jami repolar + tillar. 1 soat kesh. Yopiq repolar soni uchun `GITHUB_TOKEN` / `GITLAB_TOKEN` kerak |
+| Blog | `src/content/blog/*.md`, `/blog` | Frontmatter: `title, description, date, tags, draft`. `draft: true` faqat `npm run dev`da ko'rinadi |
+| Mijozlar fikri | `src/data/testimonials.js` | Ro'yxat bo'sh bo'lsa bo'lim ko'rinmaydi |
+| PWA / offline | `public/sw.js`, `public/manifest.webmanifest` | Faqat production'da ro'yxatdan o'tadi |
+| Analytics eventlari | `src/lib/analytics.js` | `contact_submit`, `resume_download`, `theme_toggle`, `command_palette_run` (GA ulangan bo'lsa) |
+| Kontakt himoyasi | `api/_lib/sendTelegram.js` | Honeypot, uzunlik limitlari, IP bo'yicha 10 daqiqada 5 ta xabar |
+| CI | `.github/workflows/ci.yml` | Har push/PR'da lint → test → build |
+
+Environment o'zgaruvchilarining to'liq ro'yxati: `.env.example`.

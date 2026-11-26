@@ -98,7 +98,7 @@ function SkillCard({ skill, accent }) {
                     <span className="text-[9px] font-medium text-white/55">
                         {t('SKILL_PROFICIENCY')}
                     </span>
-                    <span className="text-[9px] font-semibold" style={{ color: accent }}>
+                    <span className="tone-text text-[9px] font-semibold text-(--accent)" style={{ "--accent": accent }}>
                         {skill.level}%
                     </span>
                 </div>
@@ -163,8 +163,8 @@ export default function Skills() {
                             style={{ background: `linear-gradient(90deg, ${category.accent}70, transparent)` }}
                         />
                         <span
-                            className="shrink-0 text-[10px] font-semibold opacity-75"
-                            style={{ color: category.accent }}
+                            className="tone-text shrink-0 text-[10px] font-semibold text-(--accent) opacity-75"
+                            style={{ "--accent": category.accent }}
                         >
                             {t('SKILL_COUNT', { count: category.skills.length })}
                         </span>

@@ -68,11 +68,11 @@ export default function Projects() {
               className={cn(
                 "flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-colors duration-300 hover:bg-white/8 hover:text-white lg:px-4",
                 selected &&
-                  "bg-linear-to-r from-primary to-[#2f9bff] text-white shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary"
+                  "bg-linear-to-r from-primary to-[#2f9bff] text-snow shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary"
               )}
             >
               {t(`PROJECTS_FILTER_${key.toUpperCase()}`)}
-              <span className={cn("text-xs", selected ? "text-white/80" : "text-white/40")}>
+              <span className={cn("text-xs", selected ? "text-snow/80" : "text-white/40")}>
                 {counts[key] ?? 0}
               </span>
             </button>

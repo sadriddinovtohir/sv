@@ -1,9 +1,55 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink } from 'react-router-dom'
-import { FiGlobe, FiChevronDown } from 'react-icons/fi'
+import { FiGlobe, FiChevronDown, FiMoon, FiSearch, FiSun } from 'react-icons/fi'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/config/nav'
+import { toggleTheme, useTheme } from '@/lib/theme'
+import { OPEN_PALETTE_EVENT } from '@/lib/events'
+import { track } from '@/lib/analytics'
+
+const ICON_BTN =
+  'flex size-9 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/80 transition-colors duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white'
+
+export function ThemeToggle({ className }) {
+  const { t } = useTranslation()
+  const theme = useTheme()
+  const isLight = theme === 'light'
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        toggleTheme()
+        track('theme_toggle', { theme: isLight ? 'dark' : 'light' })
+      }}
+      aria-label={isLight ? t('THEME_TO_DARK') : t('THEME_TO_LIGHT')}
+      title={isLight ? t('THEME_TO_DARK') : t('THEME_TO_LIGHT')}
+      className={cn(ICON_BTN, className)}
+    >
+      {isLight ? <FiMoon size={16} /> : <FiSun size={16} />}
+    </button>
+  )
+}
+
+/** Opens the command palette; shows the shortcut hint on wide screens. */
+export function SearchButton({ className }) {
+  const { t } = useTranslation()
+  const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform)
+  return (
+    <button
+      type="button"
+      onClick={() => window.dispatchEvent(new Event(OPEN_PALETTE_EVENT))}
+      // Warm the palette's chunk on hover/touch so it opens without a wait.
+      onPointerEnter={() => import('@/components/CommandPalette/CommandPalette')}
+      aria-label={t('CMD_TITLE')}
+      title={`${t('CMD_TITLE')} (${isMac ? '⌘' : 'Ctrl'}+K)`}
+      className={cn(ICON_BTN, 'xl:w-auto xl:gap-2 xl:px-2.5', className)}
+    >
+      <FiSearch size={16} />
+      <kbd className="hidden font-mono text-[11px] text-white/50 xl:inline">{isMac ? '⌘K' : 'Ctrl K'}</kbd>
+    </button>
+  )
+}
 
 const LANGS = [
   { code: 'en', country: 'gb', badge: 'EN', color: '#38bdf8', label: 'English' },
@@ -140,7 +186,7 @@ export function NavLinks({ orientation = 'row', onNavigate }) {
               'flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-colors duration-300 hover:bg-white/8 hover:text-white lg:px-4',
               orientation === 'row' && 'max-lg:[&>svg]:hidden',
               orientation === 'column' && 'justify-start gap-3 rounded-2xl bg-white/5 px-5 py-3.5 text-base',
-              isActive && 'bg-gradient-to-r from-primary to-[#2f9bff] text-white shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary hover:text-white'
+              isActive && 'bg-gradient-to-r from-primary to-[#2f9bff] text-snow shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary hover:text-snow'
             )
           }
         >

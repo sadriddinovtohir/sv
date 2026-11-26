@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CiLocationOn } from 'react-icons/ci'
 import { FaArrowRight, FaPlay, FaTelegram } from 'react-icons/fa'
@@ -17,17 +18,19 @@ import { StatTile } from '@/components/common/StatTile'
 import { SocialIconLink } from '@/components/common/SocialIconLink'
 import { Seo } from '@/components/common/Seo'
 import { useReveal } from '@/hooks/useReveal'
+// Below the fold, so it is split out of the landing page's critical chunk.
+const GitHubStats = lazy(() => import('@/components/GitHubStats/GitHubStats'))
 
 const techStack = [
     { icon: <FaJs size={22} />,               name: 'JavaScript',   color: '#f7df1e' },
     { icon: <SiTypescript size={22} />,       name: 'TypeScript',   color: '#3178c6' },
     { icon: <FaReact size={22} />,            name: 'React',        color: '#61dafb' },
-    { icon: <SiNextdotjs size={22} />,        name: 'Next.js',      color: '#ffffff' },
+    { icon: <SiNextdotjs size={22} />,        name: 'Next.js',      color: 'var(--color-white)' },
     { icon: <TbBrandReactNative size={22} />, name: 'React Native', color: '#61dafb' },
     { icon: <SiReactquery size={22} />,       name: 'TanStack',     color: '#ff4154' },
     { icon: <SiTailwindcss size={22} />,      name: 'Tailwind',     color: '#38bdf8' },
     { icon: <TbBrandNodejs size={22} />,      name: 'Node.js',      color: '#68a063' },
-    { icon: <SiExpress size={22} />,          name: 'Express',      color: '#ffffff' },
+    { icon: <SiExpress size={22} />,          name: 'Express',      color: 'var(--color-white)' },
     { icon: <SiPostgresql size={22} />,       name: 'PostgreSQL',   color: '#336791' },
     { icon: <SiPrisma size={22} />,           name: 'Prisma',       color: '#5a67d8' },
     { icon: <SiMongodb size={22} />,          name: 'MongoDB',      color: '#47a248' },
@@ -46,6 +49,7 @@ const ORBIT = [
 
 const SOCIALS = [
     { icon: <FaGithub size={18} />,    href: 'https://github.com/sadriddinovtohir',                     label: 'GitHub' },
+    { icon: <FaGitlab size={18} />,    href: 'https://gitlab.com/sadriddinovtohir',                     label: 'GitLab' },
     { icon: <FaTelegram size={18} />,  href: 'https://t.me/tohir_sadriddinov',                          label: 'Telegram' },
     { icon: <FaLinkedin size={18} />,  href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/',    label: 'LinkedIn' },
     { icon: <FaInstagram size={18} />, href: 'https://www.instagram.com/tohirbek_sadriddinov/',         label: 'Instagram' },
@@ -64,7 +68,7 @@ function MarqueeRow({ items, reverse = false, hidden = false }) {
                         key={`${tech.name}-${i}`}
                         aria-hidden={i >= items.length || undefined}
                         style={{ '--accent': tech.color }}
-                        className="flex shrink-0 items-center gap-2 rounded-xl border border-(--accent)/25 bg-white/4 px-4 py-2.5 text-(--accent) transition-[translate,background-color,border-color,box-shadow] duration-250 hover:-translate-y-0.5 hover:border-(--accent)/60 hover:bg-(--accent)/12 hover:shadow-[0_0_18px_-4px_var(--accent)]"
+                        className="flex shrink-0 items-center gap-2 rounded-xl border border-(--accent)/25 bg-white/4 px-4 py-2.5 text-(--accent) tone-text transition-[translate,background-color,border-color,box-shadow] duration-250 hover:-translate-y-0.5 hover:border-(--accent)/60 hover:bg-(--accent)/12 hover:shadow-[0_0_18px_-4px_var(--accent)]"
                     >
                         <span aria-hidden="true" className="flex">{tech.icon}</span>
                         <span className="text-[13px] font-semibold text-white/80">{tech.name}</span>
@@ -119,7 +123,7 @@ export default function Home() {
                     <div className="mb-6 flex flex-wrap gap-3">
                         <Link
                             to="/projects"
-                            className="shine group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-bold text-background shadow-[0_8px_24px_-6px_rgba(61,107,255,0.7)] transition-[translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_-6px_rgba(46,230,166,0.7)]"
+                            className="shine group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-primary to-accent px-5 py-2.5 text-sm font-bold text-ink shadow-[0_8px_24px_-6px_rgba(61,107,255,0.7)] transition-[translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_-6px_rgba(46,230,166,0.7)]"
                         >
                             {t('NAV_PROJECTS')}
                             <FaArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -235,6 +239,11 @@ export default function Home() {
                     <MarqueeRow items={[...techStack.slice(7), ...techStack.slice(0, 7)]} reverse hidden />
                 </div>
             </div>
+
+            {/* === Live GitHub activity === */}
+            <Suspense fallback={<div className="mb-14 min-h-[320px]" />}>
+                <GitHubStats />
+            </Suspense>
 
         </div>
     )

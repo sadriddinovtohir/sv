@@ -2,37 +2,69 @@ import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { handleContactSubmission } from './api/_lib/sendTelegram.js'
+import fs from 'node:fs'
+import { clientIp, handleContactSubmission } from './api/_lib/sendTelegram.js'
+import { handleGithubStats } from './api/_lib/github.js'
 
-// Serves /api/send-message during `vite dev`, since Vite doesn't run
-// Vercel serverless functions itself — this mirrors api/send-message.js
-// so the contact form works both locally and once deployed.
-function telegramDevApi() {
+// Serves the /api routes during `vite dev`, since Vite doesn't run Vercel
+// serverless functions itself — these mirror the files in api/, so the
+// contact form and the GitHub section work locally and once deployed.
+function readJson(req) {
+  return new Promise((resolve) => {
+    let raw = ''
+    req.on('data', (chunk) => { raw += chunk })
+    req.on('end', () => {
+      try { resolve(JSON.parse(raw || '{}')) } catch { resolve({}) }
+    })
+  })
+}
+
+function sendJson(res, { statusCode, headers = {}, body }) {
+  res.statusCode = statusCode
+  res.setHeader('Content-Type', 'application/json')
+  for (const [k, v] of Object.entries(headers)) res.setHeader(k, v)
+  res.end(JSON.stringify(body))
+}
+
+function devApi() {
   return {
-    name: 'telegram-dev-api',
+    name: 'dev-api',
     configureServer(server) {
-      server.middlewares.use('/api/send-message', (req, res) => {
+      server.middlewares.use('/api/send-message', async (req, res) => {
         if (req.method !== 'POST') {
           res.statusCode = 405
-          res.end()
-          return
+          return res.end()
         }
-        let raw = ''
-        req.on('data', (chunk) => { raw += chunk })
-        req.on('end', async () => {
-          let payload = {}
-          try { payload = JSON.parse(raw || '{}') } catch { /* ignore malformed body */ }
-          const { statusCode, body } = await handleContactSubmission(payload)
-          res.statusCode = statusCode
-          res.setHeader('Content-Type', 'application/json')
-          res.end(JSON.stringify(body))
-        })
+        const payload = await readJson(req)
+        sendJson(res, await handleContactSubmission(payload, { ip: clientIp(req) }))
+      })
+      server.middlewares.use('/api/github', async (req, res) => {
+        if (req.method !== 'GET') {
+          res.statusCode = 405
+          return res.end()
+        }
+        sendJson(res, await handleGithubStats())
       })
     },
   }
 }
 
-const SITEMAP_ROUTES = ['/', '/about', '/projects', '/skills', '/contact', '/offer']
+const STATIC_ROUTES = ['/', '/about', '/projects', '/skills', '/offer', '/resume', '/blog', '/contact']
+
+// Project and blog URLs for the sitemap. projectsData.js imports images, so it
+// can't be imported into the Node config — the ids are read from its source.
+function dynamicRoutes() {
+  const projectSrc = fs.readFileSync(path.resolve(__dirname, 'src/Page/Projects/projectsData.js'), 'utf8')
+  const projects = [...projectSrc.matchAll(/^s+id: "([a-z0-9-]+)"/gm)].map((m) => `/projects/${m[1]}`)
+  const blogDir = path.resolve(__dirname, 'src/content/blog')
+  const posts = fs.existsSync(blogDir)
+    ? fs.readdirSync(blogDir)
+        .filter((f) => f.endsWith('.md'))
+        .filter((f) => !/^draft:s*trues*$/m.test(fs.readFileSync(path.join(blogDir, f), 'utf8').split('---')[1] ?? ''))
+        .map((f) => `/blog/${f.replace(/.md$/, '')}`)
+    : []
+  return [...projects, ...posts]
+}
 
 // Fills the __SITE_URL__ placeholders in index.html (canonical, og:url) and
 // emits robots.txt + sitemap.xml. Without VITE_SITE_URL those tags are dropped
@@ -53,7 +85,7 @@ function seoPlugin(siteUrl) {
       if (base) {
         robots.push(`Sitemap: ${base}/sitemap.xml`)
         const today = new Date().toISOString().slice(0, 10)
-        const urls = SITEMAP_ROUTES.map(
+        const urls = [...STATIC_ROUTES, ...dynamicRoutes()].map(
           (r) => `  <url><loc>${base}${r}</loc><lastmod>${today}</lastmod></url>`
         ).join('\n')
         this.emitFile({
@@ -72,9 +104,19 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   if (env.TELEGRAM_BOT_TOKEN) process.env.TELEGRAM_BOT_TOKEN = env.TELEGRAM_BOT_TOKEN
   if (env.TELEGRAM_CHAT_ID) process.env.TELEGRAM_CHAT_ID = env.TELEGRAM_CHAT_ID
+  if (env.GITHUB_TOKEN) process.env.GITHUB_TOKEN = env.GITHUB_TOKEN
+  if (env.GITHUB_USERNAME) process.env.GITHUB_USERNAME = env.GITHUB_USERNAME
+  if (env.GITLAB_TOKEN) process.env.GITLAB_TOKEN = env.GITLAB_TOKEN
+  if (env.GITLAB_USERNAME) process.env.GITLAB_USERNAME = env.GITLAB_USERNAME
 
   return {
-    plugins: [react(), tailwindcss(), telegramDevApi(), seoPlugin(env.VITE_SITE_URL)],
+    plugins: [react(), tailwindcss(), devApi(), seoPlugin(env.VITE_SITE_URL)],
+    test: {
+      environment: 'jsdom',
+      setupFiles: ['./src/test/setup.js'],
+      include: ['src/**/*.test.{js,jsx}', 'api/**/*.test.js'],
+      css: false,
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src'),

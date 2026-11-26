@@ -70,7 +70,7 @@ export default function FloatingContact() {
                 <button
                     onClick={() => navigate('/contact')}
                     aria-label={t('FLOATING_CTA_LABEL')}
-                    className="relative flex h-13 w-13 items-center justify-center rounded-full bg-linear-to-br from-primary to-accent text-background shadow-[0_10px_30px_rgba(61,107,255,0.5)] transition-transform duration-250 hover:scale-108 hover:rotate-12 md:h-14.5 md:w-14.5"
+                    className="relative flex h-13 w-13 items-center justify-center rounded-full bg-linear-to-br from-primary to-accent text-ink shadow-[0_10px_30px_rgba(61,107,255,0.5)] transition-transform duration-250 hover:scale-108 hover:rotate-12 md:h-14.5 md:w-14.5"
                 >
                     {/* Expanding halo to draw the eye to the CTA. */}
                     <span aria-hidden="true" className="ping absolute inset-0 -z-10 rounded-full bg-primary/50" />

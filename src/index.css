@@ -7,7 +7,17 @@
      that are actually used get downloaded. */
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
 
-  /* === Ocean Sunrise palette === */
+  /* === Ocean Sunrise palette ===
+     Components paint text, borders and glass with `white/xx` utilities.
+     Tailwind compiles those to `var(--color-white)`, so the light theme only
+     has to point --color-white at a dark ink and the whole UI flips with it.
+     `snow` is the white that never flips (text on primary/gradient fills);
+     `ink` the dark that never flips (text on accent-gradient buttons). */
+  --color-white: #ffffff;
+  --color-snow: #ffffff;
+  --color-ink: #05080f;
+  --color-aurora-start: #86a6ff;
+
   --color-background: #05080f;
   --color-foreground: #ffffff;
 
@@ -52,6 +62,30 @@
   box-sizing: border-box;
 }
 
+/* === Light theme ===
+   Set on <html> by the inline script in index.html (before first paint) and
+   by lib/theme.js when the visitor toggles it. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-white: #0b1222;
+  --color-background: #f4f6fb;
+  --color-foreground: #0b1222;
+  --color-card: #ffffff;
+  --color-card-foreground: #0b1222;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0b1222;
+  --color-secondary: #e8ecf5;
+  --color-secondary-foreground: #0b1222;
+  --color-muted: #e8ecf5;
+  --color-muted-foreground: #0b122299;
+  /* Darker accent/glow: the dark-theme mint and amber fail contrast on white. */
+  --color-accent: #059669;
+  --color-glow: #d97706;
+  --color-border: #0b12221a;
+  --color-input: #0b122224;
+  --color-aurora-start: #3d6bff;
+}
+
 html {
   overflow-x: hidden;
   width: 100%;
@@ -62,7 +96,8 @@ html {
 body {
   font-family: var(--font-sans);
   background-color: var(--color-background);
-  color: #fff;
+  color: var(--color-white);
+  transition: background-color 0.3s ease;
   margin: 0;
   overflow-x: hidden;
   width: 100%;
@@ -72,7 +107,55 @@ body {
 
 ::selection {
   background: rgba(61, 107, 255, 0.45);
-  color: #fff;
+  color: var(--color-white);
+}
+
+/* Brand-colored text (pills, tech chips) is tuned for the dark page; on the
+   light page mix it with black so mint/amber/sky stay readable. */
+:root[data-theme="light"] .tone-text {
+  color: color-mix(in srgb, var(--accent, var(--color-primary)) 62%, #000);
+  text-shadow: none !important;
+}
+:root[data-theme="light"] .bg-orb {
+  opacity: 0.55;
+}
+:root[data-theme="light"] .site-header[data-scrolled="true"] {
+  box-shadow: 0 10px 30px -14px rgba(11, 18, 34, 0.25);
+}
+
+/* Print (the /resume page's "Download PDF" uses window.print()): plain white
+   paper, no site chrome or animated background. */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  /* Same ink as the light theme, so `white/xx` text prints dark on paper. */
+  :root {
+    --color-white: #0b1222;
+    --color-background: #ffffff;
+    --color-accent: #047857;
+    --color-glow: #b45309;
+    --color-aurora-start: #3d6bff;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print,
+  .bg-orb,
+  .web-field,
+  .site-header,
+  body > #root footer {
+    display: none !important;
+  }
+  .page-enter {
+    animation: none !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
 }
 
 /* Slim custom scrollbar */
@@ -156,10 +239,10 @@ body {
 .text-aurora {
   background: linear-gradient(
     100deg,
-    #86a6ff 0%,
+    var(--color-aurora-start) 0%,
     var(--color-accent) 35%,
     var(--color-glow) 65%,
-    #86a6ff 100%
+    var(--color-aurora-start) 100%
   );
   background-size: 200% auto;
   background-clip: text;
@@ -554,4 +637,96 @@ body {
 
 a {
   text-decoration: none;
+}
+
+/* === Blog article typography (BlogPost.jsx renders markdown into this) === */
+.prose-blog {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--color-white) 80%, transparent);
+}
+.prose-blog > * + * {
+  margin-top: 1.1em;
+}
+.prose-blog h2,
+.prose-blog h3 {
+  color: var(--color-white);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-top: 1.9em;
+}
+.prose-blog h2 {
+  font-size: 1.45em;
+}
+.prose-blog h3 {
+  font-size: 1.2em;
+}
+.prose-blog a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-blog strong {
+  color: var(--color-white);
+}
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 1.4em;
+}
+.prose-blog ul {
+  list-style: disc;
+}
+.prose-blog ol {
+  list-style: decimal;
+}
+.prose-blog li + li {
+  margin-top: 0.35em;
+}
+.prose-blog li::marker {
+  color: var(--color-accent);
+}
+.prose-blog blockquote {
+  border-left: 3px solid var(--color-primary);
+  padding: 0.2em 0 0.2em 1em;
+  color: color-mix(in srgb, var(--color-white) 65%, transparent);
+}
+.prose-blog code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--color-white) 8%, transparent);
+  color: var(--color-white);
+}
+.prose-blog pre {
+  overflow-x: auto;
+  padding: 1em 1.2em;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--color-white) 10%, transparent);
+  background: var(--color-card);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.prose-blog pre code {
+  padding: 0;
+  background: none;
+}
+.prose-blog hr {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+.prose-blog img {
+  max-width: 100%;
+  border-radius: 14px;
+}
+.prose-blog table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.prose-blog th,
+.prose-blog td {
+  border: 1px solid color-mix(in srgb, var(--color-white) 12%, transparent);
+  padding: 0.5em 0.75em;
+  text-align: left;
 }

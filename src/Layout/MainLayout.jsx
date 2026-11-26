@@ -1,11 +1,43 @@
-import { useEffect, useRef } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import Header from '../components/Header/Header'
 import { Outlet, useLocation } from 'react-router-dom'
 import Footer from '../components/Footer/Footer'
 import FloatingContact from '../components/FloatingContact/FloatingContact'
 import WebField from '../components/Background/WebField'
+import { OPEN_PALETTE_EVENT } from '@/lib/events'
+
+const CommandPalette = lazy(() => import('../components/CommandPalette/CommandPalette'))
+
 
 const MAX_TILT = 7 // degrees
+
+// Ctrl/⌘+K (or "/" outside text fields) and the header's search button open
+// the palette. Its chunk is fetched on first use, then cached by the browser.
+function useCommandPalette() {
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        const show = () => setOpen(true)
+        const onKey = (e) => {
+            const typing = e.target instanceof Element && e.target.closest('input, textarea, select, [contenteditable="true"]')
+            if ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault()
+                setOpen((o) => !o)
+            } else if (e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                e.preventDefault()
+                show()
+            }
+        }
+        window.addEventListener('keydown', onKey)
+        window.addEventListener(OPEN_PALETTE_EVENT, show)
+        return () => {
+            window.removeEventListener('keydown', onKey)
+            window.removeEventListener(OPEN_PALETTE_EVENT, show)
+        }
+    }, [])
+
+    return { open, close: () => setOpen(false) }
+}
 
 // One delegated, rAF-throttled pointer listener for the whole page (desktop
 // pointers only). It drives two effects:
@@ -90,6 +122,7 @@ function useScrolledFlag(ref) {
 export default function MainLayout() {
     const { pathname } = useLocation()
     const headerRef = useRef(null)
+    const palette = useCommandPalette()
     usePointerEffects()
     useScrolledFlag(headerRef)
 
@@ -133,11 +166,19 @@ export default function MainLayout() {
                 </main>
             </div>
 
-            <footer className="relative z-1">
+            <footer className="no-print relative z-1">
                 <Footer />
             </footer>
 
-            <FloatingContact />
+            <div className="no-print">
+                <FloatingContact />
+            </div>
+
+            {palette.open && (
+                <Suspense fallback={null}>
+                    <CommandPalette onClose={palette.close} />
+                </Suspense>
+            )}
         </div>
     )
 }

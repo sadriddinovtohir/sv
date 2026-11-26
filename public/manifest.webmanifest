@@ -1,0 +1,19 @@
+{
+  "name": "Tohirbek Sadriddinov — Software Engineer",
+  "short_name": "Tohirbek",
+  "description": "Portfolio of Tohirbek Sadriddinov: web, mobile and backend projects.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#05080f",
+  "theme_color": "#05080f",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Projects", "url": "/projects" },
+    { "name": "Resume", "url": "/resume" },
+    { "name": "Contact", "url": "/contact" }
+  ]
+}

@@ -15,26 +15,28 @@ const Offer = lazy(() => import('./components/Offer/Offer'))
 // Shown only while a route chunk that wasn't prefetched yet is downloading
 // (slow connections) — without this, Suspense renders nothing and a nav
 // tap looks like it silently did nothing.
+const LOADER_RINGS = [
+  { inset: 0, color: 'var(--color-primary)', duration: '1.1s', reverse: false },
+  { inset: 8, color: 'var(--color-accent)', duration: '1.5s', reverse: true },
+  { inset: 16, color: 'var(--color-glow)', duration: '0.9s', reverse: false },
+]
+
 function RouteLoader() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <div
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: '50%',
-          border: '3px solid rgba(255,255,255,0.15)',
-          borderTopColor: 'var(--color-primary)',
-          animation: 'spin 0.7s linear infinite',
-        }}
-      />
+    <div role="status" aria-label="Loading" className="flex h-screen items-center justify-center">
+      <div className="relative size-14" aria-hidden="true">
+        {LOADER_RINGS.map((r) => (
+          <span
+            key={r.inset}
+            className="absolute rounded-full border-[3px] border-transparent"
+            style={{
+              inset: r.inset,
+              borderTopColor: r.color,
+              animation: `spin ${r.duration} cubic-bezier(.5,0,.5,1) infinite${r.reverse ? ' reverse' : ''}`,
+            }}
+          />
+        ))}
+      </div>
     </div>
   )
 }

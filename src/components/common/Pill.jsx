@@ -28,7 +28,7 @@ export function Pill({
       {...props}
     >
       {dot && (
-        <span className="h-[7px] w-[7px] shrink-0 rounded-full bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
+        <span className="ping h-1.75 w-1.75 shrink-0 rounded-full bg-(--accent) shadow-[0_0_8px_var(--accent)]" />
       )}
       {icon}
       {children}

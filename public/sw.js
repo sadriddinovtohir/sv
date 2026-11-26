@@ -10,7 +10,11 @@
  *
  * Bump VERSION to drop every old cache on the next visit.
  */
-const VERSION = "v1"
+const VERSION = "v2"
+
+// respondWith() must always get a Response: an undefined cache miss is what
+// threw "Failed to convert value to 'Response'".
+const offline = () => new Response("Offline", { status: 503, headers: { "Content-Type": "text/plain" } })
 const SHELL = `shell-${VERSION}`
 const ASSETS = `assets-${VERSION}`
 const STATIC = `static-${VERSION}`
@@ -54,7 +58,7 @@ self.addEventListener("fetch", (event) => {
           }
           return res
         })
-        .catch(() => caches.match("/", { cacheName: SHELL }))
+        .catch(() => caches.match("/", { cacheName: SHELL }).then((hit) => hit || offline()))
     )
     return
   }
@@ -70,7 +74,7 @@ self.addEventListener("fetch", (event) => {
               caches.open(ASSETS).then((c) => c.put(request, copy)).then(() => trim(ASSETS, MAX_ASSET_ENTRIES))
             }
             return res
-          })
+          }).catch(() => offline())
       )
     )
     return
@@ -84,7 +88,7 @@ self.addEventListener("fetch", (event) => {
             if (res.ok) cache.put(request, res.clone())
             return res
           })
-          .catch(() => hit)
+          .catch(() => hit || offline())
         return hit || network
       })
     )

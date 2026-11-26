@@ -129,6 +129,15 @@ export default function MainLayout() {
     const headerRef = useRef(null)
     const palette = useCommandPalette()
     const showWebField = useMediaQuery(WEB_FIELD_QUERY)
+
+    // The page-enter fade starts at opacity 0, which would hold back the
+    // first paint of the landing content (LCP). Play it only on navigation.
+    const [prevPath, setPrevPath] = useState(pathname)
+    const [navigated, setNavigated] = useState(false)
+    if (prevPath !== pathname) {
+        setPrevPath(pathname)
+        setNavigated(true)
+    }
     usePointerEffects()
     useScrolledFlag(headerRef)
 
@@ -167,7 +176,7 @@ export default function MainLayout() {
                 <div className="h-14 md:h-16" />
 
                 {/* Keyed by path so the enter animation replays on every navigation. */}
-                <main key={pathname} className="page-enter">
+                <main key={pathname} className={navigated ? 'page-enter' : undefined}>
                     <Outlet />
                 </main>
             </div>

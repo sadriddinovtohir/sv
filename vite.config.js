@@ -55,13 +55,13 @@ const STATIC_ROUTES = ['/', '/about', '/projects', '/skills', '/offer', '/resume
 // can't be imported into the Node config — the ids are read from its source.
 function dynamicRoutes() {
   const projectSrc = fs.readFileSync(path.resolve(__dirname, 'src/Page/Projects/projectsData.js'), 'utf8')
-  const projects = [...projectSrc.matchAll(/^s+id: "([a-z0-9-]+)"/gm)].map((m) => `/projects/${m[1]}`)
+  const projects = [...projectSrc.matchAll(/^\s+id: "([a-z0-9-]+)"/gm)].map((m) => `/projects/${m[1]}`)
   const blogDir = path.resolve(__dirname, 'src/content/blog')
   const posts = fs.existsSync(blogDir)
     ? fs.readdirSync(blogDir)
         .filter((f) => f.endsWith('.md'))
-        .filter((f) => !/^draft:s*trues*$/m.test(fs.readFileSync(path.join(blogDir, f), 'utf8').split('---')[1] ?? ''))
-        .map((f) => `/blog/${f.replace(/.md$/, '')}`)
+        .filter((f) => !/^draft:\s*true\s*$/m.test(fs.readFileSync(path.join(blogDir, f), 'utf8').split('---')[1] ?? ''))
+        .map((f) => `/blog/${f.replace(/\.md$/, '')}`)
     : []
   return [...projects, ...posts]
 }

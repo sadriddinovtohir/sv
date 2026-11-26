@@ -170,7 +170,9 @@ export default function Home() {
                 </div>
 
                 {/* RIGHT — Profile Image */}
-                <div className="float relative mx-auto shrink-0 md:mx-0">
+                {/* Margin = how far the orbiting chips stick out past the photo
+                    (ring offset + half a chip), so they never touch the text. */}
+                <div className="float relative mx-auto my-11 shrink-0 sm:my-14 md:mx-14 md:my-14">
                     {/* Soft glow — a plain radial gradient, no blur filter needed. */}
                     <div className="absolute -inset-10 z-0 rounded-full bg-[radial-gradient(circle,rgba(61,107,255,0.38)_0%,rgba(46,230,166,0.12)_45%,transparent_70%)]" />
 
@@ -191,7 +193,7 @@ export default function Home() {
                     {/* Rotating gradient border: a spinning conic layer clipped to a 2px frame. */}
                     <div className="relative z-1 overflow-hidden rounded-[28px] p-[2px]">
                         <div className="ring-spin absolute top-1/2 left-1/2 aspect-square w-[160%] -translate-x-1/2 -translate-y-1/2" />
-                        <div className="relative aspect-[467/420] w-[230px] max-w-full overflow-hidden rounded-[26px] bg-background sm:w-[290px] md:w-[340px]">
+                        <div className="relative aspect-[467/420] w-[200px] max-w-full overflow-hidden min-[380px]:w-[230px] rounded-[26px] bg-background sm:w-[290px] md:w-[340px]">
                             <img
                                 src={profileImg}
                                 alt='Tohirbek Sadriddinov'

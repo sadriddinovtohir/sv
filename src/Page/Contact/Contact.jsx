@@ -78,8 +78,8 @@ export default function Contact() {
   return (
     <div className="pt-8 pb-16 text-white md:pt-12">
       <Seo title={t('NAV_CONTACT')} description={t('CONTACT_TITLE')} />
-      <div className="mb-10 flex max-w-[640px] flex-col gap-1">
-        <h1 className="text-[26px] font-extrabold tracking-wide text-aurora md:text-[34px]">
+      <div className="stagger mb-10 flex max-w-[640px] flex-col gap-1">
+        <h1 className="text-[26px] font-extrabold tracking-wide text-aurora text-flow md:text-[34px]">
           {t('CONTACT_TITLE')}
         </h1>
         <p className="text-[14px] text-[#ccc] md:text-[15px]">
@@ -101,7 +101,7 @@ export default function Contact() {
         <GlassPanel
           as="form"
           onSubmit={handleSubmit}
-          className="relative flex w-full min-w-0 flex-col gap-6 p-5 md:p-8"
+          className="relative flex w-full min-w-0 animate-in fade-in-0 slide-in-from-bottom-6 flex-col gap-6 p-5 duration-700 md:p-8"
         >
           {/* Honeypot — hidden from real visitors, catches basic bots */}
           <input

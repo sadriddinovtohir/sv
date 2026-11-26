@@ -1,7 +1,7 @@
 export const skillCategoryData = [
     {
         labelKey: 'SKILL_CAT_FRONTEND_CORE',
-        accent: '#7c5cff',
+        accent: '#5b85ff',
         skills: [
             { name: 'HTML5',          level: 95 },
             { name: 'CSS / Tailwind', level: 92 },

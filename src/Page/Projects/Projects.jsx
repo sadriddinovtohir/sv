@@ -47,7 +47,8 @@ export default function Projects() {
         className="mb-0 w-full px-0 md:px-2"
         title={t("PROJECTS_TITLE")}
         subtitle={t("PROJECTS_SUBTITLE")}
-        titleClassName="text-aurora tracking-wide text-2xl md:text-[34px]"
+        gradient
+        titleClassName="tracking-wide text-2xl md:text-[34px]"
       />
 
       <div
@@ -67,7 +68,7 @@ export default function Projects() {
               className={cn(
                 "flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-colors duration-300 hover:bg-white/8 hover:text-white lg:px-4",
                 selected &&
-                  "bg-gradient-to-r from-primary to-primary/70 text-white shadow-[0_4px_18px_rgba(124,92,255,0.45)] hover:bg-primary"
+                  "bg-linear-to-r from-primary to-[#2f9bff] text-white shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary"
               )}
             >
               {t(`PROJECTS_FILTER_${key.toUpperCase()}`)}

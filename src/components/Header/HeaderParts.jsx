@@ -140,7 +140,7 @@ export function NavLinks({ orientation = 'row', onNavigate }) {
               'flex items-center justify-center gap-1.5 rounded-full px-3.5 py-1.75 text-sm font-medium whitespace-nowrap text-white/65 transition-colors duration-300 hover:bg-white/8 hover:text-white lg:px-4',
               orientation === 'row' && 'max-lg:[&>svg]:hidden',
               orientation === 'column' && 'justify-start gap-3 rounded-2xl bg-white/5 px-5 py-3.5 text-base',
-              isActive && 'bg-gradient-to-r from-primary to-primary/70 text-white shadow-[0_4px_18px_rgba(124,92,255,0.45)] hover:bg-primary hover:text-white'
+              isActive && 'bg-gradient-to-r from-primary to-[#2f9bff] text-white shadow-[0_4px_18px_rgba(61,107,255,0.5)] animate-in fade-in-0 zoom-in-90 duration-300 hover:bg-primary hover:text-white'
             )
           }
         >
@@ -158,7 +158,7 @@ export function Logo() {
       className="group flex items-center gap-2.5 text-lg font-extrabold tracking-tight"
     >
       {/* Code-style mark: gradient frame around a dark tile with "<TS/>". */}
-      <span className="rounded-xl bg-gradient-to-br from-primary via-accent to-glow p-px shadow-[0_0_18px_-4px_rgba(124,92,255,0.7)] transition-shadow duration-300 group-hover:shadow-[0_0_24px_-2px_rgba(34,211,238,0.7)]">
+      <span className="rounded-xl bg-gradient-to-br from-primary via-accent to-glow p-px shadow-[0_0_18px_-4px_rgba(61,107,255,0.7)] transition-[box-shadow,rotate,scale] duration-500 group-hover:scale-105 group-hover:-rotate-6 group-hover:shadow-[0_0_24px_-2px_rgba(46,230,166,0.7)]">
         <span className="flex h-9 items-center rounded-[11px] bg-background px-2 font-mono text-[13px] leading-none font-bold">
           <span className="text-accent transition-transform duration-300 group-hover:-translate-x-0.5">&lt;</span>
           <span className="text-white">TS</span>

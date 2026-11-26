@@ -4,6 +4,7 @@ import { skillCategoryData } from '../../data/skillsData'
 import { GlassPanel } from '@/components/common/GlassPanel'
 import { SectionHeading } from '@/components/common/SectionHeading'
 import { Progress } from '@/components/ui/progress'
+import { useReveal } from '@/hooks/useReveal'
 
 import { FaHtml5, FaJs, FaReact, FaGithub, FaGitlab } from 'react-icons/fa'
 import {
@@ -66,14 +67,18 @@ const skillCategoryKeys = skillCategoryData.map((cat) => ({
 
 function SkillCard({ skill, accent }) {
     const { t } = useTranslation()
+    const revealRef = useReveal()
     return (
         <GlassPanel
+            ref={revealRef}
+            data-reveal=""
+            data-reveal-variant="zoom"
             accent={accent}
             hover
-            className="flex w-full animate-[fadeInUp_0.45s_ease_forwards] cursor-default flex-col items-center gap-2.5 rounded-[18px] px-3 pt-5 pb-4"
+            className="tilt group flex w-full cursor-default flex-col items-center gap-2.5 rounded-[18px] px-3 pt-5 pb-4"
         >
             <div
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] border"
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[14px] border transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[8deg]"
                 style={{
                     background: `linear-gradient(135deg, ${accent}28, ${accent}10)`,
                     color: accent,
@@ -108,6 +113,15 @@ function SkillCard({ skill, accent }) {
     )
 }
 
+function CategoryHeader({ children }) {
+    const revealRef = useReveal()
+    return (
+        <div ref={revealRef} data-reveal="" data-reveal-variant="left" className="mb-4 flex items-center gap-3 md:mb-5">
+            {children}
+        </div>
+    )
+}
+
 export default function Skills() {
     const { t } = useTranslation()
 
@@ -136,7 +150,7 @@ export default function Skills() {
                 <div key={category.labelKey} className="mb-8 md:mb-10">
 
                     {/* Category Header */}
-                    <div className="mb-4 flex items-center gap-3 md:mb-5">
+                    <CategoryHeader>
                         <span
                             className="h-5.5 w-[3px] shrink-0 rounded"
                             style={{ background: category.accent, boxShadow: `0 0 12px ${category.accent}80` }}
@@ -144,14 +158,17 @@ export default function Skills() {
                         <p className="text-[13px] font-bold tracking-wide text-white md:text-[15px]">
                             {category.label}
                         </p>
-                        <span className="h-px flex-1 bg-white/6" />
+                        <span
+                            className="line-grow-x h-px flex-1"
+                            style={{ background: `linear-gradient(90deg, ${category.accent}70, transparent)` }}
+                        />
                         <span
                             className="shrink-0 text-[10px] font-semibold opacity-75"
                             style={{ color: category.accent }}
                         >
                             {t('SKILL_COUNT', { count: category.skills.length })}
                         </span>
-                    </div>
+                    </CategoryHeader>
 
                     {/* Cards Grid */}
                     <div className="grid grid-cols-2 justify-center gap-3 md:grid-cols-4 md:gap-4">

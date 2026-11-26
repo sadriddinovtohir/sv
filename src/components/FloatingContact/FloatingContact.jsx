@@ -12,7 +12,7 @@ const CHANNELS = [
     { icon: <FaTelegram size={20} />, href: 'https://t.me/tohir_sadriddinov', color: '#38bdf8', label: 'Telegram' },
     { icon: <FaLinkedin size={20} />, href: 'https://www.linkedin.com/in/tohirbek-sadriddinov-dev/', color: '#22c55e', label: 'LinkedIn' },
     { icon: <FaPhone size={17} />, href: 'tel:+998901283307', color: '#a855f7', label: 'Phone' },
-    { icon: <FaEnvelope size={18} />, href: GMAIL_COMPOSE_URL, color: '#f472b6', label: 'Email' },
+    { icon: <FaEnvelope size={18} />, href: GMAIL_COMPOSE_URL, color: '#ffb547', label: 'Email' },
 ]
 
 // Pure-CSS tooltip shown to the left of its `group` parent on hover/focus.
@@ -70,9 +70,11 @@ export default function FloatingContact() {
                 <button
                     onClick={() => navigate('/contact')}
                     aria-label={t('FLOATING_CTA_LABEL')}
-                    className="flex h-13 w-13 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-white shadow-[0_10px_30px_rgba(124,92,255,0.5)] transition-transform duration-250 hover:scale-108 md:h-14.5 md:w-14.5"
+                    className="relative flex h-13 w-13 items-center justify-center rounded-full bg-linear-to-br from-primary to-accent text-background shadow-[0_10px_30px_rgba(61,107,255,0.5)] transition-transform duration-250 hover:scale-108 hover:rotate-12 md:h-14.5 md:w-14.5"
                 >
-                    <FiMessageCircle size={24} />
+                    {/* Expanding halo to draw the eye to the CTA. */}
+                    <span aria-hidden="true" className="ping absolute inset-0 -z-10 rounded-full bg-primary/50" />
+                    <FiMessageCircle size={24} className="relative" />
                 </button>
                 <HoverLabel>{t('FLOATING_CTA_LABEL')}</HoverLabel>
             </div>

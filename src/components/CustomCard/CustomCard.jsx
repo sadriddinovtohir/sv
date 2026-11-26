@@ -25,9 +25,10 @@ function CustomCard({ project, onOpen }) {
         <GlassPanel
             as="div"
             hover
-            accent="#7c5cff"
+            accent="#3d6bff"
             ref={revealRef}
             data-reveal=""
+            data-reveal-variant="zoom"
             role="button"
             tabIndex={0}
             onClick={() => onOpen(project)}
@@ -37,7 +38,7 @@ function CustomCard({ project, onOpen }) {
                     onOpen(project);
                 }
             }}
-            className="group w-full cursor-pointer rounded-[14px] p-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_-8px_rgba(124,92,255,0.5)] sm:rounded-[20px] sm:p-4"
+            className="tilt beam-border group w-full cursor-pointer rounded-[14px] p-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_-8px_rgba(61,107,255,0.55)] sm:rounded-[20px] sm:p-4"
         >
             {/* Image + Badge */}
             <div className="relative mb-2 overflow-hidden rounded-[10px] bg-black/25 sm:mb-3 sm:rounded-[14px]">
@@ -82,8 +83,9 @@ function CustomCard({ project, onOpen }) {
             </div>
 
             <div className="flex items-center justify-between gap-2">
-                <span className="text-[10.5px] font-semibold tracking-wide text-accent opacity-80 sm:text-xs">
-                    {t("PROJECT_MORE")} →
+                <span className="text-[10.5px] font-semibold tracking-wide text-accent opacity-80 transition-opacity group-hover:opacity-100 sm:text-xs">
+                    {t("PROJECT_MORE")}{" "}
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </span>
 
                 {/* One-click shortcut straight to the live site, skipping the detail page. */}

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 export function SocialIconLink({
   icon,
   href,
-  accent = "#7c5cff",
+  accent = "#3d6bff",
   size = "md",
   tint = false,
   className,
@@ -26,7 +26,7 @@ export function SocialIconLink({
         tint
           ? "border-(--accent)/33 bg-popover/95 text-(--accent)"
           : "border-white/8 bg-white/5 text-white/60",
-        "hover:-translate-y-0.5 hover:border-(--accent) hover:bg-(--accent) hover:text-white hover:shadow-[0_6px_16px_var(--accent)]",
+        "hover:-translate-y-1 hover:scale-110 hover:rotate-6 hover:border-(--accent) hover:bg-(--accent) hover:text-white hover:shadow-[0_6px_16px_var(--accent)]",
         size === "sm" ? "h-8.5 w-8.5 md:h-9.5 md:w-9.5" : "h-10.5 w-10.5 md:h-11.5 md:w-11.5",
         className
       )}

@@ -7,37 +7,37 @@
      that are actually used get downloaded. */
   --font-sans: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
 
-  /* === Midnight Aurora palette === */
-  --color-background: #070a17;
+  /* === Ocean Sunrise palette === */
+  --color-background: #05080f;
   --color-foreground: #ffffff;
 
-  --color-card: #0e1328;
+  --color-card: #0b1120;
   --color-card-foreground: #ffffff;
 
-  --color-popover: #0d1124;
+  --color-popover: #0a0f1d;
   --color-popover-foreground: #ffffff;
 
-  --color-primary: #7c5cff;
+  --color-primary: #3d6bff;
   --color-primary-foreground: #ffffff;
 
-  --color-secondary: #111735;
+  --color-secondary: #0f172a;
   --color-secondary-foreground: #ffffff;
 
-  --color-muted: #111735;
+  --color-muted: #0f172a;
   --color-muted-foreground: #ffffff80;
 
-  --color-accent: #22d3ee;
-  --color-accent-foreground: #070a17;
+  --color-accent: #2ee6a6;
+  --color-accent-foreground: #05080f;
 
   /* Third brand hue — used in gradients next to primary/accent. */
-  --color-glow: #f472b6;
+  --color-glow: #ffb547;
 
   --color-destructive: #fb7185;
   --color-destructive-foreground: #ffffff;
 
   --color-border: #ffffff1a;
   --color-input: #ffffff1f;
-  --color-ring: #7c5cff;
+  --color-ring: #3d6bff;
 
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -45,6 +45,7 @@
   --radius-xl: 1.25rem;
 
   --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-reverse: marquee 46s linear infinite reverse;
 }
 
 * {
@@ -70,7 +71,7 @@ body {
 }
 
 ::selection {
-  background: rgba(124, 92, 255, 0.45);
+  background: rgba(61, 107, 255, 0.45);
   color: #fff;
 }
 
@@ -86,57 +87,79 @@ body {
   border-radius: 6px;
 }
 
-/* === Aurora background ===
-   One fixed layer painted with radial gradients. Unlike the old blurred orbs
-   there is no `filter: blur()` here — the softness comes from the gradients
-   themselves — so the GPU only has to translate a pre-rasterized texture,
-   which is what keeps scrolling smooth on low-end phones. */
-.aurora {
+/* === Background: drifting color orbs ===
+   Three fixed layers painted with radial gradients. No `filter: blur()` — the
+   softness comes from the gradients themselves — so each frame the GPU only
+   translates pre-rasterized textures, which keeps scrolling smooth. */
+.bg-orb {
   position: fixed;
-  inset: -20%;
   z-index: 0;
   pointer-events: none;
-  background:
-    radial-gradient(38% 32% at 18% 22%, rgba(124, 92, 255, 0.28), transparent 70%),
-    radial-gradient(34% 30% at 82% 30%, rgba(34, 211, 238, 0.16), transparent 70%),
-    radial-gradient(40% 34% at 55% 85%, rgba(244, 114, 182, 0.13), transparent 70%);
+  border-radius: 50%;
   will-change: transform;
-  animation: aurora-drift 28s ease-in-out infinite alternate;
+}
+.bg-orb--1 {
+  top: -22vmax;
+  left: -18vmax;
+  width: 62vmax;
+  height: 62vmax;
+  background: radial-gradient(circle, rgba(61, 107, 255, 0.3), transparent 65%);
+  animation: orb-a 26s ease-in-out infinite alternate;
+}
+.bg-orb--2 {
+  top: 8vh;
+  right: -22vmax;
+  width: 54vmax;
+  height: 54vmax;
+  background: radial-gradient(circle, rgba(46, 230, 166, 0.15), transparent 65%);
+  animation: orb-b 32s ease-in-out infinite alternate;
+}
+.bg-orb--3 {
+  bottom: -28vmax;
+  left: 22vw;
+  width: 52vmax;
+  height: 52vmax;
+  background: radial-gradient(circle, rgba(255, 181, 71, 0.12), transparent 65%);
+  animation: orb-c 38s ease-in-out infinite alternate;
+}
+@keyframes orb-a {
+  to {
+    transform: translate3d(18vw, 14vh, 0) scale(1.1);
+  }
+}
+@keyframes orb-b {
+  to {
+    transform: translate3d(-16vw, 22vh, 0) scale(0.92);
+  }
+}
+@keyframes orb-c {
+  to {
+    transform: translate3d(-14vw, -18vh, 0) scale(1.12);
+  }
 }
 
-/* Faint dot grid on top of the aurora, faded out toward the edges. */
-.grid-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 100%);
+/* Spider-web background (WebField.jsx) — knots flee from the cursor.
+   Softly faded toward the edges so it never fights the content. */
+.web-field {
+  mask-image: radial-gradient(ellipse 110% 100% at 50% 40%, #000 55%, transparent 100%);
 }
 
-@keyframes aurora-drift {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate3d(4%, 3%, 0) rotate(6deg);
-  }
-  100% {
-    transform: translate3d(-3%, 5%, 0) rotate(-4deg);
-  }
+/* Header gets denser glass and a shadow once the page is scrolled. */
+.site-header {
+  transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.site-header[data-scrolled="true"] {
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.7);
 }
 
-/* === Brand gradient text ===
-   The shine only runs on hover: animating background-position repaints the
-   text on the main thread every frame, which is too costly to leave running. */
+/* === Brand gradient text === */
 .text-aurora {
   background: linear-gradient(
     100deg,
-    #9d85ff 0%,
+    #86a6ff 0%,
     var(--color-accent) 35%,
     var(--color-glow) 65%,
-    #9d85ff 100%
+    #86a6ff 100%
   );
   background-size: 200% auto;
   background-clip: text;
@@ -148,17 +171,110 @@ body {
     animation: text-shine 2.5s linear infinite;
   }
 }
-
+/* Always-flowing variant, used only on a few page headlines. */
+.text-flow {
+  animation: text-shine 6s linear infinite;
+}
 @keyframes text-shine {
   to {
     background-position: 200% center;
   }
 }
 
+/* Gradient bar under section headings that draws itself in. */
+.heading-bar {
+  display: block;
+  height: 3px;
+  width: 56px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-glow));
+  transform-origin: left center;
+  animation: bar-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+@keyframes bar-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Light sweep across buttons — transform only, so it stays on the compositor. */
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: shine-sweep 4s ease-in-out infinite;
+}
+@keyframes shine-sweep {
+  0%,
+  65% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+/* Rotating gradient border (hover only) — uses a registered angle property. */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.beam-border {
+  position: relative;
+}
+.beam-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    var(--accent, var(--color-primary)) 60deg,
+    transparent 120deg,
+    transparent 360deg
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: beam-spin 3.5s linear infinite;
+  animation-play-state: paused;
+}
+@media (hover: hover) {
+  .beam-border:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+  }
+}
+/* Always-on variant for a single highlighted card. */
+.beam-border.beam-on::after {
+  opacity: 1;
+  animation-play-state: running;
+}
+@keyframes beam-spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
 /* === Cursor spotlight ===
    MainLayout writes --mx/--my on the hovered `.spotlight` element (one
-   delegated, rAF-throttled listener for the whole page). The glow is a
-   pseudo-element whose opacity is the only thing that transitions. */
+   delegated, rAF-throttled listener for the whole page). */
 .spotlight {
   position: relative;
   isolation: isolate;
@@ -173,7 +289,7 @@ body {
   opacity: 0;
   background: radial-gradient(
     260px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent, var(--color-primary)) 22%, transparent),
+    color-mix(in srgb, var(--accent, var(--color-primary)) 24%, transparent),
     transparent 70%
   );
   transition: opacity 0.3s ease;
@@ -182,6 +298,17 @@ body {
   .spotlight:hover::before {
     opacity: 1;
   }
+}
+
+/* === 3D tilt === MainLayout writes --rx/--ry on the hovered `.tilt` element. */
+.tilt {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 /* === Marquee (tech stack) === */
@@ -199,12 +326,12 @@ body {
 
 /* === Page enter — replayed on every route change (MainLayout keys <main>) === */
 .page-enter {
-  animation: page-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: page-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes page-in {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(18px) scale(0.99);
   }
   to {
     opacity: 1;
@@ -214,18 +341,22 @@ body {
 
 /* Hero entrance: children fade up one after another. */
 .stagger > * {
-  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .stagger > *:nth-child(1) { animation-delay: 0.05s; }
-.stagger > *:nth-child(2) { animation-delay: 0.12s; }
-.stagger > *:nth-child(3) { animation-delay: 0.19s; }
-.stagger > *:nth-child(4) { animation-delay: 0.26s; }
-.stagger > *:nth-child(5) { animation-delay: 0.33s; }
-.stagger > *:nth-child(6) { animation-delay: 0.4s; }
+.stagger > *:nth-child(2) { animation-delay: 0.13s; }
+.stagger > *:nth-child(3) { animation-delay: 0.21s; }
+.stagger > *:nth-child(4) { animation-delay: 0.29s; }
+.stagger > *:nth-child(5) { animation-delay: 0.37s; }
+.stagger > *:nth-child(6) { animation-delay: 0.45s; }
+.stagger > *:nth-child(7) { animation-delay: 0.53s; }
 
-/* Slow floating motion for the hero portrait. */
+/* Slow floating motion. */
 .float {
   animation: float 6s ease-in-out infinite;
+}
+.float-slow {
+  animation: float 9s ease-in-out infinite;
 }
 @keyframes float {
   50% {
@@ -245,25 +376,127 @@ body {
   animation: spin 8s linear infinite;
 }
 
+/* Tech chips orbiting the hero portrait. The ring spins; each chip spins the
+   other way at the same speed so its icon stays upright. */
+.orbit {
+  animation: spin 26s linear infinite;
+}
+.orbit-counter {
+  animation: spin 26s linear infinite reverse;
+}
+
+/* Pulsing ring behind status dots. */
+.ping {
+  position: relative;
+}
+.ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Blinking caret for the About page's typed code card. */
+.caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--color-accent);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 /* === Scroll reveal ===
    Elements marked `data-reveal` stay hidden until useReveal's shared
-   IntersectionObserver flips them to `in`, so a card animates when it actually
-   reaches the viewport instead of burning its entrance off-screen.
-   `backwards` (not `forwards`) holds the hidden state during the stagger delay
-   and then lets go, leaving no transform stuck on the element afterwards. */
+   IntersectionObserver flips them to `in`. `data-reveal-variant` picks the
+   entrance (up by default, left/right/zoom/blur). `backwards` holds the hidden
+   state during the stagger delay, then leaves no transform behind. */
 [data-reveal] {
   opacity: 0;
 }
 [data-reveal="in"] {
   opacity: 1;
-  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) backwards;
+  animation: var(--reveal-anim, fadeInUp) 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) backwards;
+}
+[data-reveal-variant="left"] { --reveal-anim: reveal-left; }
+[data-reveal-variant="right"] { --reveal-anim: reveal-right; }
+[data-reveal-variant="zoom"] { --reveal-anim: reveal-zoom; }
+[data-reveal-variant="blur"] { --reveal-anim: reveal-blur; }
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+@keyframes reveal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+}
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(16px);
+  }
+}
+
+/* Skill bars fill up when their card is revealed. */
+[data-reveal="in"] [data-slot="progress-indicator"] {
+  animation: progress-in 1.3s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--reveal-delay, 0s) + 0.2s) backwards;
+}
+@keyframes progress-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+/* Timeline line on the About page draws itself downward. */
+.line-grow {
+  transform-origin: top;
+  animation: line-grow 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+/* Horizontal divider that draws itself once its revealed parent appears. */
+.line-grow-x {
+  transform-origin: left center;
+}
+[data-reveal="in"] .line-grow-x {
+  animation: bar-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+@keyframes line-grow {
+  from {
+    transform: scaleY(0);
+  }
 }
 
 /* === Animations === */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -285,12 +518,11 @@ body {
   }
 }
 
-/* Small screens: the aurora stays but stops drifting — a static gradient costs
-   nothing per frame, and phones are where jank shows first. */
+/* Small screens: the background stays but stops drifting — static gradients
+   cost nothing per frame, and phones are where jank shows first. */
 @media (max-width: 768px) {
-  .aurora {
+  .bg-orb {
     animation: none;
-    inset: -10%;
   }
 }
 
@@ -306,6 +538,9 @@ body {
   [data-reveal="in"] {
     opacity: 1;
     animation: none;
+  }
+  .tilt {
+    transform: none;
   }
 }
 

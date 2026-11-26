@@ -17,12 +17,13 @@ export function SectionHeading({
       <h2
         className={cn(
           "text-xl leading-tight font-extrabold tracking-tight text-white md:text-2xl",
-          gradient && "text-aurora",
+          gradient && "text-aurora text-flow",
           titleClassName
         )}
       >
         {title}
       </h2>
+      <span aria-hidden="true" className="heading-bar mb-1" />
       {subtitle && <p className="text-[13px] text-white/60 md:text-[15px]">{subtitle}</p>}
     </div>
   )

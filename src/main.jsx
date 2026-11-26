@@ -6,6 +6,19 @@ import i18n, { i18nReady } from './utils/i18n.js';
 import '@fontsource-variable/manrope'
 import './index.css'
 
+// After a redeploy, a tab still running the previous build asks for chunk
+// files that no longer exist. Reload once to pick up the new build instead of
+// leaving the visitor with a menu/page that won't open. The timestamp guard
+// stops a reload loop if the chunk is genuinely unreachable (offline).
+window.addEventListener('vite:preloadError', (event) => {
+  const KEY = 'chunk-reload-at'
+  const last = Number(sessionStorage.getItem(KEY) || 0)
+  if (Date.now() - last < 10_000) return
+  event.preventDefault()
+  sessionStorage.setItem(KEY, String(Date.now()))
+  window.location.reload()
+})
+
 // Wait for the saved language (a tiny chunk for ru/uz, instant for en); the
 // boot loader in index.html stays on screen meanwhile.
 i18nReady.then(() => {

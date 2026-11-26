@@ -10,7 +10,7 @@
  *
  * Bump VERSION to drop every old cache on the next visit.
  */
-const VERSION = "v2"
+const VERSION = "v3"
 
 // respondWith() must always get a Response: an undefined cache miss is what
 // threw "Failed to convert value to 'Response'".
@@ -69,7 +69,9 @@ self.addEventListener("fetch", (event) => {
         (hit) =>
           hit ||
           fetch(request).then((res) => {
-            if (res.ok) {
+            // Never cache an HTML fallback under a JS/CSS asset name.
+            const isHtml = (res.headers.get("Content-Type") || "").includes("text/html")
+            if (res.ok && !isHtml) {
               const copy = res.clone()
               caches.open(ASSETS).then((c) => c.put(request, copy)).then(() => trim(ASSETS, MAX_ASSET_ENTRIES))
             }

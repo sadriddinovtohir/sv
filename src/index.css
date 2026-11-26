@@ -601,11 +601,38 @@ body {
   }
 }
 
-/* Small screens: the background stays but stops drifting — static gradients
-   cost nothing per frame, and phones are where jank shows first. */
-@media (max-width: 768px) {
+/* Phones and touch tablets: keep the look, drop the per-frame cost.
+   Everything here is decoration that loops forever; several of these
+   (`text-flow`'s background-position, `beam-on`'s animated --angle) repaint
+   on every frame, which is what made scrolling and the drawer stutter. */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
   .bg-orb {
     animation: none;
+    will-change: auto; /* static now — no need for huge GPU layers */
+  }
+  /* The spider web is desktop-only (MainLayout doesn't mount it on phones);
+     this is a safety net in case it ever is. */
+  .web-field {
+    display: none;
+  }
+  .text-flow,
+  .float,
+  .float-slow,
+  .orbit,
+  .orbit-counter,
+  .ring-spin,
+  .shine::after,
+  .ping::after,
+  .beam-border::after {
+    animation: none;
+  }
+  /* No pointer to tilt toward: skip the 3D layer altogether. */
+  .tilt {
+    transform: none;
+  }
+  /* filter: blur() is expensive to animate on mobile GPUs. */
+  [data-reveal-variant="blur"] {
+    --reveal-anim: fadeInUp;
   }
 }
 

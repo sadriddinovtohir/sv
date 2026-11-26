@@ -10,7 +10,8 @@ export default function MobileMenu({ open, onOpenChange }) {
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side="right"
-        className="z-1300 w-4/5 border-white/10 bg-background text-white"
+        // Shorter, GPU-only slide: 500ms felt sluggish on phones.
+        className="z-1300 w-4/5 border-white/10 bg-background text-white will-change-transform data-[state=closed]:duration-200 data-[state=open]:duration-300"
       >
         <SheetTitle className="sr-only">{t('NAV_HOME')}</SheetTitle>
         <div className="flex h-full flex-col p-6">

@@ -1,11 +1,22 @@
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { FiMenu } from 'react-icons/fi'
 import { LanguageSwitcher, Logo, NavLinks, SearchButton, ThemeToggle } from './HeaderParts'
 
-const MobileMenu = lazy(() => import('./MobileMenu'))
+const loadMobileMenu = () => import('./MobileMenu')
+const MobileMenu = lazy(loadMobileMenu)
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+
+  // On phones, fetch the menu chunk once the page is idle, so the first tap
+  // opens the drawer at once instead of waiting on the network mid-animation.
+  useEffect(() => {
+    if (!window.matchMedia('(max-width: 767px)').matches) return
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500))
+    const cancel = window.cancelIdleCallback || clearTimeout
+    const id = idle(() => loadMobileMenu())
+    return () => cancel(id)
+  }, [])
   // Stays true after the first open so the Sheet can play its close animation.
   const [menuMounted, setMenuMounted] = useState(false)
 
@@ -37,7 +48,7 @@ export default function Header() {
           type="button"
           onClick={openMenu}
           // Start fetching the menu chunk as soon as a finger lands on the button.
-          onPointerDown={() => import('./MobileMenu')}
+          onPointerDown={loadMobileMenu}
           aria-label="Menu"
           aria-expanded={open}
           className="flex size-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"

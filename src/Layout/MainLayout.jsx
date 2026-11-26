@@ -5,11 +5,16 @@ import Footer from '../components/Footer/Footer'
 import FloatingContact from '../components/FloatingContact/FloatingContact'
 import WebField from '../components/Background/WebField'
 import { OPEN_PALETTE_EVENT } from '@/lib/events'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
 
 const CommandPalette = lazy(() => import('../components/CommandPalette/CommandPalette'))
 
 
 const MAX_TILT = 7 // degrees
+
+// The spider-web canvas runs a per-frame O(n²) loop: only desktops with a real
+// mouse get it. Phones and tablets skip it entirely (nothing is mounted).
+const WEB_FIELD_QUERY = '(min-width: 768px) and (hover: hover) and (pointer: fine)'
 
 // Ctrl/⌘+K (or "/" outside text fields) and the header's search button open
 // the palette. Its chunk is fetched on first use, then cached by the browser.
@@ -123,6 +128,7 @@ export default function MainLayout() {
     const { pathname } = useLocation()
     const headerRef = useRef(null)
     const palette = useCommandPalette()
+    const showWebField = useMediaQuery(WEB_FIELD_QUERY)
     usePointerEffects()
     useScrolledFlag(headerRef)
 
@@ -145,7 +151,7 @@ export default function MainLayout() {
             <div className="bg-orb bg-orb--1" aria-hidden="true" />
             <div className="bg-orb bg-orb--2" aria-hidden="true" />
             <div className="bg-orb bg-orb--3" aria-hidden="true" />
-            <WebField />
+            {showWebField && <WebField />}
 
             {/* Glass Header */}
             <header

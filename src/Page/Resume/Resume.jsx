@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "react-router-dom"
 import { FaGithub, FaLinkedin, FaTelegram } from "react-icons/fa"
-import { FiDownload, FiMail, FiMapPin, FiPhone } from "react-icons/fi"
+import { FiDownload, FiFileText, FiMail, FiMapPin, FiPhone } from "react-icons/fi"
 import { Seo } from "@/components/common/Seo"
 import { Button } from "@/components/ui/button"
 import { SITE } from "@/config/site"
@@ -14,10 +14,26 @@ import { PROJECTS, localizeProject } from "@/Page/Projects/projectsData"
 // The projects worth a recruiter's 30 seconds, in this order.
 const RESUME_PROJECTS = ["uzfixcar", "zukko-crm", "zukko-backend", "studance-crm", "studance-backend", "gap-bot"]
 
+// "example.com/path" — full URLs are printed as text so they stay readable on paper.
+const prettyUrl = (url) => url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")
+
+// The link printed next to a project. Projects whose `link` is only the
+// Telegram contact (no public demo) fall back to their repository, if any.
+const projectLink = (p) => (p.link && !p.telegramContact ? p.link : p.giturl || p.gitlab || null)
+
+function ProjectUrl({ href }) {
+  if (!href) return null
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="block text-[12.5px] break-all text-accent hover:underline">
+      {prettyUrl(href)}
+    </a>
+  )
+}
+
 function Section({ title, children }) {
   return (
-    <section className="break-inside-avoid-page">
-      <h2 className="mb-3 border-b border-white/10 pb-1.5 text-[13px] font-bold tracking-[0.14em] text-accent uppercase">
+    <section>
+      <h2 className="break-after-avoid mb-3 border-b border-white/10 pb-1.5 text-[13px] font-bold tracking-[0.14em] text-accent uppercase">
         {title}
       </h2>
       {children}
@@ -42,6 +58,13 @@ export default function Resume() {
     [t]
   )
 
+  // Everything else on the projects page, listed compactly so the PDF shows
+  // the whole portfolio, not only the highlights.
+  const otherProjects = useMemo(
+    () => PROJECTS.filter((p) => !RESUME_PROJECTS.includes(p.id)).map((p) => localizeProject(p, t)),
+    [t]
+  )
+
   const contacts = [
     { icon: <FiMail />, label: SITE.email, href: `mailto:${SITE.email}` },
     { icon: <FiPhone />, label: SITE.phone, href: SITE.phoneHref },
@@ -49,6 +72,7 @@ export default function Resume() {
     { icon: <FaGithub />, label: "github.com/" + SITE.githubUser, href: SITE.links.github },
     { icon: <FaLinkedin />, label: "LinkedIn", href: SITE.links.linkedin },
     { icon: <FaTelegram />, label: "@tohir_sadriddinov", href: SITE.links.telegram },
+    { icon: <FiFileText />, label: prettyUrl(SITE.resumeUrl), href: SITE.resumeUrl },
   ]
 
   const download = () => {
@@ -110,11 +134,30 @@ export default function Resume() {
                       <span className="text-[12px] text-white/50">{p.tech.slice(0, 5).join(" · ")}</span>
                     )}
                   </div>
+                  <ProjectUrl href={projectLink(p)} />
                   <p className="mt-1 text-[13.5px] leading-[1.7] text-white/70">{summarize(p.desc)}</p>
                 </li>
               ))}
             </ul>
           </Section>
+
+          {otherProjects.length > 0 && (
+            <Section title={t("RESUME_OTHER_PROJECTS")}>
+              <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2 print:grid-cols-2">
+                {otherProjects.map((p) => (
+                  <li key={p.id} className="break-inside-avoid">
+                    <Link to={`/projects/${p.id}`} className="block text-[13.5px] font-bold text-white hover:text-accent">
+                      {p.title}
+                    </Link>
+                    {p.tech?.length > 0 && (
+                      <span className="block text-[12px] text-white/50">{p.tech.slice(0, 4).join(" · ")}</span>
+                    )}
+                    <ProjectUrl href={projectLink(p)} />
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          )}
 
           <Section title={t("SKILLS_TITLE")}>
             <dl className="grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
@@ -132,6 +175,13 @@ export default function Resume() {
           <Section title={t("RESUME_EDUCATION")}>
             <p className="text-[14px] leading-[1.75] text-white/80">{t("RESUME_EDUCATION_TEXT")}</p>
           </Section>
+
+          <p className="border-t border-white/10 pt-3 text-[12.5px] text-white/60">
+            {t("RESUME_ONLINE")}:{" "}
+            <a href={SITE.resumeUrl} target="_blank" rel="noreferrer" className="font-semibold text-accent hover:underline">
+              {SITE.resumeUrl}
+            </a>
+          </p>
         </div>
       </article>
     </div>

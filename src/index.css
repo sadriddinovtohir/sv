@@ -149,6 +149,18 @@ body {
   body > #root footer {
     display: none !important;
   }
+  /* A flex/overflow-clipped layout makes some browsers (Firefox, mobile
+     Safari) print only the first page. Plain blocks split cleanly. */
+  html,
+  body,
+  #root,
+  #root > div,
+  main {
+    display: block !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
   .page-enter {
     animation: none !important;
   }

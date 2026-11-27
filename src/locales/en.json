@@ -203,6 +203,8 @@
   "RESUME_DOWNLOAD": "Download PDF",
   "RESUME_SUMMARY": "Summary",
   "RESUME_PROJECTS": "Key projects",
+  "RESUME_OTHER_PROJECTS": "Other projects",
+  "RESUME_ONLINE": "Online resume",
   "RESUME_EDUCATION": "Education",
   "RESUME_EDUCATION_TEXT": "IT Park and Najot Ta'lim — frontend development; then self-directed study of backend, databases, mobile and DevOps.",
   "GITHUB_TITLE": "GitHub & GitLab",

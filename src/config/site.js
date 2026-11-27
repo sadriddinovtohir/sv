@@ -7,6 +7,8 @@ export const SITE = {
   email: "toxir4626@gmail.com",
   phone: "+998-90-128-33-07",
   phoneHref: "tel:+998901283307",
+  // Public copy of the resume, printed into the PDF so readers can open it online.
+  resumeUrl: "https://rezumi2.vercel.app/",
   githubUser: "sadriddinovtohir",
   gitlabUser: "sadriddinovtohir",
   links: {

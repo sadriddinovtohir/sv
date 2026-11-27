@@ -203,6 +203,8 @@
   "RESUME_DOWNLOAD": "PDF yuklab olish",
   "RESUME_SUMMARY": "Qisqacha",
   "RESUME_PROJECTS": "Asosiy loyihalar",
+  "RESUME_OTHER_PROJECTS": "Boshqa loyihalar",
+  "RESUME_ONLINE": "Onlayn rezyume",
   "RESUME_EDUCATION": "Ta'lim",
   "RESUME_EDUCATION_TEXT": "IT Park va Najot Ta'lim — frontend dasturlash; keyinchalik backend, ma'lumotlar bazalari, mobil va DevOps bo'yicha mustaqil o'rganish.",
   "GITHUB_TITLE": "GitHub va GitLab",

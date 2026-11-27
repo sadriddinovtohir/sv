@@ -17,6 +17,7 @@ import studanceBackend from "../../assets/img/studanceBackend.webp"
 import gapBot from "../../assets/img/gapBot.png"
 import kallaPocha from "../../assets/img/kallaPocha.png"
 import viraAi from "../../assets/img/viraAi.jpg"
+import pydjango from "../../assets/img/pydjango.png"
 
 /**
  * Order of the stack groups on the detail page. Each key maps to a
@@ -287,6 +288,25 @@ export const PROJECTS = [
     stack: {
       backend: STUDANCE_BACKEND,
       services: STUDANCE_SERVICES,
+    },
+  },
+  {
+    id: "pydjango-akademiya",
+    categories: ["web"],
+    img: pydjango,
+    titleKey: "PROJECT_PYDJANGO_TITLE",
+    descKey: "PROJECT_PYDJANGO_DESC",
+    link: "https://pythondarslari.vercel.app/",
+    highlights: ["JavaScript", "Pyodide", "Python", "Django"],
+    stack: {
+      web: [
+        "HTML", "CSS", "Vanilla JavaScript", "SPA (hash routing)", "Pyodide (Python in browser)",
+        "localStorage", "Progress export / import (JSON)", "Ctrl+K search", "Bookmarks",
+        "Notes", "Playground", "Dark / light theme", "Font size settings", "Daily streak",
+        "Quizzes", "Exercises", "Syntax highlighting (Pygments)",
+      ],
+      backend: ["Python build script (content generator)", "Markdown → HTML"],
+      services: ["Vercel", "jsDelivr CDN"],
     },
   },
   {
